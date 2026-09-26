@@ -1,0 +1,421 @@
+# 03. ビットマップだけでは足りない — i-node
+
+第 2 章で、空いているブロックを見つけて確保できるようになった。
+ではブロック 7 を確保して 1200 バイト書き込んだとして、**次にこのディスクを開いたとき、
+そこに何があるのか誰が知っているのか。**
+
+ビットマップが言えるのは「7 番は使用中」だけ。
+誰のものなのか、何バイト目なのか、そもそも何バイトあるのかは、どこにも書かれていない。
+
+---
+
+## 1. 問題 — 覚えておくべきことが足りない
+
+ファイル 1 個を表すのに必要な情報を並べてみる。
+
+| 覚えておくこと | 今どこにあるか |
+|---|---|
+| どのブロックでできているか | **どこにもない** |
+| そのブロックがファイルの何バイト目か | **どこにもない** |
+| 長さは何バイトか（4096 の倍数とは限らない） | **どこにもない** |
+| 種別（ファイルかディレクトリか）、パーミッション、所有者、時刻 | **どこにもない** |
+| 使用中かどうか | ビットマップ（第 2 章） |
+
+ビットマップが答えられるのは最後の 1 行だけだった。
+残りを置く場所を作るのがこの章の仕事になる。
+
+難しいのは 1 行目と 2 行目。ファイルは 4096 バイトに収まるとは限らないので、
+**複数のブロックを、順番付きで**覚えておく必要がある。
+しかもファイルは後から伸びる。
+
+---
+
+## 2. ブロック番号の一覧を持つ
+
+10000 バイトのファイル `A.txt` は、1 ブロック (4096 バイト) には収まらない。
+3 個使うことになる（4096 + 4096 + 1808）。ファイルが伸びればもっと増える。
+だから覚えておくのは、**使ったブロック番号を、ファイルの先頭からの順に並べた一覧**になる。
+
+```
+A.txt = [3, 7, 9]
+         │  │  └ ファイルの 8192 バイト目から
+         │  └ ファイルの 4096 バイト目から
+         └ ファイルの 0 バイト目から
+```
+
+この一覧さえあれば、**何バイト目でも直接引ける**。
+
+```python
+# 5000 バイト目はどこにあるか
+index, inner = divmod(5000, BLOCK_SIZE)   # → (1, 904)
+block_no = index_list[index]              # → 7
+# 「ブロック 7 の 904 バイト目」と一発で決まる
+```
+
+ブロック番号が連続している必要はない。空いていたブロックを使うだけなので、
+`[3, 7, 9]` のように飛び飛びになる。それでも上の計算は変わらない。
+ファイルが伸びたら一覧の末尾にブロック番号を足す。第 2 章の `allocate()` が
+返した番号を、そのまま書き足すだけで済む。
+
+決めることは 2 つ残っている。**この一覧をどこに置くか**と、
+**何個まで持てるか**。次の節がその答えになる。
+
+---
+
+## 3. i-node — 一覧とメタデータを 1 個にまとめる
+
+ブロック番号の一覧 `[3, 7, 9]` と、§1 の表に並べた残りの情報（長さ、種別、所有者、時刻）を、
+**1 個の構造体**にまとめる。これが **i-node**。
+
+i-node は**固定長 128 バイト**の構造体として定義する。全部の i-node が同じ大きさになる。
+
+```python
+# tiny_fs/constants.py
+INODE_SIZE = 128                                # i-node 1 個のディスク上の大きさ
+NDIRECT = 12                                    # ブロック番号の一覧の長さ
+INODES_PER_BLOCK = BLOCK_SIZE // INODE_SIZE     # 4096 ÷ 128 = 32
+```
+
+```python
+# tiny_fs/inode.py
+@dataclass
+class Inode:
+    """i-node 1 個。ディスク上では 128 バイトの大きさを占める。"""
+
+    mode: int           # u16       ファイル種別 + パーミッション
+    nlink: int          # u16       この i-node を指す名前の数
+    uid: int            # u32       所有者
+    gid: int            # u32
+    size: int           # u64       バイト単位のファイルサイズ
+    mtime: int          # u64       内容の更新時刻
+    ctime: int          # u64       メタデータの更新時刻
+    direct: list[int]   # u32 × 12  使ったブロック番号を順に並べたもの。0 は未割り当て
+```
+
+**Python の `int` には幅がない**ので、各フィールドが何ビットかはコメントで示した
+`u16` / `u32` / `u64`（符号なし 16 / 32 / 64 ビット整数）が正になる。
+この幅は次節の `INODE_FMT` でディスクに書くときに効いてくる。
+
+ファイルの中身を指しているのは最後の `direct` だけで、残りはメタデータ。
+
+![i-node 1 個は 128 バイト、1 ブロックに 32 個](../images/03-inode-in-block.svg)
+
+実際に使うのは 84 バイトで、残り 44 バイトはゼロで埋めて必ず 128 バイトにする。
+**1 ブロックに i-node がちょうど 32 個並ぶ。** 128 は 4096 の約数なので割り切れ、
+ブロックの境界をまたぐ i-node は存在しない。ブロックを 1 枚読めば、
+その中の 32 個は必ず完全な形で入っている。
+
+![固定長 128 バイト → 配列にできる](../images/03-inode-array.svg)
+
+同じ大きさのものが隙間なく並ぶので、全体は**配列**になる。
+配列の添字がそのまま **i-node 番号**で、番号から位置が計算で決まる。
+「17 番の i-node」と言えば、テーブルの先頭から数えて 17 個目。探索は要らない。
+
+そして、**その i-node が使用中かどうかは第 2 章のビットマップで管理できる**。
+1 ビット = 1 i-node。ブロック用に作った `Bitmap` を、もう 1 枚別の用途で使うだけで済む。
+新しくファイルを作るときは、`allocate()` が返した番号がそのまま新しい i-node 番号になる。
+ビット番号を i-node 番号に合わせるので、ビットマップが扱うのは
+**bit 0 から bit `NUM_INODES` までの `NUM_INODES + 1` 個**になる（bit 0 は次で述べる予約ぶん）。
+
+個数は mkfs のときに決める。既定は 128 個 = **i-node テーブルは 4 ブロック**。
+配列なので後から増やせず、容量が余っていても i-node が尽きれば
+ファイルは作れなくなる（`ENOSPC`）。
+
+### i-node 番号は 1 から
+
+i-node 番号は **1 始まり**にして、**0 は「無効 / 未使用」を表す番兵**として予約する。
+`ino == 0` は「そんなものはない」を意味し、これから何度も出てくる
+（第 4 章のディレクトリの空きスロットがそれ）。
+ビットマップの側では、ビット 0 を最初から使用中にしておけば 0 番が割り当てられることはない。
+
+### そして、i-node は名前を持たない
+
+`mode` も `size` も時刻も持つのに、**ファイル名だけは入っていない**。
+i-node を指すのは常に番号で、名前は次章のディレクトリが持つ。
+
+---
+
+## 4. 128 バイトの中身
+
+![i-node の 128 バイト](../images/03-inode-layout.svg)
+
+| フィールド | 型 | 意味 |
+|---|---|---|
+| `mode` | `H` (2 B) | ファイル種別 + パーミッション（`S_IFREG \| 0o644` など） |
+| `nlink` | `H` (2 B) | この i-node を指す名前の数（第 4 章） |
+| `uid` / `gid` | `I` (4 B) | 所有者 |
+| `size` | `Q` (8 B) | **バイト単位**のファイルサイズ |
+| `mtime` / `ctime` | `Q` (8 B) | 内容 / メタデータの更新時刻（Unix epoch 秒） |
+| `direct[12]` | `12I` (48 B) | データブロック番号の一覧。0 は「未割り当て」 |
+| padding | 44 B | ゼロ埋め |
+
+```python
+# tiny_fs/constants.py
+INODE_FMT = "<HHIIQQQ12I"   # 84 バイト。128 バイトまでゼロで埋める
+```
+
+§3 の `Inode` とこのバイト列を往復させるのが `encode` / `decode`。
+
+```python
+    def encode(self) -> bytes:
+        packed = struct.pack(INODE_FMT, self.mode, self.nlink, self.uid, self.gid,
+                             self.size, self.mtime, self.ctime, *self.direct)
+        # 84 バイトを 128 バイトに伸ばす。余白は常にゼロに保つ
+        return packed.ljust(INODE_SIZE, b"\x00")
+
+    @classmethod
+    def decode(cls, raw: bytes) -> "Inode":
+        if len(raw) != INODE_SIZE:
+            raise ValueError(...)
+        values = struct.unpack(INODE_FMT, raw[:struct.calcsize(INODE_FMT)])
+        return cls(*values[:7], direct=list(values[7:]))
+```
+
+5000 バイトのファイル（ブロック 8 と 9 を使っている）の実バイト列:
+
+```
+00000000  a4 81 01 00 00 00 00 00 00 00 00 00 88 13 00 00  |................|
+          ^^^^^ ^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^^ ^^^^^^^^^^^
+          mode  nlink uid=0       gid=0       size=0x1388 = 5000
+00000010  00 00 00 00 c0 10 b5 6a 00 00 00 00 c0 10 b5 6a  |.......j.......j|
+          +----------  mtime = 0x6ab510c0  ----  ctime
+00000020  00 00 00 00 08 00 00 00 09 00 00 00 00 00 00 00  |................|
+          +----------  direct[0]=8, direct[1]=9, direct[2..]=0
+00000030  ... 以降 128 バイトまでゼロ ...
+```
+
+- `mode = 0x81a4 = 0o100644` — 上位が種別 `S_IFREG`、下位が `rw-r--r--`。
+  この 2 つを 1 個の整数に詰めるのは POSIX の流儀をそのまま借りている。
+- `size = 5000` なのにブロックは 2 個（8192 バイト）確保されている。
+  **最後のブロックの 904 バイト目から先はゴミ**で、そこが中身でないことを知っているのは
+  `size` だけ。第 1 章の「長さが分からない」問題は、このフィールド 1 個で解決する。
+
+### 128 バイトの内訳
+
+```
+メタデータ      mode 2 + nlink 2 + uid 4 + gid 4 + size 8 + mtime 8 + ctime 8 = 36 バイト
+ブロック一覧    4 バイト × 12 本                                              = 48 バイト
+                                                                    合計  = 84 バイト
+余白                                                                         = 44 バイト
+                                                             INODE_SIZE = 128 バイト
+```
+
+実際に使うのは 84 バイトで、残り 44 バイトはゼロで埋める。
+128 という大きさは、84 バイトが入って、かつ `BLOCK_SIZE` (4096) を割り切れること
+から決まっている。
+
+将来フィールドを足すときは、**この余白から削る**。
+末尾に付け足すのではなく余白を削る形にしておけば、既存フィールドのオフセットが動かない。
+
+---
+
+## 5. オフセットからブロックへ
+
+![direct[12] とデータブロックの対応](../images/03-direct-pointers.svg)
+
+変換はこれだけ。分岐も探索もない。
+
+```python
+# 論理オフセット off バイト目が、どのブロックの何バイト目か
+index, inner = divmod(off, BLOCK_SIZE)
+block_no = inode.direct[index]
+```
+
+`direct[]` の並び順はファイルの論理的な順序を表すだけで、
+**ブロック番号が昇順である必要はない**（図の例は 7 → 9 → 8）。
+空いていたブロックを使うだけなので、書いた順に散らばる。
+
+`direct[i] == 0` は「まだ割り当てていない」。
+ブロック 0 は第 5 章でスーパーブロックになるので、
+データブロック番号として 0 が現れることはなく、番兵として安全に使える。
+
+### ファイルサイズの上限
+
+```
+MAX_FILE_SIZE = NDIRECT × BLOCK_SIZE = 12 × 4096 = 49152 バイト = 48 KiB
+```
+
+一覧を 12 本しか持たないので、**48 KiB を超えるファイルは作れない**。
+これを超える書き込みは `EFBIG` で拒否する。
+この壁をどう越えるかは第 13 章で扱う。
+
+### `size` と確保済みブロックの関係
+
+この 2 つは**別々に動く**。
+
+- `size` はファイルの終わりを指す。バイト単位。
+- 確保済みブロックは `ceil(size / 4096)` 個 …… とは限らない。
+  ファイルを縮めた直後は、まだ余分なブロックを持っていることがある。
+
+tiny-fs は「`truncate` で縮めたら余ったブロックはその場で解放する」と決めておく。
+こう決めておかないと、`fsck` が「本来使われているはずのブロック」を
+一意に計算できなくなる。
+
+また、**穴 (sparse file) は作らない**。
+`offset = 20000` にいきなり書いたら、手前のブロックも実際に確保してゼロで埋める。
+`direct[i] == 0` が「未割り当て」と「全部ゼロのブロック」の 2 つの意味を持つと、
+解放漏れの検出が一気に面倒になるため。
+
+---
+
+## 6. 実装 — `inode.py` (L3)
+
+構造体 (§3) とバイト列との変換 (§4) はもう書いた。
+ここでは **i-node を 1 個作る / 捨てる**、そして **中身を読み書きする** 関数を足す。
+この層も自分がディスクのどこに置かれるかは知らないので、
+必要な相手（ブロックデバイスと、ブロック / i-node の割り当て係）は引数でもらう。
+
+### i-node を 1 個作る / 捨てる
+
+§3 のとおり、i-node 番号は i-node ビットマップの添字そのものなので、
+**`allocate()` が返した番号がそのまま新しい i-node 番号**になる。
+
+```python
+def allocate_inode(inode_bitmap, mode: int, now: int) -> tuple[int, Inode]:
+    """空いている i-node 番号を 1 個取り、まっさらな Inode を返す。"""
+    # bit 0 は mkfs で埋めてあるので、ino = 0 が返ることはない
+    ino = inode_bitmap.allocate()
+    inode = Inode(mode=mode, nlink=0, uid=0, gid=0, size=0,
+                  mtime=now, ctime=now, direct=[0] * NDIRECT)
+    # nlink はまだ 0。名前を 1 つ付けた時点で 1 になる（第 7 章）
+    return ino, inode
+
+
+def free_inode(inode: Inode, blocks, alloc, inode_bitmap, ino: int) -> None:
+    """i-node が持っているデータブロックを全部返し、i-node 番号も返す。"""
+    # 先にデータブロック。順番を逆にすると、途中で落ちたときに
+    # 「誰からも参照されていないのに使用中のブロック」が残る
+    truncate(inode, blocks, alloc, 0)     # ← この後の節で書く
+    inode_bitmap.mark_free(ino)
+```
+
+ブロックを返す処理は「サイズ 0 に縮める」とまったく同じなので、
+次の節の `truncate` をそのまま呼べばよい。解放専用のループは要らない。
+
+この 2 つが返すのは**番号と構造体**だけで、
+**その 128 バイトをディスクのどこに書くか**はこの層の担当ではない。
+i-node テーブルの位置を知っているのは `fs.py`（第 5 章）で、
+`ino` から「何番ブロックの何バイト目か」を計算して `encode()` の結果を書き込む。
+
+### 中身を読み書きする
+
+読み出しは `size` で止める。
+
+```python
+def read(inode: Inode, blocks: BlockDevice, offset: int, length: int) -> bytes:
+    # size より先は「ファイルの外」。ブロックが確保されていても読まない
+    length = max(0, min(length, inode.size - offset))
+    out = bytearray()
+    while length > 0:
+        index, inner = divmod(offset, BLOCK_SIZE)
+        n = min(length, BLOCK_SIZE - inner)
+        block_no = inode.direct[index]
+        out += blocks.read_block(block_no)[inner:inner + n]
+        offset += n
+        length -= n
+    return bytes(out)
+```
+
+書き込みは read-modify-write になる。
+第 1 章で「部分書き込みは装置にはない」と言ったものを、ここで組み立てる。
+
+```python
+def write(inode: Inode, blocks: BlockDevice, alloc: BlockAllocator,
+          offset: int, data: bytes) -> None:
+    if offset + len(data) > MAX_FILE_SIZE:
+        raise FileTooBigError(...)          # EFBIG
+
+    pos = 0
+    while pos < len(data):
+        index, inner = divmod(offset + pos, BLOCK_SIZE)
+        n = min(len(data) - pos, BLOCK_SIZE - inner)
+
+        if inode.direct[index] == 0:
+            # 必要になった時点で初めて確保する。新品は全部ゼロとして扱う
+            inode.direct[index] = alloc.allocate()
+            buf = bytearray(BLOCK_SIZE)
+        else:
+            # ブロックの一部だけ書き換えるので、まず読んでから差し替える
+            buf = bytearray(blocks.read_block(inode.direct[index]))
+
+        buf[inner:inner + n] = data[pos:pos + n]
+        blocks.write_block(inode.direct[index], buf)
+        pos += n
+
+    inode.size = max(inode.size, offset + len(data))
+```
+
+`truncate` は伸ばす側と縮める側で別のことをする。
+
+```python
+def truncate(inode, blocks, alloc, new_size):
+    if new_size > inode.size:
+        # 伸長は「ゼロを書き込む」のと同じ。穴は作らない
+        write(inode, blocks, alloc, inode.size, b"\x00" * (new_size - inode.size))
+    else:
+        # 縮小は、要らなくなったブロックをその場で解放する。
+        # ここを忘れるとビットマップだけが埋まり続ける（fsck が検出する）
+        first_unused = math.ceil(new_size / BLOCK_SIZE)
+        for index in range(first_unused, NDIRECT):
+            if inode.direct[index] != 0:
+                alloc.free(inode.direct[index])
+                inode.direct[index] = 0
+    inode.size = new_size
+```
+
+`inode.py` は `bitmap.py` を import しない。`alloc` や `inode_bitmap` として
+「`allocate()` と `free()`（`mark_free()`）を持つ何か」を受け取るだけにしておく。
+こうするとテストで偽物の割り当て係を渡せるし、
+「i-node がビットマップの置き場所を知っている」という層の逆転も起きない。
+
+---
+
+## 7. テスト
+
+```python
+def test_encode_decode_roundtrip():
+    # 128 バイトになること。往復して同じ値が戻ること
+
+def test_encoded_size_is_exactly_128():
+    # 余白 44 バイトがゼロであること（規約そのものの検査）
+
+def test_write_across_block_boundary():
+    # 4090 バイト目から 12 バイト書く → 2 ブロックにまたがる
+    # 装置側から見て、両方のブロックが正しく変わっていること
+
+def test_partial_write_preserves_neighbours():
+    # ブロックの真ん中 10 バイトだけ書き換えて、前後が壊れていないこと
+    # （read-modify-write ができているか）
+
+def test_read_stops_at_size():
+    # size = 5000 のとき、8192 バイト読もうとしても 5000 しか返らない
+
+def test_write_beyond_max_file_size_raises_efbig():
+    # 49152 ちょうどは書けて、49153 は EFBIG
+
+def test_truncate_shrink_frees_blocks():
+    # 縮めたぶんのブロックが割り当て係に返っていること
+
+def test_truncate_grow_fills_zero():
+    # 伸ばしたぶんがゼロで読めること（ゴミが見えない）
+
+def test_allocate_inode_never_returns_zero():
+    # bit 0 が埋まっている状態から取り、1 以上が返ること。
+    # 返ってくる Inode は size = 0、direct が全部 0 であること
+
+def test_free_inode_returns_blocks_and_number():
+    # 3 ブロック使っている i-node を解放すると、
+    # 空きブロック数が 3 戻り、その i-node 番号も空きに戻ること
+```
+
+4 つ目と 7 つ目が要。**書いたものが読める**だけのテストは、
+read-modify-write の欠落も解放漏れも見逃す。
+「隣が壊れていないこと」「返したはずのブロックが本当に返っていること」を
+別々に確かめる。
+
+---
+
+ここまでで、ファイルの中身は完全に表せるようになった。
+しかし `A.txt` という名前はまだどこにもない。
+i-node は番号でしか呼べず、人間はその番号を知らない。
+次章で**名前**を作る。

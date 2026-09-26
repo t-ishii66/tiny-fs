@@ -1,0 +1,39 @@
+# --- tiny-fs の成果物 ---------------------------------------------------
+# ディスクイメージは生成物で、巨大になりうる
+*.img
+disk.img
+# FUSE のマウントポイント
+mnt/
+
+# --- レビュー用の作業ファイル（ローカル限定） ---------------------------
+PROBLEMS.md
+*PROBLEMS*.md
+
+# --- Python -------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# --- エディタ / OS ------------------------------------------------------
+.DS_Store
+*.swp
+
+# --- Claude Code のローカル設定 ----------------------------------------
+.claude/settings.local.json
+
+# --- 秘密情報（絶対にコミットしない） -----------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+credentials.json
+service-account*.json
+*.pem
+*.key
+id_rsa*
