@@ -477,17 +477,30 @@ class FileSystem:
         # One directory, one in-memory copy: two would overwrite each other.
         new_parent = old_parent if same_parent else self.read_inode(new_parent_ino)
 
-        if directory.exists(new_parent, self._blocks, new_name):
-            raise AlreadyExistsError(new_path)     # EEXIST. no overwriting
+        # rename replaces whatever sits at the destination (POSIX), so find out
+        # what that is before touching anything.
+        found = directory.find(new_parent, self._blocks, new_name)
+        victim_ino = None if found is None else found[1].ino
+        if victim_ino is not None:
+            self._check_can_replace(inode, victim_ino, new_path)
         if stat.S_ISDIR(inode.mode):
             self._check_not_descendant(ino, new_parent_ino)
 
-        # Add the new name first: if this fails, the old name is still there.
-        self._add_entry(new_parent, new_name, ino, new_path)
+        # Everything that can fail has failed by now.
+        if victim_ino is None:
+            # Add the new name first: if this fails, the old name is still there.
+            self._add_entry(new_parent, new_name, ino, new_path)
+        else:
+            # Point the name that is already there at the source instead. One
+            # 32-byte write, which cannot fail for want of space.
+            directory.set_entry(new_parent, self._blocks, self.blocks_alloc,
+                                new_name, ino)
         directory.remove_entry(old_parent, self._blocks, self.blocks_alloc,
                                old_name)
 
         stamp = now()
+        if victim_ino is not None:
+            self._drop_replaced(victim_ino, new_parent)
         if not same_parent and stat.S_ISDIR(inode.mode):
             # The parent changed, so ".." and both link counts have to follow.
             directory.set_entry(inode, self._blocks, self.blocks_alloc,
@@ -502,6 +515,38 @@ class FileSystem:
         if not same_parent:
             new_parent.mtime = new_parent.ctime = stamp
             self.write_inode(new_parent_ino, new_parent)
+
+    def _check_can_replace(self, inode: Inode, victim_ino: int,
+                           new_path: str) -> None:
+        """A file may replace a file, and a directory an empty directory."""
+        victim = self.read_inode(victim_ino)
+        if stat.S_ISDIR(inode.mode):
+            if not stat.S_ISDIR(victim.mode):
+                raise NotADirectoryError(new_path)    # ENOTDIR
+            if not directory.is_empty(victim, self._blocks):
+                raise NotEmptyError(new_path)         # ENOTEMPTY
+        elif stat.S_ISDIR(victim.mode):
+            raise IsADirectoryError(new_path)         # EISDIR
+
+    def _drop_replaced(self, victim_ino: int, new_parent: Inode) -> None:
+        """The name that used to point at the replaced i-node is gone."""
+        victim = self.read_inode(victim_ino)
+        if stat.S_ISDIR(victim.mode):
+            # An empty directory, so the only name left is its own ".".
+            # Free it, and the parent loses the ".." that pointed back at it.
+            new_parent.nlink -= 1
+            inode_mod.free_inode(victim, self._blocks, self.blocks_alloc,
+                                 self.inodes_alloc, victim_ino)
+            self.write_inode(victim_ino, Inode.empty())
+            return
+
+        victim.nlink -= 1
+        if victim.nlink == 0:
+            inode_mod.free_inode(victim, self._blocks, self.blocks_alloc,
+                                 self.inodes_alloc, victim_ino)
+            self.write_inode(victim_ino, Inode.empty())
+        else:
+            self.write_inode(victim_ino, victim)
 
     def _check_not_descendant(self, ino: int, new_parent_ino: int) -> None:
         # Walk ".." up from the new parent. Meeting ino on the way means the

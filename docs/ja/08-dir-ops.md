@@ -144,17 +144,29 @@ i-node もデータブロックも動かない。
         # 2 個読むと、片方への変更がもう片方の write_inode で消える
         new_parent = old_parent if same_parent else self.read_inode(new_parent_ino)
 
-        if directory.exists(new_parent, self._blocks, new_name):
-            raise AlreadyExistsError(new_path)     # EEXIST。上書きはしない
+        # 宛先に既に何かあれば、それを置き換える。先に何があるか見ておく
+        found = directory.find(new_parent, self._blocks, new_name)
+        victim_ino = None if found is None else found[1].ino
+        if victim_ino is not None:
+            self._check_can_replace(inode, victim_ino, new_path)
         if stat.S_ISDIR(inode.mode):
             self._check_not_descendant(ino, new_parent_ino)
 
-        # 先に新しい名前を足す。ここで失敗しても、元の名前はまだ無事
-        self._add_entry(new_parent, new_name, ino, new_path)
+        # 失敗しうる検査はここで終わり。以降は必ず完走する
+        if victim_ino is None:
+            # 先に新しい名前を足す。ここで失敗しても、元の名前はまだ無事
+            self._add_entry(new_parent, new_name, ino, new_path)
+        else:
+            # 既にあるエントリの ino を差し替える。32 バイトの書き込み 1 回で、
+            # 空きスロットを必要としないので失敗しない
+            directory.set_entry(new_parent, self._blocks, self.blocks_alloc,
+                                new_name, ino)
         directory.remove_entry(old_parent, self._blocks, self.blocks_alloc,
                                old_name)
 
         stamp = now()
+        if victim_ino is not None:
+            self._drop_replaced(victim_ino, new_parent)
         # 親が変わったなら、ディレクトリの ".." と両親の nlink を直す
         if not same_parent and stat.S_ISDIR(inode.mode):
             directory.set_entry(inode, self._blocks, self.blocks_alloc,
@@ -173,11 +185,55 @@ i-node もデータブロックも動かない。
 
 決めごとが 3 つある。
 
-**宛先が既にあれば `EEXIST`。** 上書きはしない。
-`mv a b` で `b` が存在する場合は失敗する。
+**宛先が既にあれば置き換える。** `mv a b` で `b` が存在する場合、
+`b` は消えて `a` がその名前を引き継ぐ。`rename(2)` の規定がそうなっている。
+置き換えられるのは同じ種別どうしだけで、組み合わせによって拒み方が変わる。
+
+| 宛先 | 移すのがファイル | 移すのがディレクトリ |
+|---|---|---|
+| 無い | 新しいエントリを足す | 同じ |
+| ファイル | 置き換える | `ENOTDIR` |
+| 空のディレクトリ | `EISDIR` | 置き換える |
+| 空でないディレクトリ | `EISDIR` | `ENOTEMPTY` |
+
+```python
+    def _check_can_replace(self, inode, victim_ino: int, new_path: str) -> None:
+        victim = self.read_inode(victim_ino)
+        if stat.S_ISDIR(inode.mode):
+            if not stat.S_ISDIR(victim.mode):
+                raise NotADirectoryError(new_path)    # ENOTDIR
+            if not directory.is_empty(victim, self._blocks):
+                raise NotEmptyError(new_path)         # ENOTEMPTY
+        elif stat.S_ISDIR(victim.mode):
+            raise IsADirectoryError(new_path)         # EISDIR
+```
+
+置き換えられた側は、指していた名前を失う。あとは `unlink` と同じ処理になる。
+
+```python
+    def _drop_replaced(self, victim_ino: int, new_parent: Inode) -> None:
+        victim = self.read_inode(victim_ino)
+        if stat.S_ISDIR(victim.mode):
+            # 空のディレクトリなので、残る名前は自分の "." だけ。丸ごと解放し、
+            # 親は自分を指していた ".." を 1 つ失う
+            new_parent.nlink -= 1
+            inode_mod.free_inode(victim, self._blocks, self.blocks_alloc,
+                                 self.inodes_alloc, victim_ino)
+            self.write_inode(victim_ino, Inode.empty())
+            return
+
+        victim.nlink -= 1
+        if victim.nlink == 0:
+            inode_mod.free_inode(victim, self._blocks, self.blocks_alloc,
+                                 self.inodes_alloc, victim_ino)
+            self.write_inode(victim_ino, Inode.empty())
+        else:
+            self.write_inode(victim_ino, victim)
+```
 
 **足してから消す。** 逆順にすると、`add_entry` が `ENOSPC` で失敗したときに
 **名前が 1 つもない i-node** が残る。足す側を先にしておけば、失敗しても元の状態のまま。
+置き換えのときは足す必要がないので、`set_entry` の 1 回の書き込みで名前が移る。
 
 **ディレクトリを自分の子孫へ移せない。** `/a` を `/a/b/c` の下へ移すと、
 `/a` 以下が木から切り離されて、どこからもたどれない輪になる。
@@ -227,7 +283,18 @@ def test_rename_across_directories_fixes_dotdot(tmp_path):
 def test_rename_into_descendant_raises_einval(tmp_path):
     # /a を /a/b の下へは移せない
 
-def test_rename_to_existing_name_raises_eexist(tmp_path):
+def test_rename_replaces_an_existing_file(tmp_path):
+    # 宛先のファイルが消え、その i-node とブロックが返っていること
+
+def test_rename_replaces_an_empty_directory(tmp_path):
+    # 親の nlink が 1 減り、移したディレクトリの ".." が正しいこと
+
+def test_rename_over_a_non_empty_directory_raises_enotempty(tmp_path):
+def test_rename_a_file_over_a_directory_raises_eisdir(tmp_path):
+def test_rename_a_directory_over_a_file_raises_enotdir(tmp_path):
+
+def test_a_refused_rename_changes_nothing(tmp_path):
+    # 拒まれたとき、空きブロック数・空き i-node 数・両方の名前が元のまま
 ```
 
 5 つ目が第 4 章の「削除は詰めない」と対になる。
@@ -237,6 +304,11 @@ def test_rename_to_existing_name_raises_eexist(tmp_path):
 9 つ目は `..` の付け替えを忘れると通らない。
 忘れたまま動かすと、移動したディレクトリから `cd ..` したときに
 **移動前の親に戻ってしまう**。
+
+置き換えの 5 本は、`sed -i` や多くのエディタの保存手順をそのまま支えている
+（一時ファイルに書いて、元の名前へ `rename` で被せる）。
+最後の 1 本は、置き換えで**失敗する経路が増えた**ぶんの担保で、
+拒んだときに何も変わっていないことを見る。
 
 ---
 

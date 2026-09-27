@@ -4,7 +4,6 @@ import pytest
 
 from tiny_fs.constants import BLOCK_SIZE
 from tiny_fs.errors import (
-    AlreadyExistsError,
     InvalidArgumentError,
     IsADirectoryError,
     NotADirectoryError,
@@ -134,11 +133,85 @@ def test_rename_into_descendant_raises_einval(fs):
         fs.rename("/a", "/a/c")
 
 
-def test_rename_to_existing_name_raises_eexist(fs):
+def test_rename_replaces_an_existing_file(fs):
+    # rename(2) replaces the destination: mv a b works even if b is there.
     fs.create("/a.txt")
+    fs.write("/a.txt", 0, b"source")
     fs.create("/b.txt")
-    with pytest.raises(AlreadyExistsError):
-        fs.rename("/a.txt", "/b.txt")
+    fs.write("/b.txt", 0, b"x" * 5000)      # 2 blocks, about to be freed
+    ino = fs.lookup("/a.txt")
+    free_blocks, free_inodes = fs.count_free_blocks(), fs.count_free_inodes()
+
+    fs.rename("/a.txt", "/b.txt")
+
+    assert fs.lookup("/b.txt") == ino
+    assert fs.read("/b.txt", 0, 100) == b"source"
+    assert [name for name, _ino in fs.readdir("/")] == [b".", b"..", b"b.txt"]
+    # the replaced file gave back its i-node and both of its blocks
+    assert fs.count_free_blocks() == free_blocks + 2
+    assert fs.count_free_inodes() == free_inodes + 1
+
+
+def test_rename_replaces_an_existing_file_across_directories(fs):
+    fs.mkdir("/docs")
+    fs.create("/a.txt")
+    fs.write("/a.txt", 0, b"source")
+    fs.create("/docs/a.txt")
+    free_inodes = fs.count_free_inodes()
+
+    fs.rename("/a.txt", "/docs/a.txt")
+
+    assert fs.read("/docs/a.txt", 0, 100) == b"source"
+    assert fs.readdir("/") == [(b".", 1), (b"..", 1), (b"docs", fs.lookup("/docs"))]
+    assert fs.count_free_inodes() == free_inodes + 1
+
+
+def test_rename_replaces_an_empty_directory(fs):
+    fs.mkdir("/a")
+    fs.mkdir("/b")
+    fs.create("/a/inside.txt")
+    ino = fs.lookup("/a")
+    root_nlink = fs.stat("/").nlink          # 2 + 2 children = 4
+
+    fs.rename("/a", "/b")
+
+    assert fs.lookup("/b") == ino
+    assert fs.read("/b/inside.txt", 0, 1) == b""
+    assert fs.stat("/").nlink == root_nlink - 1     # one child directory left
+    assert fs.lookup("/b/..") == fs.superblock.root_ino
+
+
+def test_rename_over_a_non_empty_directory_raises_enotempty(fs):
+    fs.mkdir("/a")
+    fs.mkdir("/b")
+    fs.create("/b/kid.txt")
+    with pytest.raises(NotEmptyError):
+        fs.rename("/a", "/b")
+
+
+def test_rename_a_file_over_a_directory_raises_eisdir(fs):
+    fs.create("/a.txt")
+    fs.mkdir("/b")
+    with pytest.raises(IsADirectoryError):
+        fs.rename("/a.txt", "/b")
+
+
+def test_rename_a_directory_over_a_file_raises_enotdir(fs):
+    fs.mkdir("/a")
+    fs.create("/b.txt")
+    with pytest.raises(NotADirectoryError):
+        fs.rename("/a", "/b.txt")
+
+
+def test_a_refused_rename_changes_nothing(fs):
+    fs.mkdir("/a")
+    fs.mkdir("/b")
+    fs.create("/b/kid.txt")
+    before = (fs.count_free_blocks(), fs.count_free_inodes())
+    with pytest.raises(NotEmptyError):
+        fs.rename("/a", "/b")
+    assert (fs.count_free_blocks(), fs.count_free_inodes()) == before
+    assert fs.lookup("/a") and fs.lookup("/b/kid.txt")
 
 
 def test_rename_of_dot_is_rejected(fs):

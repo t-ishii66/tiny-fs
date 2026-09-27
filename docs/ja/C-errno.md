@@ -38,10 +38,10 @@ class AlreadyExistsError(FSError):
 | 例外 | `errno` | 意味 | いつ出るか |
 |---|---|---|---|
 | `NotFoundError` | `ENOENT` | そのパスがない | `lookup` で成分が見つからない。`unlink` / `rm` の対象がない |
-| `AlreadyExistsError` | `EEXIST` | 既にある | `create` / `mkdir` / `rename` の宛先が既にある |
-| `NotADirectoryError` | `ENOTDIR` | ディレクトリではない | パスの途中の成分がファイル（`/memo.txt/x`）。`readdir` / `rmdir` の対象がファイル |
-| `IsADirectoryError` | `EISDIR` | ディレクトリである | `read` / `write` / `unlink` の対象がディレクトリ |
-| `NotEmptyError` | `ENOTEMPTY` | 空ではない | `rmdir` の対象に有効なエントリが残っている |
+| `AlreadyExistsError` | `EEXIST` | 既にある | `create` / `mkdir` の宛先が既にある（`rename` は置き換えるので出ない） |
+| `NotADirectoryError` | `ENOTDIR` | ディレクトリではない | パスの途中の成分がファイル（`/memo.txt/x`）。`readdir` / `rmdir` の対象がファイル。`rename` でディレクトリをファイルに被せようとした |
+| `IsADirectoryError` | `EISDIR` | ディレクトリである | `read` / `write` / `unlink` の対象がディレクトリ。`rename` でファイルをディレクトリに被せようとした |
+| `NotEmptyError` | `ENOTEMPTY` | 空ではない | `rmdir` の対象に有効なエントリが残っている。`rename` の宛先が空でないディレクトリ |
 | `NoSpaceError` | `ENOSPC` | 空きがない | データブロックの枯渇。i-node の枯渇。ディレクトリが 1536 エントリに達した |
 | `FileTooBigError` | `EFBIG` | 大きすぎる | 書き込みが `MAX_FILE_SIZE`（48 KiB）を超える |
 | `NameTooLongError` | `ENAMETOOLONG` | 名前が長すぎる | 名前が 28 バイト以上 |
