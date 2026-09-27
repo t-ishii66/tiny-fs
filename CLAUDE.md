@@ -110,6 +110,7 @@ dirent      <I27sx>     ino, name(NUL埋め), padding      → 32 バイト
 ```
 tiny_fs/
   constants.py   レイアウト定数と struct フォーマット。ここ以外に数値を書かない
+  errors.py      FSError 派生の例外。すべて errno を持つ（層ではない）
   device.py      L0: 装置のモデル。512 B セクタの read_sector/write_sector だけ
   disk.py        L1: 8 セクタ = 1 ブロックにまとめる read_block/write_block だけ
   bitmap.py      L2: ビットの割り当て / 解放 / 走査
@@ -187,6 +188,11 @@ python -m tiny_fs.cli fsck disk.img
 python -m tiny_fs.cli mkdir disk.img /docs
 python -m tiny_fs.cli put  disk.img ./README.md /docs/readme.md
 python -m tiny_fs.cli ls   disk.img /docs
+python -m tiny_fs.cli cat  disk.img /docs/readme.md
+python -m tiny_fs.cli get  disk.img /docs/readme.md ./copy.md
+python -m tiny_fs.cli mv   disk.img /docs/readme.md /readme.md
+python -m tiny_fs.cli rm   disk.img /readme.md
+python -m tiny_fs.cli rmdir disk.img /docs
 
 # Linux + FUSE（Docker。macOS ホストでは FUSE マウントは不可能）
 docker build -t tiny-fs-dev docker/
@@ -252,8 +258,9 @@ python -m tiny_fs.fuse_ops disk.img /mnt/tiny-fs -f   # -f = フォアグラウ�
   仕組みを 1 つ示し、それが機能することが分かれば足りる。
 - 各章は **この FS がどう動くか** だけを書く。
   「なぜこの設計にしたか」という設計の弁明や、ext2 など他のファイルシステムとの比較を
-  章の中に混ぜない。どちらも**全体を理解したあとに湧いてくる疑問**なので、
-  途中に置くと読み進める邪魔になる。まとめて第 13 章「限界と、その先」で扱う。
+  章の中に混ぜない。どちらも**全体を理解したあとに湧いてくる疑問**で、
+  途中に置くと読み進める邪魔になる。最終章に集めるのも避ける
+  （集めても量は変わらず、読了感を損なうだけだった）。書かない。
   ただし、その場で必要な判断の根拠（「ここは `capacity` で打ち切る。ビットの意味を
   1 つに保つため」程度）は 1〜2 文で本文に書いてよい。節にしない。
 
