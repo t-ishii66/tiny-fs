@@ -4,8 +4,8 @@
 <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
 <text x="450.0" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">read-modify-write — セクタ 3 の 100 バイト目から 30 バイトだけ書き換えたい</text>
 <rect x="70" y="52" width="780" height="34" rx="3" fill="#fee2e2" stroke="#c05252" stroke-width="1.5"/>
-<text x="86" y="74" font-size="12" fill="#a03030" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">write_sector(3, 100, 30 バイト)</text>
-<text x="834" y="74" font-size="11" fill="#a03030" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">← こんな API は装置にない</text>
+<text x="86" y="74" font-size="12" fill="#a03030" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">「セクタ 3 の 100 バイト目から 30 バイトだけ書く」</text>
+<text x="834" y="74" font-size="11" fill="#a03030" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">← こんな操作は装置にない</text>
 <rect x="70" y="124" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
 <rect x="740" y="124" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
 <rect x="180" y="124" width="560" height="44" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
@@ -24,7 +24,8 @@
 <text x="322.1875" y="188" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">130</text>
 <path d="M 740.0 170 l 0 6" stroke="#57606a" stroke-width="1"/>
 <text x="740.0" y="188" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">512</text>
-<text x="590.0" y="152" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">書き換えたいのはここだけ</text>
+<text x="590.0" y="152" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">書き換えたいのはオレンジの 30 バイト</text>
+<path d="M 494.0 148 L 327.1875 148" stroke="#57606a" stroke-width="0.9" fill="none" stroke-dasharray="3 3"/>
 <rect x="180" y="244" width="560" height="44" rx="3" fill="#eef2ff" stroke="#5b6fc4" stroke-width="1.5"/>
 <rect x="289.375" y="244" width="32.8125" height="44" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
 <text x="170" y="265" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">メモリ</text>
@@ -34,7 +35,8 @@
 <rect x="289.375" y="364" width="32.8125" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
 <text x="170" y="385" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">メモリ</text>
 <text x="170" y="401" font-size="10" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">buf</text>
-<text x="590.0" y="392" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">差し替えるのは 30 バイト</text>
+<text x="590.0" y="392" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">差し替えたのは緑の 30 バイト</text>
+<path d="M 498.0 388 L 327.1875 388" stroke="#57606a" stroke-width="0.9" fill="none" stroke-dasharray="3 3"/>
 <rect x="70" y="484" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
 <rect x="740" y="484" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
 <rect x="180" y="484" width="560" height="44" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
@@ -44,14 +46,14 @@
 <text x="62" y="511" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ディスク</text>
 <text x="590.0" y="512" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">書き戻すのは 512 バイトまるごと</text>
 <path d="M 240 192 L 240 236" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
-<text x="256" y="212" font-size="12" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">① buf = read_sector(3)</text>
-<text x="500" y="212" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタ 3 を 512 バイトまるごとメモリに読む</text>
+<text x="258" y="212" font-size="13" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">①</text>
+<text x="280" y="212" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタ 3 を 512 バイトまるごとメモリに読む</text>
 <path d="M 240 312 L 240 356" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
-<text x="256" y="332" font-size="12" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">② buf[100:130] = new_data</text>
-<text x="500" y="332" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">メモリの上で 30 バイトだけ差し替える</text>
+<text x="258" y="332" font-size="13" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">②</text>
+<text x="280" y="332" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">メモリの上で 100 – 130 バイト目だけ差し替える</text>
 <path d="M 240 432 L 240 476" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
-<text x="256" y="452" font-size="12" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">③ write_sector(3, buf)</text>
-<text x="500" y="452" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタ 3 に 512 バイトまるごと書き戻す</text>
+<text x="258" y="452" font-size="13" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">③</text>
+<text x="280" y="452" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタ 3 に 512 バイトまるごと書き戻す</text>
 <text x="450.0" y="548" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタ 2 と セクタ 4 は最初から最後まで 1 バイトも触らない。動くのはセクタ 3 の 512 バイトだけ。</text>
 <text x="450.0" y="572" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">30 バイト書きたいだけでも、装置との往復は 512 バイト読み + 512 バイト書き。</text>
 <text x="450.0" y="594" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">この往復を read-modify-write という。ファイルシステムの部分書き込みは、いつもこの形になる。</text>

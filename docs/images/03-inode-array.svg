@@ -18,7 +18,7 @@
 <text x="200" y="126" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">mode</text>
 <text x="294" y="126" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0o040755</text>
 <text x="200" y="148" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size</text>
-<text x="294" y="148" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">64</text>
+<text x="294" y="148" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">4096</text>
 <text x="200" y="170" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct</text>
 <text x="294" y="170" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">[7, 0, 0…]</text>
 <text x="247.0" y="194" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">128 バイト</text>

@@ -88,13 +88,23 @@ ext2 など本物のファイルシステムとの比較も途中に置かない
 
 ### 06. パス解決
 
-`/docs/a.txt` という文字列から i-node にたどり着く。ルートから 1 成分ずつ降りる namei、
-親ディレクトリと最終成分の分離、`ENOENT` / `ENOTDIR` の出し分け。→ `fs.py` (L5)
+`/docs/a.txt` というパスから i-node 番号を得る手順を決める。
+ルートから 1 成分ずつ降りる namei、`.` と `..`、`ENOENT` / `ENOTDIR` の出し分け、
+親ディレクトリと最終成分の分離。ここは手順の章で、コードは次章。
 
-### 07. ファイル操作
+### 07. `fs.py` を組む — マウントとファイル操作
 
-create / read / write / truncate / unlink。オフセット付き部分書き込み、
-truncate の伸長（0 埋め）と縮小、`nlink` が 0 になったら i-node ごと解放。
+ここから実装が主役になる。`fs.py` を上から順に組み立てる。→ `fs.py` (L5)
+
+| 節 | 内容 |
+|---|---|
+| 1 | **マウント** — `FileSystem.__init__`。スーパーブロックを読んで定数と照合し、2 つのビットマップをメモリに載せる |
+| 2 | **i-node テーブルへの出入り** — `_inode_pos` / `read_inode` / `write_inode`。ino → ブロック位置を知っているのはここだけ |
+| 3 | **パス解決の実装** — `split_path` / `_walk` / `lookup` / `lookup_parent`（第 6 章の手順をコードに） |
+| 4 | **ファイルを作る** — `create`。`lookup_parent` → i-node 確保 → dirent 追加 → `nlink = 1` |
+| 5 | **読み書き** — `read` / `write` / `truncate`。ビットマップをいつ書き戻すか |
+| 6 | **消す** — `unlink`。dirent を消す → `nlink` を減らす → 0 なら `free_inode` |
+| 7 | **テスト** |
 
 ### 08. ディレクトリ操作
 

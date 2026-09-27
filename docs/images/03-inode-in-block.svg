@@ -4,7 +4,7 @@
 <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
 <text x="450.0" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">i-node 1 個はディスク上では 128 バイト。1 ブロックにちょうど 32 個入る。</text>
 <text x="34" y="56" font-size="12" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">struct Inode</text>
-<text x="74" y="74" font-size="9" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">offset</text>
+<text x="74" y="74" font-size="9" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">offset (B)</text>
 <text x="230" y="74" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">幅</text>
 <text x="326" y="74" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">大きさ</text>
 <rect x="80" y="84" width="246" height="23" rx="2" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.4"/>

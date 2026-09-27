@@ -1,84 +1,95 @@
 # 04. 名前をどう付けるか — ディレクトリ
 
-第 3 章で、ファイルの中身は完全に表せるようになった。
-5000 バイトのテキストは「17 番の i-node」として、いつでも正しく読み書きできる。
+i-node によって、ファイルの中身とメタデータは表せるようになった。
+ただし i-node を指定する手段は番号しかなく、**i-node 自身は名前を持たない**。
+`memo.txt` というファイル名から i-node にたどり着く経路は、まだどこにも存在しない。
 
-しかし人間は **17 番とは呼ばない**。`memo.txt` と呼ぶ。
-そして i-node には、名前を入れる場所がなかった。
-
----
-
-## 1. 問題 — 番号と名前のあいだに何もない
-
-足りないものは 2 つある。
-
-- **名前 → i-node 番号の対応**。`memo.txt` と言われたら 17 を返せること。
-- **グループ分け**。ファイルが 100 個あるとき、全部を 1 列に並べたくない。
-  `docs/` の下、`src/` の下、と分けたい。
-
-1 つ目だけなら、対応表を 1 枚どこかに置けば済む。
-2 つ目まで含めて考えると、置き場所の選び方が効いてくる。
+この章で用意するものは 2 つある。**名前から i-node 番号を引く対応表**と、
+ファイルが増えたときにそれを**分類する仕組み**（`docs/` の下、`src/` の下、という階層）。
 
 ---
 
-## 2. 対応表を「ファイル」にする
+## 1. ディレクトリは、実はファイル
 
-名前と i-node 番号の対応表を作る。`memo.txt → 5`、`docs → 3` という行を並べたものだ。
+ディレクトリは **ディレクトリファイル** と呼ばれる、ファイルの一種である。
+i-node を 1 個持ち、データブロックに中身を持つ。
+通常のファイルと違うのは、その中身が「名前と i-node 番号の対応表」になっていることだけ。
 
-置き場所は、**普通のファイルの中**にする。
-つまり対応表そのものに i-node を 1 個与えて、中身が対応表になっているファイルとして扱う。
-これが**ディレクトリ**。
+```
+memo.txt → 5
+docs     → 3
+```
 
-こうすると、第 3 章で作ったものが全部そのまま使える。
-
-- 表が伸びる → ファイルが伸びるのと同じ。`write` がそのまま使える
-- 表の置き場所 → `direct[]` が管理する。専用の固定領域を用意しなくていい
-- 表の大きさの上限 → 「ファイルの最大サイズ」に吸収される
-- **表の中から別の表を指せる** → 入れ子になり、木構造が何の仕掛けもなく出てくる
-
-そして名前が対応表の側にあるので、**i-node は自分の名前を知らない**ままになる。
-これは後で効いてくる: 同じ i-node に複数の名前を付けられるし、
-`rename` はデータを 1 バイトも動かさずに済む。
+表の中から別のディレクトリを指せるので、入れ子になり、木構造が出てくる。
 
 ---
 
-## 3. dirent — 対応表の 1 行
+## 2. dirent — 対応表の 1 行
 
-表の 1 行を **dirent** (directory entry) と呼ぶ。32 バイト固定。
-
-![dirent の 32 バイト](../images/04-dirent.svg)
+表の 1 行を **dirent** (directory entry) と呼ぶ。
+i-node と同じく**固定長**の構造体にする。大きさは 32 バイト。
 
 ```python
-DIRENT_FMT = "<I27sx"     # ino(4) + name(27) + padding(1) = 32 バイト
-MAX_NAME_LEN = 27         # 32 − 4 (ino) − 1 (NUL)
+# tiny_fs/constants.py
+DIRENT_SIZE = 32                                # dirent 1 個のディスク上の大きさ
+DIRENT_FMT = "<I27sx"                           # ino(4) + name(27) + 詰め物(1)
+MAX_NAME_LEN = 27                               # 32 − 4 (ino) − 1 (詰め物)
+DIRENTS_PER_BLOCK = BLOCK_SIZE // DIRENT_SIZE   # 4096 ÷ 32 = 128
 ```
+
+```python
+# tiny_fs/directory.py
+@dataclass
+class Dirent:
+    """dirent 1 個。ディスク上では 32 バイトの大きさを占める。"""
+
+    ino: int      # u32   指し先の i-node 番号。0 なら「空きスロット」
+    name: bytes   # 27 B  ファイル名。27 バイトに右 NUL 埋めして書く
+```
+
+| メンバー | 意味 |
+|---|---|
+| `ino` | この名前が指す i-node 番号。**`0` は「空きスロット」**を表す（第 3 章で 0 を番兵に予約したのが、ここで効く） |
+| `name` | ファイル名。27 バイトに満たないぶんは NUL で埋める。**NUL 終端ではない**ので、27 バイトちょうどの名前は終端バイトを持たない |
+
+`DIRENT_FMT` の `27s` が 27 バイトの固定長バイト列、末尾の `x` が 1 バイトの詰め物。
+`27s` は書くときに自動で右 NUL 埋めしてくれるので、往復はこれだけで書ける。
+
+```python
+    def encode(self) -> bytes:
+        return struct.pack(DIRENT_FMT, self.ino, self.name)
+
+    @classmethod
+    def decode(cls, raw: bytes) -> "Dirent":
+        ino, name = struct.unpack(DIRENT_FMT, raw)
+        # 埋めた NUL を落として、本来の名前に戻す
+        return cls(ino=ino, name=name.rstrip(b"\x00"))
+```
+
+![dirent の 32 バイト](../images/04-dirent.svg)
 
 `memo.txt` → i-node 5 の dirent と、その次の空きスロットの実バイト列:
 
 ```
 00000000  05 00 00 00 6d 65 6d 6f 2e 74 78 74 00 00 00 00  |....memo.txt....|
-          ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^ 名前は NUL 埋め（終端ではない）
-          ino = 5     "memo.txt"
+          ^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^
+          ino = 5     "memo.txt" (8 バイト)   名前の後ろは NUL (0x00) で埋める
+                                              → 27 バイトまで。終端記号ではなく詰め物
 00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
 00000020  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
           ^^^^^^^^^^^ ino = 0 → このスロットは空き
 00000030  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|
 ```
 
-決めておくことが 3 つある。
-
-**固定長 32 バイトにする。** `BLOCK_SIZE` の約数なので、
-1 ブロックにちょうど 128 エントリが収まり、**dirent がブロックをまたぐことがない**。
+32 が `BLOCK_SIZE` の約数なので、1 ブロックにちょうど 128 エントリが収まり、
+**dirent がブロックをまたぐことはない**。
 さらに「n 番目のエントリは `32n` バイト目」と位置が計算で決まる。
-これが後で `readdir` のオフセットとして効く（§6）。
+これが後で `readdir` のオフセットとして効く（§5）。
 
-**名前は NUL 終端ではなく NUL 埋め。** 27 バイトちょうどの名前は終端バイトを持たない。
-だから比較は「取り出してから `rstrip`」ではなく、
-**検索語のほうを 27 バイトに右 NUL 埋めして、そのまま 27 バイト比較する**。
-こうすると「名前に NUL は含められない」という前提が 1 か所に閉じ込められる。
-
-**`ino == 0` は空きスロット。** 第 3 章で i-node 番号を 1 始まりにして
-0 を番兵に予約したのが、ここで効く。
+探したい名前も 27 バイトに右 NUL 埋めしてから比べる。
+こうすると、**読み出した 27 バイトとの単純比較だけでファイル名の一致を判定できる**。
+NUL を取り除く処理は要らない。
+「名前に NUL は含めない」ことだけ、名前を登録するときに確かめておく。
 
 名前として受け付けないものも決めておく。
 
@@ -92,12 +103,24 @@ MAX_NAME_LEN = 27         # 32 − 4 (ino) − 1 (NUL)
 
 ---
 
-## 4. ディレクトリは普通のファイル
+## 3. ディレクトリは普通のファイル
 
 ![ディレクトリ = 中身が dirent の配列になっているだけの普通のファイル](../images/04-directory-is-a-file.svg)
 
 ディレクトリも i-node を持つ。`direct[12]` にデータブロックを持ち、`size` をバイト単位で持つ。
 **普通のファイルとの違いは `mode` の種別ビットだけ**（`S_IFDIR` か `S_IFREG` か）。
+
+ただし `size` の動き方は違う。通常のファイルは 1 バイト単位で増減し、`truncate` で縮む。
+ディレクトリファイルの `size` は
+
+- 常に **`BLOCK_SIZE` の倍数**。ブロックを 1 個確保するたびに 4096 ずつ増える
+- ブロックは丸ごとゼロで確保されるので、増えた 4096 バイトは
+  そのまま **`ino = 0` の空きスロット 128 個**になる
+- エントリを 1 個足しても、空きスロットがあるかぎり `size` は変わらない
+- **一度増えたら減らない**（削除は `ino = 0` を書くだけ。§5）
+
+つまりディレクトリの `size` は「いま何エントリあるか」ではなく、
+**「何エントリ置ける場所を確保したか」**を表す。
 
 ```python
 # ディレクトリの中身を読むのに、専用の関数は要らない
@@ -111,7 +134,7 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 |---|---|
 | 1 ディレクトリの最大サイズ | `MAX_FILE_SIZE` = 48 KiB |
 | 1 ディレクトリの最大エントリ数 | **1536**（12 ブロック × 128 エントリ、`.` と `..` 込み） |
-| ディレクトリの `size` | エントリ数 × 32 バイト |
+| ディレクトリの `size` | 確保したブロック数 × 4096 バイト |
 
 「ディレクトリのサイズ」が `ls -l` で 4096 などと表示されて不思議に思ったことがあれば、
 これがその正体になる。ディレクトリのサイズは**中のファイルの合計ではなく、
@@ -119,7 +142,7 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 
 ---
 
-## 5. `.` と `..` — 木をつなぐ
+## 4. `.` と `..` — 木をつなぐ
 
 ![. と .. — 木の上下をたどるのも、ただの dirent](../images/04-tree-dotdot.svg)
 
@@ -155,7 +178,7 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 
 ---
 
-## 6. 削除は詰めない
+## 5. 削除は詰めない
 
 ![削除はエントリを詰めず、ino = 0 を書くだけ](../images/04-slot-reuse.svg)
 
@@ -172,33 +195,16 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 位置が固定なら、この問題が最初から存在しない。
 
 代償は、**一度太ったディレクトリは縮まない**こと。
-1000 個作って 999 個消しても、`size` は 32000 バイトのままで、
+1000 個作ると 8 ブロック（32768 バイト）まで育ち、999 個消しても `size` はそのまま。
 検索は毎回そこまで走査する。これはディレクトリ内の断片化になる。
 
 ---
 
-## 7. 実装 — `directory.py` (L4)
+## 6. 実装 — `directory.py` (L4)
 
 この層は「dirent の並んだファイル」を扱うだけ。
 ディレクトリがディスクのどこにあるかも、パスがどう解決されるかも知らない。
 第 3 章の `inode.read` / `inode.write` を呼ぶだけで済む。
-
-```python
-@dataclass
-class Dirent:
-    ino: int
-    name: bytes          # NUL 埋めではなく、実際の名前（比較のときに埋める）
-
-    def encode(self) -> bytes:
-        # struct の 27s は自動で右 NUL 埋めしてくれる
-        return struct.pack(DIRENT_FMT, self.ino, self.name)
-
-    @classmethod
-    def decode(cls, raw: bytes) -> "Dirent":
-        ino, name = struct.unpack(DIRENT_FMT, raw)
-        # 埋めた NUL を落として、本来の名前に戻す
-        return cls(ino=ino, name=name.rstrip(b"\x00"))
-```
 
 走査はスロット番号で回す。**空きスロット (`ino == 0`) は読み飛ばす**。
 
@@ -230,16 +236,20 @@ def add_entry(dir_inode, blocks, alloc, name: bytes, ino: int) -> None:
     if _find(dir_inode, blocks, name) is not None:
         raise AlreadyExistsError(name)     # EEXIST
 
-    raw = Dirent(ino=ino, name=name).encode()
+    slot = _find_free_slot(dir_inode, blocks)
+    if slot is None:
+        # 空きスロットが尽きた。ブロックを 1 個ぶん伸ばす。
+        # truncate の伸長はゼロ埋めなので、増えた 4096 バイトは
+        # そのまま ino = 0 の空きスロット 128 個になる
+        slot = dir_inode.size // DIRENT_SIZE
+        inode.truncate(dir_inode, blocks, alloc, dir_inode.size + BLOCK_SIZE)
 
-    free_slot = _find_free_slot(dir_inode, blocks)
-    if free_slot is not None:
-        # 消えたエントリの跡地を再利用する（size は増えない）
-        inode.write(dir_inode, blocks, alloc, free_slot * DIRENT_SIZE, raw)
-    else:
-        # 末尾に足す = ディレクトリというファイルが 32 バイト伸びる
-        inode.write(dir_inode, blocks, alloc, dir_inode.size, raw)
+    raw = Dirent(ino=ino, name=name).encode()
+    inode.write(dir_inode, blocks, alloc, slot * DIRENT_SIZE, raw)
 ```
+
+エントリを足す経路はこれ 1 本だけ。`size` が増えるのは、
+**空きスロットが 1 個も無かったときのブロック追加**に限られる。
 
 削除は `ino = 0` を書くだけ。**`size` も後続エントリも触らない。**
 
@@ -264,7 +274,7 @@ def init_directory(dir_inode, blocks, alloc, self_ino: int, parent_ino: int) -> 
 
 ---
 
-## 8. テスト
+## 7. テスト
 
 ```python
 def test_add_then_lookup():
@@ -285,9 +295,12 @@ def test_remove_keeps_following_entries_in_place():
 def test_removed_slot_is_reused():
     # 消した跡地に次のエントリが入り、size が増えないこと
 
+def test_new_directory_is_one_block():
+    # 作った直後は size = 4096、有効なエントリは . と .. の 2 つだけ
+
 def test_add_beyond_one_block_grows_the_directory():
-    # 129 個目のエントリでブロックが 1 個割り当てられ、
-    # 128 個目までのエントリが無傷であること
+    # 128 個目までは size = 4096 のまま。129 個目で size = 8192 になり、
+    # それまでのエントリが無傷であること
 
 def test_dot_and_dotdot_cannot_be_removed():
 
