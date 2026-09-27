@@ -199,5 +199,16 @@ def test_out_of_range_raises(tmp_path):
 
 ---
 
+## 試す
+
+```bash
+pytest -q tests/test_device.py tests/test_disk.py
+```
+
+`test_block_is_eight_sectors` が、ブロック 1 への書き込みが
+セクタ 8–15 だけを変えることを確かめている。
+
+---
+
 次章では、この 1024 個のブロックについて
 **「どれが使用中か」をどうやって記録するか**を考える。

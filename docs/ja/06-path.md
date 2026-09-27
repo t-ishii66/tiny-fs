@@ -1,5 +1,7 @@
 # 06. パス解決
 
+![雨の日に絵本を楽しむ Alice と Bob](../images/06-alice-bob.png)
+
 第 5 章までで、部品とその配置が決まった。
 ただし i-node を指定する手段は番号だけで、`/docs/a.txt` のようなパスから
 i-node 番号を得る手順はまだない。この章でそれを作る。
@@ -68,6 +70,20 @@ FUSE はカーネル側で解決した絶対パスを渡してくるので、こ
 
 `lookup_parent("/")` は最終成分が無いので `EINVAL` にする。
 ルート自身を作ったり消したりする操作は存在しない。
+
+---
+
+## 試す
+
+```bash
+tiny-fs mkfs disk.img
+tiny-fs mkdir disk.img /docs
+
+tiny-fs ls disk.img /docs/..      # ルートの中身が出る
+tiny-fs ls disk.img /..           # ルートの親はルート自身
+tiny-fs ls disk.img //docs///     # 空の成分は捨てられる
+tiny-fs ls disk.img /nothing      # ENOENT
+```
 
 ---
 

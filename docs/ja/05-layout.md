@@ -1,5 +1,7 @@
 # 05. 地図を描く — レイアウトの確定
 
+![雨の日にテレビゲームを楽しむ Alice と Bob](../images/05-alice-bob.png)
+
 ビットマップ (第 2 章)、i-node (第 3 章)、ディレクトリ (第 4 章) と部品が揃った。
 
 第 3 章の図では、データブロック・ビットマップ、i-node ビットマップ、i-node テーブルが
@@ -357,6 +359,17 @@ DIRENT_FMT     = "<I27sx"       # 第 4 章
 どちらが先に枯渇するかは使い方で変わる。小さいファイルを並べれば i-node が先に尽き（127 個）、
 48 KiB のファイルを並べればデータ領域が先に尽きる（84 個で 1008 ブロック、85 個目の途中で枯渇）。
 どちらも `ENOSPC` で返す。
+
+---
+
+## 試す
+
+```bash
+tiny-fs mkfs disk.img
+tiny-fs dump disk.img                      # この章の図と同じ配置が出る
+tiny-fs dump disk.img --raw 0 --length 32  # スーパーブロックの 32 バイト
+tiny-fs dump disk.img --raw 7 --length 64  # ルートの "." と ".."
+```
 
 ---
 

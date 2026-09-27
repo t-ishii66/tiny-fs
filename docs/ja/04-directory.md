@@ -1,5 +1,7 @@
 # 04. 名前をどう付けるか — ディレクトリ
 
+![雨の日にジュースとお菓子を楽しむ Alice と Bob](../images/04-alice-bob.png)
+
 i-node によって、ファイルの中身とメタデータは表せるようになった。
 ただし i-node を指定する手段は番号しかなく、**i-node 自身は名前を持たない**。
 `memo.txt` というファイル名から i-node にたどり着く経路は、まだどこにも存在しない。
@@ -86,10 +88,10 @@ class Dirent:
 さらに「n 番目のエントリは `32n` バイト目」と位置が計算で決まる。
 これが後で `readdir` のオフセットとして効く（§5）。
 
-探したい名前も 27 バイトに右 NUL 埋めしてから比べる。
-こうすると、**読み出した 27 バイトとの単純比較だけでファイル名の一致を判定できる**。
-NUL を取り除く処理は要らない。
-「名前に NUL は含めない」ことだけ、名前を登録するときに確かめておく。
+固定長なので、長さを別に持たなくても名前が復元できる。
+`decode` が末尾の NUL を落とし、**あとは `bytes` の比較 1 回で一致を判定できる**。
+これが成り立つのは「名前に NUL を含めない」ことを登録時に確かめているからで、
+それがなければ埋め物と中身の区別がつかなくなる。
 
 名前として受け付けないものも決めておく。
 
@@ -211,19 +213,28 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 ```python
 def iter_entries(dir_inode, blocks):
     """有効なエントリを (スロット番号, Dirent) で返す。"""
-    for slot in range(dir_inode.size // DIRENT_SIZE):
-        raw = inode.read(dir_inode, blocks, slot * DIRENT_SIZE, DIRENT_SIZE)
-        entry = Dirent.decode(raw)
+    # 32 バイトずつ読むと 1 エントリごとに 1 ブロック読むことになるので、
+    # ディレクトリファイルを一度に読んでから区切る（最大 48 KiB）
+    raw = inode.read(dir_inode, blocks, 0, dir_inode.size)
+    for slot in range(len(raw) // DIRENT_SIZE):
+        entry = Dirent.decode(raw[slot * DIRENT_SIZE:(slot + 1) * DIRENT_SIZE])
         if entry.ino != 0:          # 0 は空きスロット
             yield slot, entry
 
 
+def find(dir_inode, blocks, name: bytes) -> tuple[int, Dirent] | None:
+    for slot, entry in iter_entries(dir_inode, blocks):
+        if entry.name == name:
+            return slot, entry
+    return None
+
+
 def lookup(dir_inode, blocks, name: bytes) -> int:
     """名前から i-node 番号を引く。なければ ENOENT。"""
-    for _slot, entry in iter_entries(dir_inode, blocks):
-        if entry.name == name:
-            return entry.ino
-    raise NotFoundError(name)
+    found = find(dir_inode, blocks, name)
+    if found is None:
+        raise NotFoundError(name)
+    return found[1].ino
 ```
 
 追加は「空きスロットを探す → なければ末尾に足す」。
@@ -233,11 +244,13 @@ def lookup(dir_inode, blocks, name: bytes) -> int:
 ```python
 def add_entry(dir_inode, blocks, alloc, name: bytes, ino: int) -> None:
     check_name(name)                       # 長さ / '/' / NUL の検査
-    if _find(dir_inode, blocks, name) is not None:
+    if exists(dir_inode, blocks, name):
         raise AlreadyExistsError(name)     # EEXIST
 
     slot = _find_free_slot(dir_inode, blocks)
     if slot is None:
+        if dir_inode.size // DIRENT_SIZE >= MAX_DIRENTS:
+            raise NoSpaceError(name)       # ENOSPC。1536 エントリで打ち止め
         # 空きスロットが尽きた。ブロックを 1 個ぶん伸ばす。
         # truncate の伸長はゼロ埋めなので、増えた 4096 バイトは
         # そのまま ino = 0 の空きスロット 128 個になる
@@ -255,7 +268,10 @@ def add_entry(dir_inode, blocks, alloc, name: bytes, ino: int) -> None:
 
 ```python
 def remove_entry(dir_inode, blocks, alloc, name: bytes) -> int:
-    slot, entry = _find(dir_inode, blocks, name)
+    found = find(dir_inode, blocks, name)
+    if found is None:
+        raise NotFoundError(name)
+    slot, entry = found
     if entry.name in (b".", b".."):
         raise InvalidArgumentError("cannot remove . or ..")
     empty = Dirent(ino=0, name=b"").encode()
@@ -310,6 +326,17 @@ def test_directory_full_raises_enospc():
 
 5 つ目が第 2 章・第 3 章と同じ役割の「規約そのものを見るテスト」。
 往復テストだけでは、実装が親切に詰めてしまっても気づけない。
+
+---
+
+## 試す
+
+```bash
+pytest -q tests/test_directory.py
+```
+
+`test_remove_keeps_following_entries_in_place` が、
+真ん中のエントリを消しても後ろのスロット番号が動かないことを確かめている。
 
 ---
 

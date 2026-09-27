@@ -174,9 +174,18 @@ class Bitmap:
                 return index
         raise NoSpaceError("no free entry left")
 
+    def count_used(self) -> int:
+        # capacity は 8 の倍数とは限らない（i-node ビットマップは 129 ビット）。
+        # 最後の 1 バイトは範囲内のビットだけをマスクしてから数える。
+        full_bytes, extra_bits = divmod(self._capacity, 8)
+        used = sum(byte.bit_count() for byte in self._buf[:full_bytes])
+        if extra_bits:
+            mask = (1 << extra_bits) - 1
+            used += (self._buf[full_bytes] & mask).bit_count()
+        return used
+
     def count_free(self) -> int:
-        used = sum(byte.bit_count() for byte in self._buf[: self._capacity // 8])
-        return self._capacity - used
+        return self._capacity - self.count_used()
 ```
 
 1 ビットずつ見るので、1024 個なら最大 1024 回。
@@ -215,6 +224,17 @@ def test_capacity_limits_allocation():
 
 5 つ目が第 1 章の「ブロックとセクタの対応」テストと同じ役割を持つ。
 **自分で決めた規約は、往復テストではなく規約そのものを見るテストで守る。**
+
+---
+
+## 試す
+
+```bash
+pytest -q tests/test_bitmap.py
+```
+
+`test_bit_position_matches_the_spec` が、index 8 を使用中にしたとき
+`buf[1] == 0x01` になること（LSB first）を確かめている。
 
 ---
 

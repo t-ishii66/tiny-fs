@@ -283,6 +283,9 @@ def read(inode: Inode, blocks: BlockDevice, offset: int, length: int) -> bytes:
         index, inner = divmod(offset, BLOCK_SIZE)
         n = min(length, BLOCK_SIZE - inner)
         block_no = inode.direct[index]
+        if block_no == 0:
+            # 穴は作らない設計なので、size の内側が未割り当てなら壊れている
+            raise CorruptionError(...)
         out += blocks.read_block(block_no)[inner:inner + n]
         offset += n
         length -= n
@@ -293,10 +296,13 @@ def read(inode: Inode, blocks: BlockDevice, offset: int, length: int) -> bytes:
 第 1 章で「部分書き込みは装置にはない」と言ったものを、ここで組み立てる。
 
 ```python
-def write(inode: Inode, blocks: BlockDevice, alloc: BlockAllocator,
+def write(inode: Inode, blocks: BlockDevice, alloc: Allocator,
           offset: int, data: bytes) -> None:
     if offset + len(data) > MAX_FILE_SIZE:
         raise FileTooBigError(...)          # EFBIG
+    if offset > inode.size:
+        # 穴は作らない。飛ばした手前の部分を、実ブロックのゼロで先に埋める
+        truncate(inode, blocks, alloc, offset)
 
     pos = 0
     while pos < len(data):
@@ -322,8 +328,12 @@ def write(inode: Inode, blocks: BlockDevice, alloc: BlockAllocator,
 
 ```python
 def truncate(inode, blocks, alloc, new_size):
+    if new_size > MAX_FILE_SIZE:
+        raise FileTooBigError(...)          # EFBIG
+
     if new_size > inode.size:
         # 伸長は「ゼロを書き込む」のと同じ。穴は作らない
+        # （size は write が更新する）
         write(inode, blocks, alloc, inode.size, b"\x00" * (new_size - inode.size))
     else:
         # 縮小は、要らなくなったブロックをその場で解放する。
@@ -331,13 +341,15 @@ def truncate(inode, blocks, alloc, new_size):
         first_unused = math.ceil(new_size / BLOCK_SIZE)
         for index in range(first_unused, NDIRECT):
             if inode.direct[index] != 0:
-                alloc.free(inode.direct[index])
+                alloc.mark_free(inode.direct[index])
                 inode.direct[index] = 0
-    inode.size = new_size
+        inode.size = new_size
 ```
 
 `inode.py` は `bitmap.py` を import しない。`alloc` や `inode_bitmap` として
-「`allocate()` と `free()`（`mark_free()`）を持つ何か」を受け取るだけにしておく。
+「`allocate()` と `mark_free()` を持つ何か」を受け取るだけにしておく
+（第 2 章の `Bitmap` がその形をしている）。型はこの 2 メソッドだけを書いた
+`Protocol` (`Allocator`) を `inode.py` 側に置いて表す。
 こうするとテストで偽物の割り当て係を渡せるし、
 「i-node がビットマップの置き場所を知っている」という層の逆転も起きない。
 
@@ -385,6 +397,18 @@ def test_free_inode_returns_blocks_and_number():
 read-modify-write の欠落も解放漏れも見逃す。
 「隣が壊れていないこと」「返したはずのブロックが本当に返っていること」を
 別々に確かめる。
+
+---
+
+## 試す
+
+```bash
+pytest -q tests/test_inode.py
+
+# 構造体のバイト数を自分で確かめる
+python -c "import struct; print(struct.calcsize('<HHIIQQQ12I'))"   # 84
+python -c "import struct; print(struct.calcsize('HHIIQQQ12I'))"    # 88（詰め物あり）
+```
 
 ---
 
