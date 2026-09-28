@@ -16,6 +16,8 @@
 ディレクトリを作る手順は `create` とほぼ同じで、違うのは 2 点。
 **中身に `.` と `..` を書く**ことと、**`nlink` が動く**こと。
 
+![mkdir("/docs") — 名前が 3 つ増える](../images/08-mkdir.svg)
+
 ```python
     def mkdir(self, path: str, mode: int = stat.S_IFDIR | 0o755) -> int:
         parent_ino, name = self.lookup_parent(path)
@@ -58,6 +60,8 @@
 消す前に**空であることを確かめる**。空とは、
 `.` と `..` 以外に有効なエントリが 1 つもないこと。
 
+![空とは「. と .. 以外に有効なエントリがない」こと](../images/08-is-empty.svg)
+
 ```python
 def is_empty(dir_inode, blocks) -> bool:
     for _slot, entry in directory.iter_entries(dir_inode, blocks):
@@ -68,6 +72,8 @@ def is_empty(dir_inode, blocks) -> bool:
 
 `iter_entries` は `ino == 0` のスロットを飛ばすので（第 4 章）、
 **消した跡地がいくつ残っていても空と判定される**。
+
+![rmdir — 2 つの検査を通ってから、まとめて返す](../images/08-rmdir.svg)
 
 ```python
     def rmdir(self, path: str) -> None:
@@ -99,6 +105,8 @@ def is_empty(dir_inode, blocks) -> bool:
 ## 3. readdir と stat
 
 どちらもディスクを変えない。
+
+![readdir は名前と ino、stat は i-node そのもの](../images/08-readdir-stat.svg)
 
 ```python
     def readdir(self, path: str) -> list[tuple[bytes, int]]:
@@ -183,6 +191,8 @@ i-node もデータブロックも動かない。
             self.write_inode(new_parent_ino, new_parent)
 ```
 
+![rename の順番 — 検査を先に、名前は足してから消す](../images/08-rename-steps.svg)
+
 決めごとが 3 つある。
 
 **宛先が既にあれば置き換える。** `mv a b` で `b` が存在する場合、
@@ -195,6 +205,8 @@ i-node もデータブロックも動かない。
 | ファイル | 置き換える | `ENOTDIR` |
 | 空のディレクトリ | `EISDIR` | 置き換える |
 | 空でないディレクトリ | `EISDIR` | `ENOTEMPTY` |
+
+![宛先に何かあるとき、置き換えられる組み合わせ](../images/08-replace-matrix.svg)
 
 ```python
     def _check_can_replace(self, inode, victim_ino: int, new_path: str) -> None:
@@ -209,6 +221,8 @@ i-node もデータブロックも動かない。
 ```
 
 置き換えられた側は、指していた名前を失う。あとは `unlink` と同じ処理になる。
+
+![置き換えられた側の後始末](../images/08-drop-replaced.svg)
 
 ```python
     def _drop_replaced(self, victim_ino: int, new_parent: Inode) -> None:
@@ -238,6 +252,8 @@ i-node もデータブロックも動かない。
 **ディレクトリを自分の子孫へ移せない。** `/a` を `/a/b/c` の下へ移すと、
 `/a` 以下が木から切り離されて、どこからもたどれない輪になる。
 新しい親から `..` をたどってルートまで上がり、途中に対象が現れたら `EINVAL` で拒む。
+
+![ディレクトリは自分の子孫へ移せない](../images/08-descendant.svg)
 
 ```python
     def _check_not_descendant(self, ino: int, new_parent_ino: int) -> None:
@@ -300,6 +316,8 @@ def test_a_refused_rename_changes_nothing(tmp_path):
 5 つ目が第 4 章の「削除は詰めない」と対になる。
 `size` が縮まないので、**空に見えるディレクトリでも `size` は 4096 のまま**。
 `is_empty` が `size` ではなく有効エントリの有無で判定していることを、ここで確かめる。
+
+![".." の付け替えを忘れると、cd .. が移動前の親に戻る](../images/08-dotdot.svg)
 
 9 つ目は `..` の付け替えを忘れると通らない。
 忘れたまま動かすと、移動したディレクトリから `cd ..` したときに

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="412" viewBox="0 0 900 412" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>write() が変えるのはメモリ上のコピー。ディスクは write_inode で追いつく</title>
+<rect x="0" y="0" width="900" height="412" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">write() が変えるのはメモリ上のコピー。ディスクは write_inode で追いつく</text>
+<text x="255" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">①</text>
+<text x="255" y="76" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">read_inode(ino)</text>
+<text x="505" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">②</text>
+<text x="505" y="76" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">inode_mod.write(...)</text>
+<text x="755" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">③</text>
+<text x="755" y="76" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">write_inode(ino, inode)</text>
+<text x="40" y="122" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">メモリの</text>
+<text x="40" y="140" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Inode</text>
+<text x="40" y="252" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">ディスク</text>
+<rect x="140" y="90" width="230" height="84" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="255" y="114" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size = 0</text>
+<text x="255" y="134" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct[] = 0, 0, ...</text>
+<text x="255" y="160" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ディスクから読んだコピー</text>
+<rect x="390" y="90" width="230" height="84" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="505" y="114" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size = 5000</text>
+<text x="505" y="134" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct[0] = 8, direct[1] = 9</text>
+<text x="505" y="160" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">変わったのはコピーだけ</text>
+<rect x="640" y="90" width="230" height="84" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="755" y="114" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size = 5000</text>
+<text x="755" y="134" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct[0] = 8, direct[1] = 9</text>
+<text x="755" y="160" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">そのまま書き出す</text>
+<rect x="140" y="210" width="230" height="84" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="255" y="256" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">読むだけ。何も変わらない</text>
+<rect x="390" y="210" width="230" height="84" rx="3" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="505" y="236" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 8, 9 に中身が入る</text>
+<text x="505" y="256" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ビットマップの bit 8, 9 = 1</text>
+<text x="505" y="280" font-size="10.5" fill="#b8690b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">i-node はまだ size = 0</text>
+<rect x="640" y="210" width="230" height="84" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="755" y="246" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node テーブルの 128 バイトが</text>
+<text x="755" y="266" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">size = 5000 に変わる</text>
+<path d="M 372 132 L 386 132" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M 622 132 L 636 132" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M 372 252 L 386 252" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M 622 252 L 636 252" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<rect x="40" y="310" width="820" height="64" rx="4" fill="#fff7ed" stroke="#b8690b" stroke-width="1.5"/>
+<text x="60" y="336" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">② の途中で ENOSPC になっても、block 8 はもう取られている。i-node を書かずに例外を投げると、誰も指していない使用中ブロックが残る。</text>
+<text x="60" y="358" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">だから失敗したときも write_inode を呼んでから raise する。</text>
+<text x="450" y="398" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">③ を忘れると、同じインスタンスでは読めるのに、マウントし直すと size = 0 のファイルが出てくる。</text>
+</svg>

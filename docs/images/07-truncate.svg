@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" viewBox="0 0 900 380" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>truncate は伸ばすと 0 埋め、縮めるとブロックを返す</title>
+<rect x="0" y="0" width="900" height="380" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">truncate は伸ばすと 0 埋め、縮めるとブロックを返す</text>
+<text x="40" y="76" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">伸ばす：truncate(9000)</text>
+<rect x="150" y="90" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="210" y="115" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 8</text>
+<rect x="272" y="90" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="332" y="115" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 9</text>
+<path d="M 298.926 82 L 298.926 138" stroke="#b8860b" stroke-width="1.8" fill="none"/>
+<text x="298.926" y="76" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">5000</text>
+<path d="M 400 110 L 446 110" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<rect x="470" y="90" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="530" y="115" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 8</text>
+<rect x="592" y="90" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="652" y="115" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 9</text>
+<rect x="714" y="90" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="774" y="115" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 10</text>
+<path d="M 738.066 82 L 738.066 138" stroke="#b8860b" stroke-width="1.8" fill="none"/>
+<text x="738.066" y="76" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">9000</text>
+<path d="M 618.926 148 L 738.066 148" stroke="#b8690b" stroke-width="1.6" fill="none"/>
+<path d="M 618.926 143 L 618.926 153" stroke="#b8690b" stroke-width="1.6" fill="none"/>
+<path d="M 738.066 143 L 738.066 153" stroke="#b8690b" stroke-width="1.6" fill="none"/>
+<text x="678.496" y="166" font-size="10" fill="#b8690b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">この範囲を 0 で埋める（穴は作らない）</text>
+<text x="150" y="148" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 10 は blocks_alloc から取る</text>
+<path d="M 40 192 L 860 192" stroke="#e1e4e8" stroke-width="1.2" fill="none"/>
+<text x="40" y="224" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">縮める：truncate(1000)</text>
+<rect x="150" y="238" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="210" y="263" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 8</text>
+<rect x="272" y="238" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="332" y="263" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 9</text>
+<path d="M 298.926 230 L 298.926 286" stroke="#b8860b" stroke-width="1.8" fill="none"/>
+<text x="298.926" y="224" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">5000</text>
+<path d="M 400 258 L 446 258" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<rect x="470" y="238" width="120" height="40" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="530" y="263" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 8</text>
+<path d="M 499.785 230 L 499.785 286" stroke="#b8860b" stroke-width="1.8" fill="none"/>
+<text x="499.785" y="224" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1000</text>
+<rect x="592" y="238" width="120" height="40" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="652" y="263" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<text x="150" y="300" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 9 のビットを 0 に戻し、direct[1] = 0 にする</text>
+<text x="450" y="342" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">どちらの向きでも、最後に size を new_size にして write_inode する。</text>
+<text x="450" y="366" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">途中で ENOSPC になっても、そこまでに取ったブロックは i-node に記録してから投げる。</text>
+</svg>
