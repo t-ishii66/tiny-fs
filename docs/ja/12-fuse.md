@@ -141,7 +141,32 @@ class TinyFSOperations(Operations):
 ```
 
 `__call__` を上書きしているのが要点になる。
-fusepy はすべての操作をここから呼び分けるので、
+これは自前の工夫ではなく、**fusepy が用意している入口**で、
+基底クラス `Operations` の側はこうなっている。
+
+```python
+# fusepy (fuse.py) より
+class Operations(object):
+    def __call__(self, op, *args):
+        if not hasattr(self, op):
+            raise FuseOSError(errno.EFAULT)
+        return getattr(self, op)(*args)
+```
+
+操作名を受け取って、同名のメソッドを探して呼ぶだけの振り分け口。
+カーネルからの呼び出しを受ける `FUSE` クラスの中は、全部この形になっている。
+
+```python
+return self.operations('mkdir', path.decode(self.encoding), mode)
+return self.operations('unlink', path.decode(self.encoding))
+```
+
+`self.operations.mkdir(...)` と直接呼ぶ箇所は 1 つもなく、
+**すべての操作が `__call__` を通る**。だから全操作に共通の処理を挟みたいときは、
+ここを上書きするのが fusepy での定型になる。
+fusepy 自身、全操作をログに出す `LoggingMixIn` をこのやり方で書いている。
+
+tiny-fs はそこにログではなく例外変換を置いた。結果として
 **独自例外 → `FuseOSError` の変換が 1 か所に集まる**。
 各メソッドに `try` を書く必要がない。
 
