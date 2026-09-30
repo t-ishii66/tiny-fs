@@ -33,7 +33,7 @@ pip install -e ".[dev]"
 ```
 
 これで `tiny-fs` コマンドが使えるようになる。
-インストールせずに使うなら、以降の `tiny-fs` を `python -m tiny_fs.cli` に読み替える。
+本文に出てくる `python -m tiny_fs.cli …` は同じものの別の書き方で、読み替えなくてよい。
 
 ## 動くことを確かめる
 
