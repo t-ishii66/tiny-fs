@@ -1,7 +1,4 @@
-"""Chapter 12: FUSE. Linux only, so it is skipped by default.
-
-Run it inside the Docker image:  pytest -m fuse
-"""
+"""Chapter 12: FUSE. Skipped where the machine cannot mount one."""
 
 from __future__ import annotations
 
@@ -18,7 +15,13 @@ from tiny_fs.disk import BlockDevice
 from tiny_fs.fs import FileSystem, mkfs
 from tiny_fs.fsck import fsck
 
-pytestmark = pytest.mark.fuse
+pytest.importorskip("fuse", reason="fusepy is not installed")
+
+pytestmark = [
+    pytest.mark.fuse,
+    pytest.mark.skipif(not os.path.exists("/dev/fuse"),
+                       reason="no /dev/fuse on this machine"),
+]
 
 
 def _unmount(mountpoint: str) -> None:
@@ -31,7 +34,6 @@ def _unmount(mountpoint: str) -> None:
 
 
 def test_mount_write_unmount(tmp_path):
-    pytest.importorskip("fuse")
     image = str(tmp_path / "disk.img")
     mountpoint = tmp_path / "mnt"
     mountpoint.mkdir()
@@ -57,6 +59,8 @@ def test_mount_write_unmount(tmp_path):
         assert (mountpoint / "a.txt").read_bytes() == b"hello\n"
         assert sorted(os.listdir(mountpoint)) == ["a.txt", "docs"]
         assert os.statvfs(mountpoint).f_bsize == 4096
+        # what the user makes belongs to the user, not to root
+        assert (mountpoint / "a.txt").stat().st_uid == os.getuid()
     finally:
         _unmount(str(mountpoint))
         proc.wait(timeout=10)

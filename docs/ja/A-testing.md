@@ -97,24 +97,26 @@ def test_detects_leaked_block(image):
 
 ---
 
-## 5. FUSE のテストを分ける
+## 5. FUSE のテストに印を付ける
 
-FUSE は Linux でしか動かないので、印を付けて**既定でスキップ**する。
+FUSE が要るのは第 12 章のテスト 1 本だけ。印を付けておくと、選んで走らせられる。
 
 ```toml
 # pyproject.toml
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["fuse: FUSE が要るテスト（Docker の Linux でのみ実行）"]
-addopts = "-m 'not fuse'"
+markers = ["fuse: mounts a filesystem; needs /dev/fuse and fusepy"]
 ```
 
 ```python
-@pytest.mark.fuse
-def test_mount_write_unmount(tmp_path):
-    ...
+pytest.importorskip("fuse")
+
+pytestmark = [
+    pytest.mark.fuse,
+    pytest.mark.skipif(not os.path.exists("/dev/fuse"),
+                       reason="no /dev/fuse on this machine"),
+]
 ```
 
-macOS では `pytest` がそのまま通り、Docker の中では `pytest -m fuse` で
-FUSE のテストだけを走らせる。
-第 1 章から層を分けてきたのは、この分離が成立する状態を保つためでもある。
+既定では全部走る。`fusepy` か `/dev/fuse` が無ければ、そのテストが自分でスキップする。
+`pytest -m fuse` で 1 本だけ、`pytest -m "not fuse"` で残り全部、という選び方ができる。

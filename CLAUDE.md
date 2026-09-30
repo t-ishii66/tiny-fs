@@ -16,7 +16,7 @@
 |---|---|
 | プロジェクト名 / リポジトリ名 / ディレクトリ名 | `tiny-fs` |
 | CLI コマンド名 | `tiny-fs` |
-| Docker イメージタグ / マウントポイント | `tiny-fs-dev` / `/mnt/tiny-fs` |
+| マウントポイント | `~/mnt/tiny-fs` |
 | Python パッケージ（import 名・ディレクトリ） | `tiny_fs` |
 | 配布名 (`pyproject.toml` の `[project].name`) | `tiny-fs` |
 | ディスク上のマジック | `"tfs1"` (`0x74667331`) |
@@ -125,7 +125,6 @@ tiny_fs/
 tests/
 docs/ja/         日本語の解説（正）
 docs/en/         英訳（doc-translator-ja-en が生成）
-docker/          Linux + FUSE 実行環境
 ```
 
 ルール:
@@ -172,7 +171,7 @@ docker/          Linux + FUSE 実行環境
 3. **可視化 / 検証**: `dump.py` と `fsck.py`。
    「mkfs 直後のイメージ」「ファイルを 1 個作った後」の差分を見せられるようにする
 4. **CLI**: `tiny-fs mkfs / ls / mkdir / put / get / cat / rm / dump / fsck`
-5. **FUSE**: `fuse_ops.py` + Docker 上でのマウント検証
+5. **FUSE**: `fuse_ops.py` + ホスト上でのマウント検証
 6. **英訳**: `doc-translator-ja-en` で `docs/en/` を生成
 
 ---
@@ -180,7 +179,6 @@ docker/          Linux + FUSE 実行環境
 ## 6. コマンド
 
 ```bash
-# macOS ホスト側（コア部分の開発・テストはここで完結する）
 python -m pytest -q
 python -m tiny_fs.cli mkfs disk.img
 python -m tiny_fs.cli dump disk.img            # レイアウトを人間可読で表示
@@ -194,30 +192,25 @@ python -m tiny_fs.cli mv   disk.img /docs/readme.md /readme.md
 python -m tiny_fs.cli rm   disk.img /readme.md
 python -m tiny_fs.cli rmdir disk.img /docs
 
-# Linux + FUSE（Docker。macOS ホストでは FUSE マウントは不可能）
-docker build -t tiny-fs-dev docker/
-docker run --rm -it \
-  --cap-add SYS_ADMIN --device /dev/fuse \
-  --security-opt apparmor:unconfined \
-  -v "$PWD":/work -w /work tiny-fs-dev bash
-# コンテナ内:
-python -m tiny_fs.cli mkfs disk.img
-python -m tiny_fs.fuse_ops disk.img /mnt/tiny-fs -f   # -f = フォアグラウンド（デバッグ用）
+# FUSE（第 12 章。sudo apt install fuse libfuse2t64 && pip install fusepy）
+mkdir -p ~/mnt/tiny-fs
+python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f   # -f = フォアグラウンド
+fusermount -u ~/mnt/tiny-fs
 ```
 
 ---
 
 ## 7. 実行環境の前提
 
-- 開発ホストは **macOS**。ここでは FUSE マウントを試せない。
-  レイヤ L0〜L4 は macOS 上で完全にテストできるように保つこと
-  （= FUSE を必要とするテストは `@pytest.mark.fuse` で分離し、既定でスキップ）。
-- FUSE の実行は **Docker の Linux コンテナ**。
-  `--cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined` が必要。
-  `docker/Dockerfile` は `fuse3`(または `fuse`) と `libfuse2`、`fusepy` を入れる。
+- 前提は **Ubuntu**（24.04 で確認）。FUSE もホストでそのまま動く。コンテナも特権も要らない。
+- FUSE に要るのは `fuse`（setuid の `fusermount`）、`libfuse2t64`（`libfuse.so.2`）、
+  そして `fusepy`。**マウント自体は一般ユーザでできる**（sudo が要るのは apt だけ）。
+  Ubuntu 22.04 では `libfuse2t64` が `libfuse2`。
+- FUSE を必要とするテストは `@pytest.mark.fuse` で選べるようにするが、**既定でも走らせる**。
+  `fusepy` か `/dev/fuse` が無ければ、そのテストが自分でスキップする。
 - バインディングは **fusepy**（同期・`Operations` サブクラス方式）。
   `pyfuse3` に乗り換えない。教材としての可読性を優先している。
-- アンマウントは `fusermount -u /mnt/tiny-fs`。フォアグラウンド実行中は Ctrl-C。
+- アンマウントは `fusermount -u ~/mnt/tiny-fs`。フォアグラウンド実行中は Ctrl-C。
 
 ---
 

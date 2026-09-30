@@ -10,7 +10,7 @@ import stat
 import sys
 import time
 
-from fuse import FUSE, FuseOSError, Operations
+from fuse import FUSE, FuseOSError, Operations, fuse_get_context
 
 from .constants import BLOCK_SIZE, MAX_NAME_LEN
 from .device import SectorDevice
@@ -73,6 +73,7 @@ class TinyFSOperations(Operations):
 
     def create(self, path, mode, fi=None):
         self._fs.create(path, stat.S_IFREG | (mode & 0o777))
+        self._set_owner(path)
         return 0
 
     def write(self, path, data, offset, fh):
@@ -86,6 +87,13 @@ class TinyFSOperations(Operations):
 
     def mkdir(self, path, mode):
         self._fs.mkdir(path, stat.S_IFDIR | (mode & 0o777))
+        self._set_owner(path)
+
+    def _set_owner(self, path: str) -> None:
+        # Whoever asked for the operation owns what it made. Without this every
+        # i-node keeps uid 0 and `ls -l` calls the user's own files root's.
+        uid, gid, _pid = fuse_get_context()
+        self._fs.chown(path, uid, gid)
 
     def rmdir(self, path):
         self._fs.rmdir(path)

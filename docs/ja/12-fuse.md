@@ -26,42 +26,28 @@ OS から見れば `disk.img` はいまだに**ただのファイル**にすぎ�
 
 ---
 
-## 2. 実行環境
+## 2. 用意する
 
-**macOS では動かせない。** `/dev/fuse` は Linux のものなので、Docker の Linux で動かす。
-
-```dockerfile
-# docker/Dockerfile
-FROM python:3.11-slim
-
-# fusepy が読み込むのは libfuse.so.2 なので libfuse2 が要る。
-# fuse3 はアンマウント用の fusermount3 コマンドのために入れている。
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        fuse3 libfuse2 \
-    && rm -rf /var/lib/apt/lists/*
-
-# fusepy はここだけで使う。pytest は -m fuse を走らせるために入れている
-RUN pip install --no-cache-dir fusepy pytest
-
-# リポジトリはここに bind mount される。入れ直さずに import できるようにする
-ENV PYTHONPATH=/work
-WORKDIR /work
-```
-
-`libfuse2` を忘れると、`fusepy` の import は通るのに
-マウントの直前で「ライブラリが見つからない」で落ちる。
+Linux なら、コンテナも特権も要らない。**一般ユーザのまま**マウントできる。
 
 ```bash
-docker build -t tiny-fs-dev docker/
-docker run --rm -it \
-  --cap-add SYS_ADMIN --device /dev/fuse \
-  --security-opt apparmor:unconfined \
-  -v "$PWD":/work -w /work tiny-fs-dev bash
+sudo apt install fuse libfuse2t64
+pip install fusepy
 ```
 
-3 つのオプションはすべて必要になる。
-`--device /dev/fuse` で窓口を渡し、`--cap-add SYS_ADMIN` でマウントを許し、
-`--security-opt apparmor:unconfined` で AppArmor の既定の禁止を外す。
+| 入れるもの | 何のために |
+|---|---|
+| `libfuse2t64` | `libfuse.so.2` そのもの。fusepy が読み込むのはこれ |
+| `fuse` | `/usr/bin/fusermount`。マウントを代行する **setuid root** のコマンド |
+| `fusepy` | `libfuse.so.2` を Python から呼ぶ薄い層 |
+
+`/dev/fuse` は誰でも開ける (`crw-rw-rw-`) が、マウント自体は本来 root の操作になる。
+`fusermount` が setuid root で間に入るので、**sudo なしでマウントできる**。
+これが無いと `Permission denied` で止まる。
+`libfuse.so.2` のほうが無いと、`import fuse` は通るのに
+マウントの直前で「ライブラリが見つからない」で落ちる。
+
+パッケージ名は Ubuntu 24.04 のもの。22.04 では `libfuse2t64` が `libfuse2` になる。
 
 ---
 
@@ -191,51 +177,56 @@ FUSE(TinyFSOperations(image), mountpoint, foreground=True,
 ## 5. マウントして触る
 
 ```
-# python -m tiny_fs.cli mkfs disk.img
+$ tiny-fs mkfs disk.img
 created disk.img: 1024 blocks (4 MiB), 128 inodes
 
-# mkdir -p /mnt/tiny-fs
-# python -m tiny_fs.fuse_ops disk.img /mnt/tiny-fs -f &
+$ mkdir -p ~/mnt/tiny-fs
+$ python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f &
 
-# ls -la /mnt/tiny-fs
+$ ls -la ~/mnt/tiny-fs
 total 4
-drwxr-xr-x 2 root root 4096 Sep 27 12:00 .
-drwxr-xr-x 1 root root 4096 Sep 27 12:00 ..
+drwxr-xr-x 2 root root 4096 Sep 30 06:46 .
+drwxrwxr-x 3 dev  dev  4096 Sep 30 06:46 ..
 
-# echo hello > /mnt/tiny-fs/a.txt
-# cat /mnt/tiny-fs/a.txt
+$ echo hello > ~/mnt/tiny-fs/a.txt
+$ cat ~/mnt/tiny-fs/a.txt
 hello
 
-# mkdir /mnt/tiny-fs/docs
-# cp /etc/hostname /mnt/tiny-fs/docs/
-# ls -l /mnt/tiny-fs/docs
+$ mkdir ~/mnt/tiny-fs/docs
+$ cp /etc/hostname ~/mnt/tiny-fs/docs/
+$ ls -l ~/mnt/tiny-fs/docs
 total 0
--rw-r--r-- 1 root root 13 Sep 27 12:01 hostname
+-rw-r--r-- 1 dev dev 13 Sep 30 06:46 hostname
 
-# df -h /mnt/tiny-fs
+$ df -h ~/mnt/tiny-fs
 Filesystem      Size  Used Avail Use% Mounted on
-tiny-fs         4.0M   44K  4.0M   2% /mnt/tiny-fs
+tiny-fs         4.0M   44K  4.0M   2% /home/dev/mnt/tiny-fs
 
-# fusermount -u /mnt/tiny-fs
+$ fusermount -u ~/mnt/tiny-fs
 ```
 
 **`echo` も `cat` も `cp` も `ls` も、tiny-fs のことを何も知らない。**
 これらは普通のシステムコールを呼んでいるだけで、
 その先がユーザ空間の Python だとは気づいていない。
 
+`hostname` の持ち主が `dev` になっているのは、`create` の中で
+`fuse_get_context()` が返した uid / gid を i-node に書いているから。
+一方 `.`（ルートディレクトリ）が `root` なのは、それを作ったのが `mkfs` で、
+uid 0 をそのまま書いているため（第 5 章のダンプのとおり）。
+
 アンマウントしてから、同じイメージを CLI で読む。
 
 ```
-# python -m tiny_fs.cli ls disk.img /
+$ tiny-fs ls disk.img /
 .
 ..
 a.txt
 docs
 
-# python -m tiny_fs.cli cat disk.img /a.txt
+$ tiny-fs cat disk.img /a.txt
 hello
 
-# python -m tiny_fs.cli fsck disk.img
+$ tiny-fs fsck disk.img
 fsck: clean (11 blocks used, 4 inodes used)
 ```
 
@@ -249,8 +240,9 @@ FUSE 経由で書いたものが、CLI からそのまま読める。
 
 | 症状 | 原因 |
 |---|---|
-| import は通るのにマウントで落ちる | `libfuse2` が入っていない |
-| マウントできない（Permission denied） | `--cap-add SYS_ADMIN` か `--device /dev/fuse` がない |
+| import は通るのにマウントで落ちる | `libfuse2t64` が入っていない |
+| マウントできない（Permission denied） | `fuse` が入っていない（`fusermount` が無い） |
+| 作ったファイルの持ち主が root になる | `create` で `fuse_get_context()` の uid を書いていない |
 | 大きいファイルの `cp` が途中で失敗する | 48 KiB の上限（`EFBIG`）。仕様どおり |
 | `ls -l` が遅い | エントリごとに `getattr` が呼ばれる。1 回ごとにパスを解決し直している |
 | 開いたままのファイルを消すと壊れる | `nlink` が 0 になった時点で解放してしまう。オープン数を数えていない |
@@ -261,19 +253,28 @@ FUSE 経由で書いたものが、CLI からそのまま読める。
 
 ### テスト
 
-FUSE を必要とするテストは、macOS では動かせない。
-第 1 章から守ってきた分離が、ここで効く。
+実際にマウントして、シェル経由で書き、アンマウントしてから
+CLI と `fsck` で中身を確かめる。第 1 章から層を分けてきたので、
+このテストだけが FUSE を必要とする。
 
 ```python
+pytest.importorskip("fuse")
+
+pytestmark = [
+    pytest.mark.fuse,
+    pytest.mark.skipif(not os.path.exists("/dev/fuse"),
+                       reason="no /dev/fuse on this machine"),
+]
+
+
 @pytest.mark.fuse
 def test_mount_write_unmount(tmp_path):
-    # マウントして、シェル経由で書き、アンマウントし、
-    # CLI と fsck で内容を確かめる
+    ...
 ```
 
-`@pytest.mark.fuse` を付けたテストは**既定でスキップ**する。
-Docker の中でだけ `pytest -m fuse` で走らせる。
-第 11 章までのテストは、この印が付いていないので macOS でそのまま通る。
+`fusepy` か `/dev/fuse` が無い環境では、このテストだけが自分でスキップする。
+印を付けてあるので `pytest -m fuse` で 1 本だけ走らせることも、
+`pytest -m "not fuse"` で外すこともできる。
 
 ---
 
