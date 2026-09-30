@@ -32,7 +32,19 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-これで `tiny-fs` コマンドが使えるようになる。
+これで `tiny-fs` コマンドが使えるようになる。実体は venv の中の 1 本のスクリプト。
+
+```
+$ which tiny-fs
+/home/dev/tiny-fs/.venv/bin/tiny-fs
+```
+
+システム側には何も入らない。`deactivate` すれば PATH から消え、
+`.venv/` を消せば跡形もなくなる。
+`-e`（editable）なので `tiny_fs/` のソースもコピーされず、
+site-packages に入るのはこのリポジトリを指す `.pth` ファイルだけになる。
+直したソースがそのまま次の実行に効く。
+
 本文に出てくる `python -m tiny_fs.cli …` は同じものの別の書き方で、読み替えなくてよい。
 
 ## 動くことを確かめる
