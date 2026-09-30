@@ -97,7 +97,7 @@ def _collect(blocks, sb):
 **`fsck` は直さない。検出して報告するだけ。**
 
 ```
-$ python -m tiny_fs.cli fsck disk.img
+$ tiny-fs fsck disk.img
 fsck: 3 problems found
 
   block 9 is referenced by inode 2 but marked free in the block bitmap
@@ -111,7 +111,7 @@ $ echo $?
 問題がなければ 1 行だけ出して 0 で終わる。
 
 ```
-$ python -m tiny_fs.cli fsck disk.img
+$ tiny-fs fsck disk.img
 fsck: clean (10 blocks used, 2 inodes used)
 $ echo $?
 0

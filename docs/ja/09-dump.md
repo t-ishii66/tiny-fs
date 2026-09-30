@@ -15,7 +15,7 @@
 出力は、第 5 章で決めたレイアウトの順に並べる。
 
 ```
-$ python -m tiny_fs.cli dump disk.img
+$ tiny-fs dump disk.img
 
 superblock (block 0)
   ...
@@ -43,8 +43,8 @@ i-node テーブルも同じで、128 個すべてではなく**使用中のも�
 ## 2. mkfs 直後を見る
 
 ```
-$ python -m tiny_fs.cli mkfs disk.img
-$ python -m tiny_fs.cli dump disk.img
+$ tiny-fs mkfs disk.img
+$ tiny-fs dump disk.img
 
 superblock (block 0)
   magic              0x74667331 "tfs1"
@@ -90,9 +90,9 @@ directory /  (ino 1)
 1 つの操作がディスクのどこを変えたかがそのまま読める。
 
 ```
-$ python -m tiny_fs.cli dump disk.img > before.txt
-$ python -m tiny_fs.cli put disk.img ./memo.txt /a.txt      # 5000 バイト
-$ python -m tiny_fs.cli dump disk.img > after.txt
+$ tiny-fs dump disk.img > before.txt
+$ tiny-fs put disk.img ./memo.txt /a.txt      # 5000 バイト
+$ tiny-fs dump disk.img > after.txt
 $ diff before.txt after.txt
 ```
 
@@ -136,7 +136,7 @@ directory /  (ino 1)
 解釈せずに 16 進で見たいときのために、ブロック番号を指定できるようにする。
 
 ```
-$ python -m tiny_fs.cli dump disk.img --raw 7 --length 64
+$ tiny-fs dump disk.img --raw 7 --length 64
 block 7
 00000000  01 00 00 00 2e 00 00 00 00 00 00 00 00 00 00 00  |................|
 00000010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  |................|

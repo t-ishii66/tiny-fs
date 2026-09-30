@@ -78,7 +78,7 @@ class AlreadyExistsError(FSError):
 NotFoundError: /nothing: No such file or directory
 
 # CLI から（第 11 章）
-$ python -m tiny_fs.cli cat disk.img /nothing
+$ tiny-fs cat disk.img /nothing
 tiny-fs: /nothing: No such file or directory (ENOENT)
 $ echo $?
 1

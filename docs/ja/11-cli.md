@@ -38,18 +38,18 @@ OS から見れば `disk.img` はただのファイルで、
 ## 2. 一通り使ってみる
 
 ```
-$ python -m tiny_fs.cli mkfs disk.img
+$ tiny-fs mkfs disk.img
 created disk.img: 1024 blocks (4 MiB), 128 inodes
 
-$ python -m tiny_fs.cli mkdir disk.img /docs
-$ python -m tiny_fs.cli put disk.img ./sample.txt /docs/sample.txt
+$ tiny-fs mkdir disk.img /docs
+$ tiny-fs put disk.img ./sample.txt /docs/sample.txt
 
-$ python -m tiny_fs.cli ls disk.img /
+$ tiny-fs ls disk.img /
 .
 ..
 docs
 
-$ python -m tiny_fs.cli ls -l disk.img /docs
+$ tiny-fs ls -l disk.img /docs
 d rwxr-xr-x  2  4096  2026-09-27 12:00  .
 d rwxr-xr-x  3  4096  2026-09-27 12:00  ..
 - rw-r--r--  1  5000  2026-09-27 12:03  sample.txt
@@ -62,7 +62,7 @@ d rwxr-xr-x  3  4096  2026-09-27 12:00  ..
 取り出して、元のファイルと一致することを確かめる。
 
 ```
-$ python -m tiny_fs.cli get disk.img /docs/sample.txt ./copy.txt
+$ tiny-fs get disk.img /docs/sample.txt ./copy.txt
 $ diff ./sample.txt ./copy.txt && echo same
 same
 ```
@@ -70,9 +70,9 @@ same
 最後に全部消して、mkfs 直後の状態に戻ることを見る。
 
 ```
-$ python -m tiny_fs.cli rm disk.img /docs/sample.txt
-$ python -m tiny_fs.cli rmdir disk.img /docs
-$ python -m tiny_fs.cli fsck disk.img
+$ tiny-fs rm disk.img /docs/sample.txt
+$ tiny-fs rmdir disk.img /docs
+$ tiny-fs fsck disk.img
 fsck: clean (8 blocks used, 1 inodes used)
 ```
 
@@ -179,17 +179,17 @@ def main(argv: list[str] | None = None) -> int:
 それを受けないと `tiny-fs fsck /etc/hosts` がトレースバックで落ちる。
 
 ```
-$ python -m tiny_fs.cli cat disk.img /nothing
+$ tiny-fs cat disk.img /nothing
 tiny-fs: /nothing: No such file or directory (ENOENT)
 $ echo $?
 1
 
-$ python -m tiny_fs.cli put disk.img ./big.bin /big.bin
+$ tiny-fs put disk.img ./big.bin /big.bin
 tiny-fs: /big.bin: File too large (EFBIG)
 $ echo $?
 1
 
-$ python -m tiny_fs.cli rm disk.img /docs
+$ tiny-fs rm disk.img /docs
 tiny-fs: /docs: Is a directory (EISDIR)
 ```
 

@@ -180,17 +180,17 @@ docs/en/         英訳（doc-translator-ja-en が生成）
 
 ```bash
 python -m pytest -q
-python -m tiny_fs.cli mkfs disk.img
-python -m tiny_fs.cli dump disk.img            # レイアウトを人間可読で表示
-python -m tiny_fs.cli fsck disk.img
-python -m tiny_fs.cli mkdir disk.img /docs
-python -m tiny_fs.cli put  disk.img ./README.md /docs/readme.md
-python -m tiny_fs.cli ls   disk.img /docs
-python -m tiny_fs.cli cat  disk.img /docs/readme.md
-python -m tiny_fs.cli get  disk.img /docs/readme.md ./copy.md
-python -m tiny_fs.cli mv   disk.img /docs/readme.md /readme.md
-python -m tiny_fs.cli rm   disk.img /readme.md
-python -m tiny_fs.cli rmdir disk.img /docs
+tiny-fs mkfs disk.img
+tiny-fs dump disk.img            # レイアウトを人間可読で表示
+tiny-fs fsck disk.img
+tiny-fs mkdir disk.img /docs
+tiny-fs put  disk.img ./README-jp.md /docs/readme.md
+tiny-fs ls   disk.img /docs
+tiny-fs cat  disk.img /docs/readme.md
+tiny-fs get  disk.img /docs/readme.md ./copy.md
+tiny-fs mv   disk.img /docs/readme.md /readme.md
+tiny-fs rm   disk.img /readme.md
+tiny-fs rmdir disk.img /docs
 
 # FUSE（第 12 章。sudo apt install fuse libfuse2t64 && pip install fusepy）
 mkdir -p ~/mnt/tiny-fs
