@@ -229,7 +229,7 @@ MAX_FILE_SIZE = NDIRECT × BLOCK_SIZE = 12 × 4096 = 49152 バイト = 48 KiB
 ここでは **i-node の割り当てと解放**、そして **ファイルの中身を読み書きする** 関数を足す。
 この層も、自分がディスクのどこに置かれるかは知らない。
 ブロックを読み書きする第 1 章の `BlockDevice` と、
-ブロック / i-node の割り当て係は、引数として受け取る。
+ブロック / i-node のアロケータは、引数として受け取る。
 
 ### i-node の割り当てと解放
 
@@ -347,12 +347,13 @@ def truncate(inode, blocks, alloc, new_size):
         inode.size = new_size
 ```
 
-`inode.py` は `bitmap.py` を import しない。`alloc` や `inode_bitmap` として
-「`allocate()` と `mark_free()` を持つ何か」を受け取るだけにしておく
-（第 2 章の `Bitmap` がその形をしている）。型はこの 2 メソッドだけを書いた
-`Protocol` (`Allocator`) を `inode.py` 側に置いて表す。
-こうするとテストで偽物の割り当て係を渡せるし、
-「i-node がビットマップの置き場所を知っている」という層の逆転も起きない。
+`inode.py` は `bitmap.py` を import しない。ブロックと i-node のアロケータは、
+`allocate()` と `mark_free()` を持つオブジェクトとして引数で受け取る
+（第 2 章の `Bitmap` がこのインタフェースを満たす）。
+型注釈には、この 2 つのメソッドだけを宣言した `Protocol` (`Allocator`) を
+`inode.py` 側に定義して使う。
+テストではスタブを渡せるようになり、`inode.py` は
+どのビットマップがディスクのどこにあるかを知らずに済む。
 
 ---
 
@@ -380,7 +381,7 @@ def test_write_beyond_max_file_size_raises_efbig():
     # 49152 ちょうどは書けて、49153 は EFBIG
 
 def test_truncate_shrink_frees_blocks():
-    # 縮めたぶんのブロックが割り当て係に返っていること
+    # 縮めたぶんのブロックが解放されていること
 
 def test_truncate_grow_fills_zero():
     # 伸ばしたぶんがゼロで読めること（ゴミが見えない）
@@ -394,10 +395,11 @@ def test_free_inode_returns_blocks_and_number():
     # 空きブロック数が 3 戻り、その i-node 番号も空きに戻ること
 ```
 
-4 つ目と 7 つ目が要。**書いたものが読める**だけのテストは、
-read-modify-write の欠落も解放漏れも見逃す。
-「隣が壊れていないこと」「返したはずのブロックが本当に返っていること」を
-別々に確かめる。
+重要なのは `test_partial_write_preserves_neighbours` と
+`test_truncate_shrink_frees_blocks`。**書いたものが読める**だけのテストでは、
+read-modify-write の欠落も解放漏れも検出できない。
+「隣のバイトが壊れていないこと」と「解放したブロックが本当に空きに戻っていること」は、
+別々に確かめる必要がある。
 
 ---
 
@@ -413,7 +415,6 @@ python -c "import struct; print(struct.calcsize('HHIIQQQ12I'))"    # 88（詰め
 
 ---
 
-ここまでで、ファイルの中身は完全に表せるようになった。
-しかし `A.txt` という名前はまだどこにもない。
-i-node は番号でしか呼べず、人間はその番号を知らない。
+ここまでで、ファイルの中身とメタデータは i-node で表せるようになった。
+しかし `A.txt` という名前はまだどこにもなく、ファイルは i-node 番号でしか指定できない。
 次章で**名前**を作る。
