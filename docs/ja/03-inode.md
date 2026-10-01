@@ -228,8 +228,12 @@ MAX_FILE_SIZE = NDIRECT × BLOCK_SIZE = 12 × 4096 = 49152 バイト = 48 KiB
 構造体 (§1) とバイト列との変換 (§2) はもう書いた。
 ここでは **i-node の割り当てと解放**、そして **ファイルの中身を読み書きする** 関数を足す。
 この層も、自分がディスクのどこに置かれるかは知らない。
-ブロックを読み書きする第 1 章の `BlockDevice` と、
-ブロック / i-node のアロケータは、引数として受け取る。
+ブロックを読み書きする第 1 章の `BlockDevice` と、ブロック / i-node のアロケータを、
+引数として受け取る。アロケータは `allocate()` と `mark_free()` を持つオブジェクトで、
+第 2 章の `Bitmap` がこのインタフェースを満たす。
+型注釈には、この 2 つのメソッドだけを宣言した `Protocol` (`Allocator`) を
+`inode.py` 側に定義して使う。こうすると `inode.py` は `bitmap.py` を import せずに済み、
+テストではスタブを渡せる。
 
 ### i-node の割り当てと解放
 
@@ -346,14 +350,6 @@ def truncate(inode, blocks, alloc, new_size):
                 inode.direct[index] = 0
         inode.size = new_size
 ```
-
-`inode.py` は `bitmap.py` を import しない。ブロックと i-node のアロケータは、
-`allocate()` と `mark_free()` を持つオブジェクトとして引数で受け取る
-（第 2 章の `Bitmap` がこのインタフェースを満たす）。
-型注釈には、この 2 つのメソッドだけを宣言した `Protocol` (`Allocator`) を
-`inode.py` 側に定義して使う。
-テストではスタブを渡せるようになり、`inode.py` は
-どのビットマップがディスクのどこにあるかを知らずに済む。
 
 ---
 
