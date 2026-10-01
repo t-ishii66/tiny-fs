@@ -292,7 +292,7 @@ def read(inode: Inode, blocks: BlockDevice, offset: int, length: int) -> bytes:
 ```
 
 書き込みは read-modify-write になる。
-第 1 章の装置には部分書き込みがないので、それをこの層で実装する。
+第 1 章の装置には部分書き込み機能がないので、それをこの層で実装する。
 
 ```python
 def write(inode: Inode, blocks: BlockDevice, alloc: Allocator,
@@ -323,7 +323,9 @@ def write(inode: Inode, blocks: BlockDevice, alloc: Allocator,
     inode.size = max(inode.size, offset + len(data))
 ```
 
-`truncate` は伸ばす側と縮める側で別のことをする。
+`truncate` は、ファイルのサイズを `new_size` に変更する。
+縮める場合だけでなく伸ばす場合もこの関数が受け持ち、
+伸長はゼロで埋める、縮小は余ったブロックを解放する、と処理は逆向きになる。
 
 ```python
 def truncate(inode, blocks, alloc, new_size):
