@@ -36,7 +36,7 @@ class Inode:
     size: int           # u64       file length in bytes
     mtime: int          # u64       contents last changed
     ctime: int          # u64       metadata last changed
-    direct: list[int]   # u32 x 12  blocks used, in file order. 0 = unallocated
+    direct: list[int]   # u32 x 12  blocks holding the data. 0 = unallocated
 
     @classmethod
     def empty(cls) -> "Inode":

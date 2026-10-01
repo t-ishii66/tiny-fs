@@ -85,8 +85,6 @@
 <text x="518" y="241.0625" font-size="9" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">84</text>
 <path d="M 508 318.0 l 6 0" stroke="#57606a" stroke-width="1"/>
 <text x="518" y="321.5" font-size="9" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">128</text>
-<text x="468.0" y="336" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">2 B と 8 B の差が</text>
-<text x="468.0" y="350" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">そのまま高さの差</text>
 <text x="718.0" y="56" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">1 ブロック = 4096 B</text>
 <rect x="648" y="84.0" width="140" height="6.1125" rx="1" fill="#fde68a" stroke="#b8860b" stroke-width="0.9"/>
 <rect x="648" y="91.3125" width="140" height="6.1125" rx="1" fill="#f3f4f6" stroke="#8b949e" stroke-width="0.9"/>

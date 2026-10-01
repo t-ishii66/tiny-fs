@@ -175,7 +175,7 @@ class Bitmap:
         raise NoSpaceError("no free entry left")
 
     def count_used(self) -> int:
-        # capacity は 8 の倍数とは限らない（i-node ビットマップは 129 ビット）。
+        # capacity は 8 の倍数とは限らない。
         # 最後の 1 バイトは範囲内のビットだけをマスクしてから数える。
         full_bytes, extra_bits = divmod(self._capacity, 8)
         used = sum(byte.bit_count() for byte in self._buf[:full_bytes])

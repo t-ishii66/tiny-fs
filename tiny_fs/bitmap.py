@@ -64,8 +64,8 @@ class Bitmap:
         raise NoSpaceError("no free entry left")
 
     def count_used(self) -> int:
-        # capacity is not always a multiple of 8 (the i-node bitmap holds 129
-        # bits), so the last, partial byte has to be masked before counting.
+        # capacity is not always a multiple of 8, so the last, partial byte
+        # has to be masked before counting.
         full_bytes, extra_bits = divmod(self._capacity, 8)
         used = sum(byte.bit_count() for byte in self._buf[:full_bytes])
         if extra_bits:
