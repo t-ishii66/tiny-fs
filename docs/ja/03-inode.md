@@ -248,17 +248,18 @@ def allocate_inode(inode_bitmap, mode: int, now: int) -> tuple[int, Inode]:
 
 
 def free_inode(inode: Inode, blocks, alloc, inode_bitmap, ino: int) -> None:
-    """i-node が持っているデータブロックを全部返し、i-node 番号も返す。"""
+    """i-node が持っているデータブロックを全部解放し、i-node 番号も空きに戻す。"""
     # 先にデータブロック。順番を逆にすると、途中で落ちたときに
     # 「誰からも参照されていないのに使用中のブロック」が残る
     truncate(inode, blocks, alloc, 0)     # ← この後の節で書く
     inode_bitmap.mark_free(ino)
 ```
 
-ブロックを返す処理は「サイズ 0 に縮める」とまったく同じなので、
+ブロックを解放する処理は「サイズ 0 に縮める」とまったく同じなので、
 次の節の `truncate` をそのまま呼べばよい。解放専用のループは要らない。
 
-この 2 つが返すのは**番号と構造体**だけで、
+どちらも、ディスク上の i-node テーブルには触らない。
+`allocate_inode` の戻り値は番号とメモリ上の `Inode` で、
 **その 128 バイトをディスクのどこに書くか**はこの層の担当ではない。
 i-node テーブルの位置を知っているのは `fs.py`（第 5 章）で、
 `ino` から「何番ブロックの何バイト目か」を計算して `encode()` の結果を書き込む。
