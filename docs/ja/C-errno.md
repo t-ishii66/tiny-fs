@@ -38,9 +38,9 @@ class AlreadyExistsError(FSError):
 | 例外 | `errno` | 意味 | いつ出るか |
 |---|---|---|---|
 | `NotFoundError` | `ENOENT` | そのパスがない | `lookup` で成分が見つからない。`unlink` / `rm` の対象がない |
-| `AlreadyExistsError` | `EEXIST` | 既にある | `create` / `mkdir` の宛先が既にある（`rename` は置き換えるので出ない） |
-| `NotADirectoryError` | `ENOTDIR` | ディレクトリではない | パスの途中の成分がファイル（`/memo.txt/x`）。`readdir` / `rmdir` の対象がファイル。`rename` でディレクトリをファイルに被せようとした |
-| `IsADirectoryError` | `EISDIR` | ディレクトリである | `read` / `write` / `unlink` の対象がディレクトリ。`rename` でファイルをディレクトリに被せようとした |
+| `AlreadyExistsError` | `EEXIST` | 既にある | `create` / `mkdir` が作ろうとしたパスが既にある（`rename` は置き換えるので出ない） |
+| `NotADirectoryError` | `ENOTDIR` | ディレクトリではない | パスの途中の成分がファイル（`/memo.txt/x`）。`readdir` / `rmdir` の対象がファイル。`rename` でディレクトリをファイルに上書きしようとした |
+| `IsADirectoryError` | `EISDIR` | ディレクトリである | `read` / `write` / `unlink` の対象がディレクトリ。`rename` でファイルをディレクトリに上書きしようとした |
 | `NotEmptyError` | `ENOTEMPTY` | 空ではない | `rmdir` の対象に有効なエントリが残っている。`rename` の宛先が空でないディレクトリ |
 | `NoSpaceError` | `ENOSPC` | 空きがない | データブロックの枯渇。i-node の枯渇。ディレクトリが 1536 エントリに達した |
 | `FileTooBigError` | `EFBIG` | 大きすぎる | 書き込みが `MAX_FILE_SIZE`（48 KiB）を超える |
@@ -54,7 +54,7 @@ class AlreadyExistsError(FSError):
 
 | 層 | 例外について |
 |---|---|
-| `device.py` / `disk.py` | 範囲外のセクタ / ブロック番号は `ValueError`。まだ FS の話ではない |
+| `device.py` / `disk.py` | 範囲外のセクタ / ブロック番号は `ValueError`。まだファイルシステムの層ではない |
 | `bitmap.py` | `NoSpaceError`、二重解放の `CorruptionError` |
 | `inode.py` | `FileTooBigError` |
 | `directory.py` | `NotFoundError`、`AlreadyExistsError`、`NameTooLongError`、`InvalidArgumentError` |
@@ -88,5 +88,5 @@ $ cat /mnt/tiny-fs/nothing
 cat: /mnt/tiny-fs/nothing: No such file or directory
 ```
 
-3 つ目は `cat` が出しているメッセージで、tiny-fs は関与していない。
-`errno` を正しく返せば、**あとは OS とコマンドが勝手に説明してくれる**。
+FUSE 経由の例は `cat` が出しているメッセージで、tiny-fs は関与していない。
+`errno` を正しく返せば、**あとは OS とコマンドが説明を引き受ける**。

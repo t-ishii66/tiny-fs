@@ -12,17 +12,17 @@ OS から見れば `disk.img` はいまだに**ただのファイル**にすぎ�
 ## 1. FUSE とは何か
 
 ファイルシステムは普通カーネルの中にある。
-**FUSE** (Filesystem in Userspace) は、その処理を**ユーザ空間のプロセスに投げる**仕組み。
-カーネルの FUSE ドライバが `/dev/fuse` を窓口にして、
-「このパスを読みたい」という依頼をこちらのプロセスに渡し、返事を待つ。
+**FUSE** (Filesystem in Userspace) は、その処理を**ユーザ空間のプロセスに委ねる**仕組み。
+カーネルの FUSE ドライバが `/dev/fuse` を介して、
+「このパスを読みたい」という要求をこちらのプロセスに渡し、応答を待つ。
 
 ![cat /mnt/tiny-fs/a.txt が tiny-fs に届くまで](../images/12-fuse-flow.svg)
 
 `cat` から見れば、これは普通のファイルを読んだのとまったく区別がつかない。
 カーネルモジュールを書かなくても、**Python のプロセス 1 個がファイルシステムになれる**。
 
-ここで初めて「マウント」が本物になる。第 7 章の `FileSystem` を作る操作は
-メモリ上の準備にすぎなかったが、今回は OS のディレクトリツリーに組み込まれる。
+ここで初めて「マウント」が本物になる。第 7 章の `FileSystem` の生成は
+メモリ上の準備にすぎなかったが、FUSE では OS のディレクトリツリーに組み込まれる。
 
 ---
 
@@ -43,9 +43,9 @@ pip install fusepy
 
 `/dev/fuse` は誰でも開ける (`crw-rw-rw-`) が、マウント自体は本来 root の操作になる。
 `fusermount` が setuid root で間に入るので、**sudo なしでマウントできる**。
-これが無いと `Permission denied` で止まる。
-`libfuse.so.2` のほうが無いと、`import fuse` は通るのに
-マウントの直前で「ライブラリが見つからない」で落ちる。
+これが無いと、マウントが `Permission denied` で失敗する。
+`libfuse.so.2` が無い場合は、`import fuse` は成功するのに、
+マウントの直前で「ライブラリが見つからない」というエラーで失敗する。
 
 パッケージ名は Ubuntu 24.04 のもの。22.04 では `libfuse2t64` が `libfuse2` になる。
 
@@ -126,8 +126,8 @@ class TinyFSOperations(Operations):
         self._fs.close()          # アンマウント。ここで free_hint が書き戻る
 ```
 
-`__call__` を上書きしているのが要点になる。
-これは自前の工夫ではなく、**fusepy が用意している入口**で、
+`__call__` をオーバーライドしているのが要点になる。
+これは tiny-fs 独自の仕組みではなく、**fusepy が用意しているフック**で、
 基底クラス `Operations` の側はこうなっている。
 
 ```python
@@ -139,8 +139,8 @@ class Operations(object):
         return getattr(self, op)(*args)
 ```
 
-操作名を受け取って、同名のメソッドを探して呼ぶだけの振り分け口。
-カーネルからの呼び出しを受ける `FUSE` クラスの中は、全部この形になっている。
+操作名を受け取り、同名のメソッドを探して呼ぶだけのディスパッチャになっている。
+カーネルからの呼び出しを受ける `FUSE` クラスの実装は、すべてこの形になっている。
 
 ```python
 return self.operations('mkdir', path.decode(self.encoding), mode)
@@ -149,7 +149,7 @@ return self.operations('unlink', path.decode(self.encoding))
 
 `self.operations.mkdir(...)` と直接呼ぶ箇所は 1 つもなく、
 **すべての操作が `__call__` を通る**。だから全操作に共通の処理を挟みたいときは、
-ここを上書きするのが fusepy での定型になる。
+ここをオーバーライドするのが fusepy での定型になる。
 fusepy 自身、全操作をログに出す `LoggingMixIn` をこのやり方で書いている。
 
 tiny-fs はそこにログではなく例外変換を置いた。結果として
@@ -157,7 +157,7 @@ tiny-fs はそこにログではなく例外変換を置いた。結果として
 各メソッドに `try` を書く必要がない。
 
 メソッドの中身はどれも 1〜2 行。
-**ここにファイルシステムの処理を書かない**、という第 1 章からの約束が守られていれば、
+**ここにファイルシステムの処理を書かない**、という第 1 章からの規約が守られていれば、
 この層はこれ以上大きくならない。
 
 マウントは 1 行。
@@ -209,7 +209,7 @@ $ fusermount -u ~/mnt/tiny-fs
 これらは普通のシステムコールを呼んでいるだけで、
 その先がユーザ空間の Python だとは気づいていない。
 
-`hostname` の持ち主が `dev` になっているのは、`create` の中で
+`hostname` の所有者が `dev` になっているのは、`create` の中で
 `fuse_get_context()` が返した uid / gid を i-node に書いているから。
 一方 `.`（ルートディレクトリ）が `root` なのは、それを作ったのが `mkfs` で、
 uid 0 をそのまま書いているため（第 5 章のダンプのとおり）。
@@ -236,17 +236,17 @@ FUSE 経由で書いたものが、CLI からそのまま読める。
 
 ---
 
-## 6. つまずく点
+## 6. 失敗しやすい点
 
 | 症状 | 原因 |
 |---|---|
 | import は通るのにマウントで落ちる | `libfuse2t64` が入っていない |
 | マウントできない（Permission denied） | `fuse` が入っていない（`fusermount` が無い） |
-| 作ったファイルの持ち主が root になる | `create` で `fuse_get_context()` の uid を書いていない |
+| 作ったファイルの所有者が root になる | `create` で `fuse_get_context()` の uid を書いていない |
 | 大きいファイルの `cp` が途中で失敗する | 48 KiB の上限（`EFBIG`）。仕様どおり |
 | `ls -l` が遅い | エントリごとに `getattr` が呼ばれる。1 回ごとにパスを解決し直している |
 | 開いたままのファイルを消すと壊れる | `nlink` が 0 になった時点で解放してしまう。オープン数を数えていない |
-| 時々おかしくなる | `nothreads=True` を付け忘れている |
+| ときどき結果が壊れる | `nothreads=True` を付け忘れている |
 
 `atime` は持っていないので `mtime` を返している。
 `ls -lu` は `ls -l` と同じ結果になる。
@@ -273,7 +273,7 @@ def test_mount_write_unmount(tmp_path):
 ```
 
 `fusepy` か `/dev/fuse` が無い環境では、このテストだけが自分でスキップする。
-印を付けてあるので `pytest -m fuse` で 1 本だけ走らせることも、
+マーカーを付けてあるので `pytest -m fuse` で 1 本だけ実行することも、
 `pytest -m "not fuse"` で外すこともできる。
 
 ---

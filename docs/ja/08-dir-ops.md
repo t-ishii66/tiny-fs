@@ -3,9 +3,9 @@
 ![傘をさして雨の日にお出かけする Alice と Bob](../images/08-alice-bob.png)
 
 前章でファイルが作れるようになった。残っているのはディレクトリ側の操作
-— 作る、消す、中を見る、名前を変える。
+— 作成、削除、一覧の取得、名前の変更。
 
-どれも `fs.py` に足す。第 4 章で決めた規約
+どれも `fs.py` に実装する。第 4 章で決めた規約
 （`.` と `..` を先頭 2 エントリに持つ、`nlink` は「自分を指す名前の数」）が、
 ここで具体的なコードになる。
 
@@ -14,7 +14,7 @@
 ## 1. mkdir
 
 ディレクトリを作る手順は `create` とほぼ同じで、違うのは 2 点。
-**中身に `.` と `..` を書く**ことと、**`nlink` が動く**こと。
+**中身に `.` と `..` を書く**ことと、**`nlink` を更新する**こと。
 
 ![mkdir("/docs") — 名前が 3 つ増える](../images/08-mkdir.svg)
 
@@ -31,7 +31,7 @@
                                      ino, parent_ino)
             self._add_entry(parent, name, ino, path)
         except FSError:
-            # 作りかけを解放する。ブロックも i-node 番号も返る（第 3 章）
+            # 作成途中の i-node を解放する。ブロックも i-node 番号も空きに戻る（第 3 章）
             inode_mod.free_inode(inode, self._blocks, self.blocks_alloc,
                                  self.inodes_alloc, ino)
             raise
@@ -43,8 +43,8 @@
         return ino
 ```
 
-失敗時の後始末が `free_inode` 1 本で済んでいる。
-**作りかけを解放する処理は、消す処理と同じもの**になる。
+失敗時の後始末が `free_inode` 1 つで済んでいる。
+**作成途中のディレクトリを解放する処理は、削除する処理と同じもの**になる。
 
 `nlink` の値はこうなる。第 4 章の「`nlink` = 2 + 子ディレクトリの数」がそのまま出る。
 
@@ -73,7 +73,7 @@ def is_empty(dir_inode, blocks) -> bool:
 `iter_entries` は `ino == 0` のスロットを飛ばすので（第 4 章）、
 **消した跡地がいくつ残っていても空と判定される**。
 
-![rmdir — 2 つの検査を通ってから、まとめて返す](../images/08-rmdir.svg)
+![rmdir — 2 つの検査を通ってから、まとめて解放する](../images/08-rmdir.svg)
 
 ```python
     def rmdir(self, path: str) -> None:
@@ -98,7 +98,7 @@ def is_empty(dir_inode, blocks) -> bool:
         self.write_inode(parent_ino, parent)
 ```
 
-ルートは `lookup_parent("/")` が `EINVAL` で落ちるので、消しようがない。
+ルートは `lookup_parent("/")` が `EINVAL` で失敗するので、削除できない。
 
 ---
 
@@ -121,7 +121,7 @@ def is_empty(dir_inode, blocks) -> bool:
 ```
 
 返ってくる一覧には `.` と `..` が**最初から入っている**。
-第 4 章で実体のある dirent として作ったので、ここで作り足す必要がない
+第 4 章で実体のある dirent として作ったので、ここで追加する必要がない
 （`ls -a` がそのまま成立し、第 12 章の FUSE でもそのまま使える）。
 
 `stat` が返すのは `Inode` そのもの。`ls -l` が必要とするもの
@@ -132,7 +132,7 @@ def is_empty(dir_inode, blocks) -> bool:
 ## 4. rename
 
 名前を変える操作は、**dirent を 1 個消して 1 個足す**だけで済む。
-i-node もデータブロックも動かない。
+i-node もデータブロックも移動しない。
 
 ![mv /docs /archive/docs — ディスクが変わるのは 4 か所](../images/08-rename-move.svg)
 
@@ -152,7 +152,7 @@ i-node もデータブロックも動かない。
         # 2 個読むと、片方への変更がもう片方の write_inode で消える
         new_parent = old_parent if same_parent else self.read_inode(new_parent_ino)
 
-        # 宛先に既に何かあれば、それを置き換える。先に何があるか見ておく
+        # 宛先にエントリが既にあれば、それを置き換える。先にその有無を確認する
         found = directory.find(new_parent, self._blocks, new_name)
         victim_ino = None if found is None else found[1].ino
         if victim_ino is not None:
@@ -160,7 +160,7 @@ i-node もデータブロックも動かない。
         if stat.S_ISDIR(inode.mode):
             self._check_not_descendant(ino, new_parent_ino)
 
-        # 失敗しうる検査はここで終わり。以降は必ず完走する
+        # 失敗しうる検査はここまで。以降は途中で失敗しない
         if victim_ino is None:
             # 先に新しい名前を足す。ここで失敗しても、元の名前はまだ無事
             self._add_entry(new_parent, new_name, ino, new_path)
@@ -193,11 +193,11 @@ i-node もデータブロックも動かない。
 
 ![rename の順番 — 検査を先に、名前は足してから消す](../images/08-rename-steps.svg)
 
-決めごとが 3 つある。
+仕様として決めたことが 3 つある。
 
 **宛先が既にあれば置き換える。** `mv a b` で `b` が存在する場合、
 `b` は消えて `a` がその名前を引き継ぐ。`rename(2)` の規定がそうなっている。
-置き換えられるのは同じ種別どうしだけで、組み合わせによって拒み方が変わる。
+置き換えられるのは同じ種別どうしだけで、組み合わせによって返す errno が変わる。
 
 | 宛先 | 移すのがファイル | 移すのがディレクトリ |
 |---|---|---|
@@ -220,7 +220,7 @@ i-node もデータブロックも動かない。
             raise IsADirectoryError(new_path)         # EISDIR
 ```
 
-置き換えられた側は、指していた名前を失う。あとは `unlink` と同じ処理になる。
+置き換えられた側は、自分を指していた名前を 1 つ失う。あとは `unlink` と同じ処理になる。
 
 ![置き換えられた側の後始末](../images/08-drop-replaced.svg)
 
@@ -246,7 +246,7 @@ i-node もデータブロックも動かない。
 ```
 
 **足してから消す。** 逆順にすると、`add_entry` が `ENOSPC` で失敗したときに
-**名前が 1 つもない i-node** が残る。足す側を先にしておけば、失敗しても元の状態のまま。
+**名前が 1 つもない i-node** が残る。追加を先に行っておけば、失敗しても元の状態のまま。
 置き換えのときは足す必要がないので、`set_entry` の 1 回の書き込みで名前が移る。
 
 **ディレクトリを自分の子孫へ移せない。** `/a` を `/a/b/c` の下へ移すと、
@@ -258,7 +258,7 @@ i-node もデータブロックも動かない。
 ```python
     def _check_not_descendant(self, ino: int, new_parent_ino: int) -> None:
         cur = new_parent_ino
-        # ".." が壊れて輪になっているイメージでも止まるよう、回数で打ち切る
+        # ".." が壊れて輪になっているイメージでも無限ループしないよう、回数で打ち切る
         for _step in range(self._sb.num_inodes + 1):
             if cur == ino:
                 raise InvalidArgumentError("cannot move a directory into itself")
@@ -313,20 +313,20 @@ def test_a_refused_rename_changes_nothing(tmp_path):
     # 拒まれたとき、空きブロック数・空き i-node 数・両方の名前が元のまま
 ```
 
-5 つ目が第 4 章の「削除は詰めない」と対になる。
+`test_rmdir_after_emptying_succeeds` が第 4 章の「削除は詰めない」と対になる。
 `size` が縮まないので、**空に見えるディレクトリでも `size` は 4096 のまま**。
 `is_empty` が `size` ではなく有効エントリの有無で判定していることを、ここで確かめる。
 
 ![".." の付け替えを忘れると、cd .. が移動前の親に戻る](../images/08-dotdot.svg)
 
-9 つ目は `..` の付け替えを忘れると通らない。
+`test_rename_across_directories_fixes_dotdot` は `..` の付け替えを忘れると通らない。
 忘れたまま動かすと、移動したディレクトリから `cd ..` したときに
 **移動前の親に戻ってしまう**。
 
-置き換えの 5 本は、`sed -i` や多くのエディタの保存手順をそのまま支えている
+置き換えに関する 5 つのテストは、`sed -i` や多くのエディタの保存手順をそのまま支えている
 （一時ファイルに書いて、元の名前へ `rename` で被せる）。
-最後の 1 本は、置き換えで**失敗する経路が増えた**ぶんの担保で、
-拒んだときに何も変わっていないことを見る。
+`test_a_refused_rename_changes_nothing` は、置き換えで**失敗する経路が増えた**ぶんを担保するもので、
+拒んだときに何も変わっていないことを確認する。
 
 ---
 
