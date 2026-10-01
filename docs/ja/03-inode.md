@@ -292,7 +292,7 @@ def read(inode: Inode, blocks: BlockDevice, offset: int, length: int) -> bytes:
 ```
 
 書き込みは read-modify-write になる。
-第 1 章で「部分書き込みは装置にはない」と言ったものを、ここで組み立てる。
+第 1 章の装置には部分書き込みがないので、それをこの層で実装する。
 
 ```python
 def write(inode: Inode, blocks: BlockDevice, alloc: Allocator,
