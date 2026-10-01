@@ -271,7 +271,7 @@ i-node テーブルの位置を知っているのは `fs.py`（第 5 章）で�
 `direct[]` の何番目か / そのブロックの何バイト目かに分解するのがこの関数の仕事になる。
 呼び出し側がブロック番号を渡すことはない。
 
-読み出しは `size` で止める。
+読み出す長さは、`size` を超えないように切り詰める。
 
 ```python
 def read(inode: Inode, blocks: BlockDevice, offset: int, length: int) -> bytes:
