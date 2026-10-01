@@ -31,7 +31,7 @@
                                      ino, parent_ino)
             self._add_entry(parent, name, ino, path)
         except FSError:
-            # 作りかけを捨てる。ブロックも i-node 番号も返る（第 3 章）
+            # 作りかけを解放する。ブロックも i-node 番号も返る（第 3 章）
             inode_mod.free_inode(inode, self._blocks, self.blocks_alloc,
                                  self.inodes_alloc, ino)
             raise
@@ -44,7 +44,7 @@
 ```
 
 失敗時の後始末が `free_inode` 1 本で済んでいる。
-**作りかけを捨てる処理は、消す処理と同じもの**になる。
+**作りかけを解放する処理は、消す処理と同じもの**になる。
 
 `nlink` の値はこうなる。第 4 章の「`nlink` = 2 + 子ディレクトリの数」がそのまま出る。
 
