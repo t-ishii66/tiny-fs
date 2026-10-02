@@ -207,7 +207,7 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 
 ## 6. 実装 — `directory.py` (L4)
 
-この層は「dirent の並んだファイル」を扱うだけ。
+この層は「dirent の並んだディレクトリファイル」を扱うだけ。
 ディレクトリファイルの中身の読み書きは第 3 章の `inode.read` / `inode.write` に任せるので、
 ディレクトリがディスクのどこにあるかを知る必要はない。
 パスを i-node 番号に解決するのは `fs.py` (L5、第 6 章) の仕事で、この層には現れない。
