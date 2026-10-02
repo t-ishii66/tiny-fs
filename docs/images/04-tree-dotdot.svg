@@ -6,28 +6,35 @@
 <text x="185.0" y="56" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/</text>
 <text x="185.0" y="72" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1,  nlink = 3</text>
 <rect x="60" y="80" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
-<text x="70" y="96" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."</text>
-<text x="300" y="96" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 1</text>
+<path d="M 130 83 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="96" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<text x="142" y="96" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."</text>
 <rect x="60" y="104" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
-<text x="70" y="120" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".."</text>
-<text x="300" y="120" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 1</text>
+<path d="M 130 107 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="120" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<text x="142" y="120" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".."</text>
 <rect x="60" y="128" width="250" height="24" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
-<text x="70" y="144" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"b.txt"</text>
-<text x="300" y="144" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 4</text>
+<path d="M 130 131 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="144" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 4</text>
+<text x="142" y="144" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"b.txt"</text>
 <rect x="60" y="152" width="250" height="24" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
-<text x="70" y="168" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"docs"</text>
-<text x="300" y="168" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 3</text>
+<path d="M 130 155 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="168" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3</text>
+<text x="142" y="168" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"docs"</text>
 <text x="645.0" y="206" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/docs</text>
 <text x="645.0" y="222" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3,  nlink = 2</text>
 <rect x="520" y="230" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
-<text x="530" y="246" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."</text>
-<text x="760" y="246" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 3</text>
+<path d="M 590 233 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="532" y="246" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3</text>
+<text x="602" y="246" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."</text>
 <rect x="520" y="254" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
-<text x="530" y="270" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".."</text>
-<text x="760" y="270" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 1</text>
+<path d="M 590 257 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="532" y="270" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<text x="602" y="270" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".."</text>
 <rect x="520" y="278" width="250" height="24" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
-<text x="530" y="294" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"a.txt"</text>
-<text x="760" y="294" font-size="10.5" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ 5</text>
+<path d="M 590 281 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="532" y="294" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 5</text>
+<text x="602" y="294" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"a.txt"</text>
 <path d="M 314 164 L 512 242" stroke="#5b6fc4" stroke-width="1.5" fill="none" marker-end="url(#g)"/>
 <text x="360" y="180" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">docs → ino 3</text>
 <path d="M 520 266 C 420 266 420 116 314 116" stroke="#5b6fc4" stroke-width="1.5" fill="none" marker-end="url(#g)" stroke-dasharray="4 3"/>
