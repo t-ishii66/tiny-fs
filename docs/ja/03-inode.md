@@ -154,6 +154,13 @@ INODE_FMT = "<HHIIQQQ12I"   # 84 バイト。128 バイトまでゼロで埋め�
         return cls(*values[:7], direct=list(values[7:]))
 ```
 
+> **Python tips** — `encode` はインスタンスメソッド、`decode` は `@classmethod` になる。
+> `encode` は変換したい `Inode` が既に手元にあるので `inode.encode()` と呼べるが、
+> `decode` を呼ぶ時点では 128 バイトのバイト列しかなく、`Inode` はまだ存在しない。
+> `cls`（= `Inode`）を受け取って最後に `cls(...)` で生成するのがこの形で、
+> `datetime.fromtimestamp()` などと同じ代替コンストラクタ。
+> 第 4 章の `Dirent` も同じ形をとる。
+
 ![i-node の 128 バイト](../images/03-inode-layout.svg)
 
 5000 バイトのファイル（ブロック 8 と 9 を使っている）の実バイト列。
