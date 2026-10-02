@@ -107,7 +107,8 @@ class Dirent:
 
 ![ディレクトリ = 中身が dirent の配列になっているだけの普通のファイル](../images/04-directory-is-a-file.svg)
 
-ディレクトリも i-node を持つ。`direct[12]` にデータブロックを持ち、`size` をバイト単位で持つ。
+ディレクトリも i-node を持つ。データブロックは `direct[]`（12 要素）に `direct[0]` から順に入り、
+`size` はバイト単位で持つ。
 **普通のファイルとの違いは `mode` の種別ビットだけ**（`S_IFDIR` か `S_IFREG` か）。
 
 ただし `size` の動き方は違う。通常のファイルは 1 バイト単位で増減し、`truncate` で縮む。
