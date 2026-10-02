@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="308" viewBox="0 0 900 308" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>i-node ビットマップ — ビット番号 = i-node 番号</title>
+<rect x="0" y="0" width="900" height="308" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">i-node ビットマップ — ビット番号 = i-node 番号</text>
+<text x="158" y="92" font-size="10.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ビットマップのビット</text>
+<rect x="168" y="72" width="44" height="30" rx="2" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="190.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<rect x="212" y="72" width="44" height="30" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="234.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<rect x="256" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="278.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="300" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="322.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="344" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="366.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="388" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="410.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="432" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="454.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="476" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="498.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="520" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="542.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="564" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="586.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="608" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="630.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="652" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="674.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="696" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="718.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="740" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="762.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="784" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="806.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="828" y="72" width="44" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="850.0" y="92" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="880" y="92" font-size="16" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">⋯</text>
+<text x="158" y="130" font-size="10.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">ビット番号 = i-node 番号</text>
+<text x="190.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="234.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="278.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">2</text>
+<text x="322.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">3</text>
+<text x="366.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">4</text>
+<text x="410.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">5</text>
+<text x="454.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">6</text>
+<text x="498.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">7</text>
+<text x="542.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">8</text>
+<text x="586.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">9</text>
+<text x="630.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">10</text>
+<text x="674.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">11</text>
+<text x="718.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">12</text>
+<text x="762.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">13</text>
+<text x="806.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">14</text>
+<text x="850.0" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">15</text>
+<path d="M 190.0 104 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 190.0 136 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 234.0 104 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 234.0 136 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 498.0 104 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 498.0 136 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 542.0 104 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<path d="M 542.0 136 l 0 10" stroke="#c9ced4" stroke-width="1"/>
+<text x="158" y="170" font-size="10.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node テーブルのスロット</text>
+<rect x="168" y="150" width="44" height="32" rx="2" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="190.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">なし</text>
+<rect x="212" y="150" width="44" height="32" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="234.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ルート</text>
+<rect x="256" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="278.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="300" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="322.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="344" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="366.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="388" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="410.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="432" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="454.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="476" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="498.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="520" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="542.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="564" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="586.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="608" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="630.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="652" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="674.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="696" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="718.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="740" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="762.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="784" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="806.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<rect x="828" y="150" width="44" height="32" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="850.0" y="170" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">空き</text>
+<text x="880" y="170" font-size="16" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">⋯</text>
+<text x="168" y="204" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino n のスロットは block 3 + (n−1) ÷ 32 の ((n−1) mod 32) × 128 バイト目（§4）</text>
+<rect x="60" y="226" width="780" height="66" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="78" y="250" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bit 0 には対応するスロットがない。i-node 番号は 1 始まりで、0 は「無効」の番兵（第 3 章）。</text>
+<text x="78" y="270" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">図は左から 0。16 進ダンプではバイト内の下位ビットが右に来る（第 2 章）。</text>
+</svg>
