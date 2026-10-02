@@ -209,7 +209,7 @@ raw = inode_read(dir_inode, blocks, offset=0, length=dir_inode.size)
 
 この層は「dirent の並んだディレクトリファイル」を扱うだけ。
 各関数が受け取るのは**そのディレクトリの `Inode` 1 個**で、それだけで動く。
-中身の読み書きは第 3 章の `inode.read` / `inode.write` に任せるので、
+ファイルの中身、つまり dirent の並びの読み書きは第 3 章の `inode.read` / `inode.write` に任せるので、
 ディレクトリがディスクのどこにあるかを知る必要もない。
 
 走査はスロット番号で行う。**空きスロット (`ino == 0`) は読み飛ばす**。
