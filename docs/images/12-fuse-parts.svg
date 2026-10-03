@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>マウントに必要な 3 つと、その居場所</title>
+<rect x="0" y="0" width="900" height="420" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">マウントに必要な 3 つと、その居場所</text>
+<text x="60" y="54" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ユーザ空間 — python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs として動く 1 プロセス</text>
+<rect x="60" y="70" width="560" height="58" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="76" y="94" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">tiny_fs/fuse_ops.py</text>
+<text x="76" y="114" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">この章で書く。errno を変換して fs.py を呼ぶだけ</text>
+<text x="604" y="94" font-size="9.5" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">自分のコード</text>
+<rect x="60" y="144" width="560" height="58" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="76" y="168" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">fusepy（fuse.py）</text>
+<text x="76" y="188" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Operations を継承して実装し、FUSE(...) で起動する</text>
+<text x="604" y="168" font-size="9.5" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">pip install fusepy</text>
+<rect x="60" y="218" width="560" height="58" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="76" y="242" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">libfuse.so.2</text>
+<text x="76" y="262" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">C のライブラリ。/dev/fuse のプロトコルを話す</text>
+<text x="604" y="242" font-size="9.5" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">apt install libfuse2t64</text>
+<path d="M 180 128 L 180 142" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="192" y="140" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">メソッド呼び出し</text>
+<path d="M 180 202 L 180 216" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="192" y="214" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ctypes が dlopen して C の関数を呼ぶ</text>
+<rect x="660" y="144" width="180" height="132" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="750" y="166" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/usr/bin/fusermount</text>
+<text x="750" y="184" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">setuid root</text>
+<text x="750" y="206" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">マウントのときだけ</text>
+<text x="750" y="222" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">libfuse が起動する</text>
+<text x="750" y="250" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">apt install fuse</text>
+<path d="M 624 247 L 656 215" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
+<text x="636" y="196" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">起動</text>
+<path d="M 750 280 L 750 314" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
+<text x="750" y="300" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">mount(2) を実行し、fd を渡す</text>
+<text x="840" y="286" font-size="9" fill="#b8860b" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">一般ユーザのままマウントできるのはこの経路のため</text>
+<path d="M 180 280 L 180 314" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="192" y="300" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">/dev/fuse を read / write して要求と応答をやり取りする</text>
+<rect x="60" y="320" width="780" height="56" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="76" y="342" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">カーネル — FUSE ドライバ</text>
+<text x="76" y="362" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">VFS から来た ls / cat の要求を /dev/fuse に流し、応答を待つ。マウント表に ~/mnt/tiny-fs を登録する</text>
+<text x="450.0" y="402" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">3 つのうち C 側は libfuse だけ。fusepy は Python と libfuse のあいだを ctypes でつなぐ部品で、ファイルシステムの処理は持たない。</text>
+</svg>

@@ -96,7 +96,7 @@ tiny-fs fsck  disk.img
 ### 第 III 部 観察と検証
 
 9. [イメージを覗く — dump](docs/ja/09-dump.md) — バイト列を人間に読める形に翻訳する
-10. [壊れていないことを確かめる — fsck](docs/ja/10-fsck.md) — 同じ事実を 2 通りに求めて突き合わせる
+10. [壊れていないことを確かめる — fsck](docs/ja/10-fsck.md) — 同じ情報を 2 通りに求めて突き合わせる
 11. [コマンドラインから触る — CLI](docs/ja/11-cli.md) — ここで普通に使える状態になる
 
 ### 第 IV 部 カーネルにつなぐ
@@ -112,6 +112,8 @@ tiny-fs fsck  disk.img
 - [A. テストの書き方](docs/ja/A-testing.md)
 - [B. 定数一覧](docs/ja/B-constants.md)
 - [C. エラーコード対応表](docs/ja/C-errno.md)
+- [D. バッファキャッシュ（参考）](docs/ja/D-buffer-cache.md)
+- [E. ジャーナリング（参考）](docs/ja/E-journaling.md)
 
 ---
 

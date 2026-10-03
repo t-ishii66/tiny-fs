@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
-<title>cat /mnt/tiny-fs/a.txt が tiny-fs に届くまで</title>
+<title>cat ~/mnt/tiny-fs/a.txt が tiny-fs に届くまで</title>
 <rect x="0" y="0" width="900" height="430" fill="#ffffff"/>
 <defs><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b6ea5"/></marker></defs>
-<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">cat /mnt/tiny-fs/a.txt が tiny-fs に届くまで</text>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">cat ~/mnt/tiny-fs/a.txt が tiny-fs に届くまで</text>
 <rect x="24" y="52" width="852" height="112" rx="8" fill="#eef2ff" stroke="#5b6fc4" stroke-width="1.2" stroke-dasharray="5 4"/>
 <text x="36" y="70" font-size="11" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ユーザ空間</text>
 <rect x="24" y="182" width="852" height="86" rx="8" fill="#fef3c7" stroke="#b8860b" stroke-width="1.2" stroke-dasharray="5 4"/>

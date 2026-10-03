@@ -5,7 +5,10 @@
 OS から見れば `disk.img` はいまだに**ただのファイル**にすぎない。
 
 最後の 1 歩は、これを OS につなぐこと。
-`/mnt/tiny-fs` に置いて、本物の `ls` や `cat` やエディタから触れるようにする。
+`~/mnt/tiny-fs` という空のディレクトリを選び、そこに tiny-fs を**マウント**する。
+これ以降、そのディレクトリが **tiny-fs のルート (`/`)** になり、
+`~/mnt/tiny-fs/docs/a.txt` は tiny-fs の中の `/docs/a.txt` を指す。
+本物の `ls` や `cat` やエディタから触れるのは、この対応があるため。
 
 ---
 
@@ -16,13 +19,14 @@ OS から見れば `disk.img` はいまだに**ただのファイル**にすぎ�
 カーネルの FUSE ドライバが `/dev/fuse` を介して、
 「このパスを読みたい」という要求をこちらのプロセスに渡し、応答を待つ。
 
-![cat /mnt/tiny-fs/a.txt が tiny-fs に届くまで](../images/12-fuse-flow.svg)
+![cat ~/mnt/tiny-fs/a.txt が tiny-fs に届くまで](../images/12-fuse-flow.svg)
 
-`cat` から見れば、これは普通のファイルを読んだのとまったく区別がつかない。
+`cat` の側からは、通常のファイルの読み出しと区別がつかない。
 カーネルモジュールを書かなくても、**Python のプロセス 1 個がファイルシステムになれる**。
 
 ここで初めて「マウント」が本物になる。第 7 章の `FileSystem` の生成は
-メモリ上の準備にすぎなかったが、FUSE では OS のディレクトリツリーに組み込まれる。
+プロセス内のメモリに状態を作るだけで、OS は関与しなかった。
+FUSE では OS のディレクトリツリーに組み込まれる。
 
 ---
 
@@ -32,26 +36,109 @@ Linux なら、コンテナも特権も要らない。**一般ユーザのまま
 
 ```bash
 sudo apt install fuse libfuse2t64
-pip install fusepy
+
+source .venv/bin/activate      # README の「用意する」で作った venv を有効にする
+pip install fusepy             # pip install -e ".[fuse]" でも入る
 ```
 
-| 入れるもの | 何のために |
-|---|---|
-| `libfuse2t64` | `libfuse.so.2` そのもの。fusepy が読み込むのはこれ |
-| `fuse` | `/usr/bin/fusermount`。マウントを代行する **setuid root** のコマンド |
-| `fusepy` | `libfuse.so.2` を Python から呼ぶ薄い層 |
+`apt` はシステム全体に入れ、`pip` は有効にした venv の中だけに入れる。
+置かれる場所が違うので、片方を消してももう片方は残る。
 
-`/dev/fuse` は誰でも開ける (`crw-rw-rw-`) が、マウント自体は本来 root の操作になる。
-`fusermount` が setuid root で間に入るので、**sudo なしでマウントできる**。
-これが無いと、マウントが `Permission denied` で失敗する。
-`libfuse.so.2` が無い場合は、`import fuse` は成功するのに、
-マウントの直前で「ライブラリが見つからない」というエラーで失敗する。
+![2 つのインストールが、どこに何を置くか](../images/12-fuse-install.svg)
+
+置かれたものは、呼び出しの連鎖で見るとこうつながる。
+
+![マウントに必要な 3 つと、その居場所](../images/12-fuse-parts.svg)
+
+マウント (`mount(2)`) は本来 root の操作で、一般ユーザは実行できない。
+そこで libfuse は `mount(2)` を自分で呼ばず、**`fusermount` を起動して代行させる**。
+このコマンドは setuid root (`-rwsr-xr-x root root`) なので、一般ユーザが起動しても
+root 権限で動き、マウントを済ませて `/dev/fuse` の fd を呼び出し元に返す。
+**だから sudo が要らない。** `fusermount` が無ければ `Permission denied` で失敗する。
+マウント後の読み書きに使う `/dev/fuse` は `crw-rw-rw-` で誰でも開けるので、ここにも特権は要らない。
+
+fusepy は `libfuse.so.2` をビルド時にリンクしない。`import fuse` の時点で
+`find_library('fuse')` が soname `libfuse.so.2` を探し、`ctypes.CDLL` で読み込む。
+だから `pip install fusepy` に C コンパイラも開発パッケージも要らず、
+ライブラリが無ければ `import fuse` が `EnvironmentError: Unable to find libfuse` で落ちる。
 
 パッケージ名は Ubuntu 24.04 のもの。22.04 では `libfuse2t64` が `libfuse2` になる。
 
 ---
 
-## 3. 呼び出しの対応
+## 3. 守るべき規約
+
+やることは 3 つ。**メソッドを定義する → 決まった形で返す → `FUSE()` に渡す**。
+
+### ① カーネルから呼ばれるメソッドを定義する
+
+`Operations` を継承したクラスを 1 つ作り、その中に**操作名と同じ名前のメソッド**を書く。
+
+```python
+from fuse import FUSE, FuseOSError, Operations
+
+class TinyFSOperations(Operations):
+    def getattr(self, path, fh=None): ...
+    def readdir(self, path, fh): ...
+    def read(self, path, size, offset, fh): ...
+    def write(self, path, data, offset, fh): ...
+    # 以下、必要な操作だけ並べる
+```
+
+対応は**名前で**行われる。`getattr` を `get_attr` と書いたメソッドは呼ばれない。
+
+第 1 引数は、どのメソッドでも**操作対象のパス**になる。渡されるのは
+**tiny-fs のルートから見た絶対パス**で、マウントポイントの部分は取り除かれている。
+`~/mnt/tiny-fs/docs/a.txt` への操作は `/docs/a.txt` として届く。
+カーネルが解決してから渡すので、相対パスもカレントディレクトリも出てこない（第 6 章）。
+
+定義しなかったメソッドは、基底クラス `Operations` の既定が答える。
+既定は `getattr` がルートだけを返し（他は `ENOENT`）、`readdir` が `.` と `..` だけを返し、
+書き込み系は `EROFS`、`read` は `EIO` を返す。つまり**何も定義しなくてもマウントは成功し、
+「ルートだけがある、書き込めない FS」になる**。そこから必要な操作を 1 つずつ置き換えていく。
+
+### ② 引数と戻り値の形を合わせる
+
+| メソッド | 返すもの |
+|---|---|
+| `getattr(path, fh=None)` | `st_mode` / `st_nlink` / `st_size` / `st_uid` / `st_gid` / `st_mtime` などを持つ辞書 |
+| `readdir(path, fh)` | 名前の文字列のリスト（`.` と `..` を含む） |
+| `read(path, size, offset, fh)` | `bytes`。`size` バイトを超えて返してはいけない |
+| `write(path, data, offset, fh)` | 実際に書いたバイト数 |
+| `statfs(path)` | `f_bsize` / `f_blocks` / `f_bfree` などを持つ辞書（`df` が読む） |
+| `unlink(path)` / `mkdir(path, mode)` など | `None`（= 成功） |
+
+**失敗は `FuseOSError(errno)` を投げて伝える。** 例外を投げずに戻れば成功とみなされる。
+独自の例外をそのまま投げると fusepy の中で落ちるので、境界で errno に変換する（§5）。
+
+### ③ `FUSE()` に渡してマウントする
+
+```python
+def mount(image: str, mountpoint: str, foreground: bool = True) -> None:
+    FUSE(TinyFSOperations(image), mountpoint, foreground=foreground,
+         nothreads=True, fsname="tiny-fs")
+```
+
+| 引数 | 値の例 | 意味 |
+|---|---|---|
+| `image` | `"disk.img"` | **イメージファイルのパス**。`mkfs` 済みのものを `TinyFSOperations` が開く |
+| `mountpoint` | `"/home/dev/mnt/tiny-fs"` | **マウントポイント**。すでにある空のディレクトリで、ここが tiny-fs のルートになる。`~/mnt/tiny-fs` と書いた場合はシェルが展開した値が渡る |
+| `foreground` | `True` | **フォアグラウンドで動かすか**。端末に留まり、Ctrl-C で終わる。`False` にすると背後に回る |
+
+§6 で実行するのは `python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f` で、
+受け取った 2 つの引数をそのまま `mount()` に渡している。
+
+この `FUSE(...)` が登録とマウントを兼ねる。`FUSE()` は libfuse のループに入り、
+カーネルから届いた操作名を見て、渡したインスタンスの同名メソッドを呼ぶ。
+戻ってくるのはアンマウントされたとき。
+
+`nothreads=True` は省略できない。既定ではカーネルからの要求が並行して届くが、
+`fs.py` はロックを持たないので、2 つの操作が同時に走るとイメージが壊れる。
+`fsname` は `df` や `mount` の表示に出る名前。
+
+---
+
+## 4. 呼び出しの対応
 
 FUSE から来る操作は、`fs.py` の API とほぼ 1 対 1 に対応する。
 
@@ -76,7 +163,7 @@ FUSE から来る操作は、`fs.py` の API とほぼ 1 対 1 に対応する�
 
 ---
 
-## 4. 実装 — `fuse_ops.py`
+## 5. 実装 — `fuse_ops.py`
 
 ```python
 class TinyFSOperations(Operations):
@@ -174,7 +261,7 @@ FUSE(TinyFSOperations(image), mountpoint, foreground=True,
 
 ---
 
-## 5. マウントして触る
+## 6. マウントして触る
 
 ```
 $ tiny-fs mkfs disk.img
@@ -236,11 +323,11 @@ FUSE 経由で書いたものが、CLI からそのまま読める。
 
 ---
 
-## 6. 失敗しやすい点
+## 7. 失敗しやすい点
 
 | 症状 | 原因 |
 |---|---|
-| import は通るのにマウントで落ちる | `libfuse2t64` が入っていない |
+| `import fuse` が `EnvironmentError: Unable to find libfuse` で落ちる | `libfuse2t64` が入っていない |
 | マウントできない（Permission denied） | `fuse` が入っていない（`fusermount` が無い） |
 | 作ったファイルの所有者が root になる | `create` で `fuse_get_context()` の uid を書いていない |
 | 大きいファイルの `cp` が途中で失敗する | 48 KiB の上限（`EFBIG`）。仕様どおり |

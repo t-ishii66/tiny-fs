@@ -39,6 +39,6 @@
 <text x="836" y="240" font-size="9.5" fill="#b8860b" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">".." をたどる</text>
 <text x="690" y="322" font-size="11" fill="#b8690b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">移す対象（ino 3）に出会った → EINVAL</text>
 <text x="690" y="346" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">出会わずにルートへ着いたら通す</text>
-<text x="450" y="400" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ルートまでの高さは i-node 数より短いはず。回数で打ち切るのは、".." が壊れて輪になったイメージでも止まるため。</text>
+<text x="450" y="400" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ルートまでの高さは i-node 数より短いはず。回数で打ち切るのは、".." が壊れて輪になったイメージでも無限ループしないため。</text>
 <text x="450" y="424" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">打ち切りに達したら、移動を拒むのではなくイメージが壊れていると報告する。</text>
 </svg>

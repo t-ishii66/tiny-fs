@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="350" viewBox="0 0 900 350" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>キャッシュを挟む場所 — L1 と L2 のあいだ</title>
+<rect x="0" y="0" width="900" height="350" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f8f52"/></marker><marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b4413c"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">キャッシュを挟む場所 — L1 と L2 のあいだ</text>
+<text x="60" y="58" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">いまの積み方</text>
+<rect x="60" y="76" width="300" height="38" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="74" y="100" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">L2  bitmap.py 以上</text>
+<rect x="60" y="132" width="300" height="38" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="74" y="156" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">L1  disk.py (BlockDevice)</text>
+<rect x="60" y="188" width="300" height="38" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="74" y="212" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">L0  device.py</text>
+<rect x="60" y="244" width="300" height="30" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="210" y="264" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.img</text>
+<path d="M 210 114 L 210 130" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<path d="M 210 170 L 210 186" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<path d="M 210 226 L 210 242" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="500" y="58" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">キャッシュを挟んだ積み方</text>
+<rect x="500" y="76" width="340" height="38" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="514" y="100" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">L2  bitmap.py 以上</text>
+<path d="M 670 114 L 670 130" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="680" y="128" font-size="9.5" fill="#3f8f52" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">read_block / write_block</text>
+<rect x="500" y="132" width="340" height="38" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="514" y="156" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">CachedBlockDevice</text>
+<text x="700" y="156" font-size="10" fill="#3f8f52" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">← 1 枚挟む</text>
+<path d="M 670 170 L 670 186" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="680" y="184" font-size="9.5" fill="#3f8f52" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">read_block / write_block</text>
+<rect x="500" y="188" width="340" height="38" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="514" y="212" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">L1  disk.py (BlockDevice)</text>
+<path d="M 670 226 L 670 242" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<rect x="500" y="244" width="340" height="38" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="514" y="268" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">L0  device.py</text>
+<path d="M 670 282 L 670 298" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<rect x="500" y="300" width="340" height="30" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="670" y="320" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.img</text>
+<text x="450" y="330" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">上下のインタフェースが同じ read_block / write_block なので、L2 以上のコードは 1 行も変わらない。</text>
+</svg>

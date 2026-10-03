@@ -84,8 +84,8 @@ $ echo $?
 1
 
 # FUSE 経由（第 12 章）
-$ cat /mnt/tiny-fs/nothing
-cat: /mnt/tiny-fs/nothing: No such file or directory
+$ cat ~/mnt/tiny-fs/nothing
+cat: /home/dev/mnt/tiny-fs/nothing: No such file or directory
 ```
 
 FUSE 経由の例は `cat` が出しているメッセージで、tiny-fs は関与していない。
