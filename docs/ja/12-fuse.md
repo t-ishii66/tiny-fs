@@ -1,5 +1,7 @@
 # 12. FUSE でマウントする
 
+![小さな島と街をつなぐ橋を渡る Alice と Bob](../images/12-alice-bob.png)
+
 第 11 章で、tiny-fs はファイルシステムとして完成した。
 ただし触れるのは `tiny-fs` コマンドからだけで、
 OS から見れば `disk.img` はいまだに**ただのファイル**にすぎない。
@@ -157,8 +159,15 @@ FUSE から来る操作は、`fs.py` の API とほぼ 1 対 1 に対応する�
 | `flush` / `fsync` | **何もしない** | キャッシュを持たないので、既に書き終わっている |
 | `open` / `release` | **何もしない** | パスだけで操作できるので、開いた状態を持たない |
 
-第 II 部で作った API がそのまま使えるのは、
-`fs.py` が FUSE を知らない形で書かれているから。
+これが 1 対 1 になるのは偶然ではなく、`fs.py` が次の 3 つを満たしているから。
+
+- **パスだけで操作できる。** 開いた状態（ファイルハンドル）を持たないので、
+  FUSE から来たパスをそのまま渡せる。`open` / `release` に書くことがない
+- **1 回の呼び出しの中で書き戻しまで終える**（第 7 章 §3）。
+  だから `flush` / `fsync` に書くことがない
+- **失敗を errno を持つ例外で表す。** `FuseOSError(e.errno)` に 1 行で変換できる（§5）
+
+どれも FUSE に合わせて決めたものではなく、第 II 部で素直に書いた結果である。
 この章で足すのは**変換だけ**になる。
 
 ---
@@ -234,18 +243,47 @@ return self.operations('mkdir', path.decode(self.encoding), mode)
 return self.operations('unlink', path.decode(self.encoding))
 ```
 
+> **Python tips** — `__call__` を定義すると、そのクラスのインスタンスを
+> **関数のように呼べる**ようになる。
+>
+> ```python
+> class Greeter:
+>     def __call__(self, name):
+>         return f"hello {name}"
+>
+> g = Greeter()
+> g("world")                    # 'hello world' — インスタンスを関数として呼ぶ
+> Greeter.__call__(g, "world")  # 上の行はこれに展開される
+> callable(g)                   # True。__call__ が無いと呼んだ時点で TypeError
+> ```
+>
+> fusepy が `self.operations('mkdir', path, mode)` と書けるのはこの仕組みで、
+> `self.operations` は `Operations` のインスタンスである。
+>
+> オーバーライドした `__call__` の中で `super().__call__(...)` を呼ぶと、
+> 基底クラスの振り分けはそのまま行われ、自分のコードはその前後に足すだけで済む。
+> 呼ばなければ振り分け自体が起きないので、どのメソッドも呼ばれなくなる。
+> `TinyFSOperations.__call__` は例外変換だけを足し、振り分けは基底に任せている。
+>
+> ```python
+> class Loud(Greeter):
+>     def __call__(self, *args):
+>         print("呼ばれた")               # 前に処理を挟む
+>         return super().__call__(*args)  # 振り分けは基底に任せる
+> ```
+
 `self.operations.mkdir(...)` と直接呼ぶ箇所は 1 つもなく、
 **すべての操作が `__call__` を通る**。だから全操作に共通の処理を挟みたいときは、
-ここをオーバーライドするのが fusepy での定型になる。
+`__call__` をオーバーライドするのが fusepy での定型になる。
 fusepy 自身、全操作をログに出す `LoggingMixIn` をこのやり方で書いている。
 
-tiny-fs はそこにログではなく例外変換を置いた。結果として
+tiny-fs は `__call__` にログではなく例外変換を置いた。結果として
 **独自例外 → `FuseOSError` の変換が 1 か所に集まる**。
 各メソッドに `try` を書く必要がない。
 
-メソッドの中身はどれも 1〜2 行。
-**ここにファイルシステムの処理を書かない**、という第 1 章からの規約が守られていれば、
-この層はこれ以上大きくならない。
+メソッドの中身はどれも 1〜2 行。この層が持つのは
+**errno への変換と `fs.py` の呼び出しだけ**で、ファイルシステムの処理は 1 行も書かない。
+第 1 章で示した層構造「各層は自分より下の層だけを呼ぶ」が、最上段の L6 でも維持されている。
 
 マウントは 1 行。
 
