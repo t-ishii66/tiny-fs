@@ -6,8 +6,9 @@
 <text x="60" y="56" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">正常時 — 本体を書き換える前にジャーナルへ書く</text>
 <rect x="60" y="72" width="186" height="72" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
 <text x="74" y="94" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">①</text>
-<text x="98" y="92" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">変更するブロックの</text>
-<text x="98" y="107" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">新しい内容をジャーナルへ</text>
+<text x="98" y="90" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ディスクリプタ（対象の番号）</text>
+<text x="98" y="104" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">＋ 各ブロックの新しい内容</text>
+<text x="98" y="122" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">まとめてジャーナルへ（上の図）</text>
 <path d="M 246 108 L 256 108" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
 <rect x="256" y="72" width="186" height="72" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
 <text x="270" y="94" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">②</text>
@@ -27,7 +28,7 @@
 <text x="74" y="236" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ジャーナルに</text>
 <text x="74" y="253" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">コミットレコードがあるか</text>
 <path d="M 284 228 L 344 204" stroke="#3f8f52" stroke-width="1.5" fill="none" marker-end="url(#g)"/>
-<text x="314" y="196" font-size="9.5" fill="#3f8f52" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ある</text>
+<text x="330" y="190" font-size="9.5" fill="#3f8f52" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ある</text>
 <rect x="348" y="180" width="500" height="46" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
 <text x="364" y="200" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ジャーナルの内容を本体へ適用する（③ をやり直す）</text>
 <text x="364" y="217" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">②まで終わっていたのだから、この変更は完了させてよい</text>
@@ -35,7 +36,7 @@
 <text x="310" y="288" font-size="9.5" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ない</text>
 <rect x="348" y="258" width="500" height="46" rx="3" fill="#fde2e0" stroke="#b4413c" stroke-width="1.5"/>
 <text x="364" y="278" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ジャーナルを破棄する。本体は操作前のまま</text>
-<text x="364" y="295" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">①の途中で落ちた可能性があり、中途半端な内容を本体に入れてはいけない</text>
+<text x="364" y="295" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">①の途中でクラッシュした可能性があり、中途半端な内容を本体に入れてはいけない</text>
 <rect x="60" y="326" width="790" height="56" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
 <text x="78" y="348" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">どちらに転んでも、本体は「操作前」か「操作後」のどちらかになる。途中の状態が残らない。</text>
 <text x="78" y="370" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">コミットレコード 1 個の書き込みが成功したかどうか、だけが分岐点になる。</text>

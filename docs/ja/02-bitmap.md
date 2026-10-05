@@ -142,7 +142,7 @@ class Bitmap:
     """ビットの配列。ビット i が 1 なら「i 番は使用中」。
 
     buf はディスクから読んだ 1 ブロック分そのもの。capacity は
-    「そのうち何個までが実在するか」（例: 1024 ブロック / 128 i-node）。
+    「そのうち何個までが実在するか」（例: 1024 ブロック / 129 i-node）。
     """
 
     def __init__(self, buf: bytearray, capacity: int) -> None:

@@ -71,11 +71,18 @@ def cmd_rmdir(args: argparse.Namespace) -> int:
 def cmd_put(args: argparse.Namespace) -> int:
     data = pathlib.Path(args.host_path).read_bytes()   # the host side
     with _open(args.image) as fs:
+        created = False
         try:
             fs.create(args.fs_path)
+            created = True
         except AlreadyExistsError:
             fs.truncate(args.fs_path, 0)               # overwrite what is there
-        fs.write(args.fs_path, 0, data)
+        try:
+            fs.write(args.fs_path, 0, data)
+        except FSError:
+            if created:
+                fs.unlink(args.fs_path)    # no empty leftovers (chapter 7)
+            raise
     return 0
 
 

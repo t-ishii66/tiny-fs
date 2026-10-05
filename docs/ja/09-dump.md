@@ -164,6 +164,9 @@ i-node の位置計算そのものが成立しない（イメージの外を読�
 ```python
 def dump(blocks: BlockDevice, out) -> None:
     sb = Superblock.decode(blocks.read_block(SUPERBLOCK_BLOCK))
+    broken = superblock_problems(sb, blocks.num_blocks, check_magic=False)
+    if broken:
+        ...        # スーパーブロックと理由だけを表示して戻る
     sections = [
         _superblock(sb),
         _bitmap(blocks, BLOCK_BITMAP_BLOCK, sb.total_blocks, "block bitmap", None),

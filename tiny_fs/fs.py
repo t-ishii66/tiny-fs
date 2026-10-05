@@ -329,12 +329,15 @@ class FileSystem:
         # Short of blocks, blocks_alloc supplies them; direct[] and size change.
         try:
             inode_mod.write(inode, self._blocks, self.blocks_alloc, offset, data)
-        except FSError:
+        except FSError as e:
             # A write that ran out of space halfway has already taken blocks.
             # Record them before reporting the failure, or nothing would point
             # at them and fsck would be right to call them leaks.
             self.write_inode(ino, inode)
-            raise
+            # inode.py names no path, so its error would read "60000 > 49152".
+            # Putting the caller's path back on is this layer's job, as in
+            # _lookup_in.
+            raise type(e)(path) from None
         inode.mtime = inode.ctime = now()
         self.write_inode(ino, inode)         # forget this and the write is lost
         return len(data)
@@ -346,9 +349,9 @@ class FileSystem:
             raise IsADirectoryError(path)
         try:
             inode_mod.truncate(inode, self._blocks, self.blocks_alloc, new_size)
-        except FSError:
+        except FSError as e:
             self.write_inode(ino, inode)     # same reason as in write()
-            raise
+            raise type(e)(path) from None
         inode.mtime = inode.ctime = now()
         self.write_inode(ino, inode)
 

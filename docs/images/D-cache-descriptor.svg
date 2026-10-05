@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="352" viewBox="0 0 900 352" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>状態はページの中身ではなく、管理構造体のフラグで持つ</title>
+<rect x="0" y="0" width="900" height="352" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">状態はページの中身ではなく、管理構造体のフラグで持つ</text>
+<text x="60" y="58" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">管理構造体（1 ページに 1 個）</text>
+<rect x="60" y="68" width="380" height="184" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.4"/>
+<text x="74" y="92" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">フラグ</text>
+<text x="166" y="92" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ダーティ = 1</text>
+<text x="166" y="106" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">装置の内容と違う。解放の前に送る</text>
+<text x="166" y="124" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">参照中 = 0</text>
+<text x="166" y="138" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">いま使っているプロセスの数で決まる</text>
+<text x="166" y="156" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">内容が有効 = 1</text>
+<text x="166" y="170" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">読み込みが完了している</text>
+<text x="74" y="188" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">どこの写しか</text>
+<text x="166" y="188" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.img / ページ 3</text>
+<text x="166" y="202" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ファイルと、その中のページ番号</text>
+<text x="74" y="220" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">つながり</text>
+<text x="166" y="220" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">索引の鎖 / LRU の鎖</text>
+<text x="166" y="234" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ポインタ 2 本（§7 の図）</text>
+<text x="560" y="58" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ページ本体</text>
+<rect x="560" y="68" width="280" height="184" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.4"/>
+<text x="700" y="150" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">4096 バイト</text>
+<text x="700" y="174" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">disk.img の block 3 の写し</text>
+<text x="700" y="196" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ここを見ても、クリーンか</text>
+<text x="700" y="210" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ダーティかは分からない</text>
+<path d="M 444 160 L 554 160" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="499" y="150" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">指す</text>
+<rect x="60" y="270" width="780" height="62" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.4"/>
+<text x="78" y="292" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">書き込みで変わるのはページ本体と、この構造体のダーティのフラグだけ。装置へは何も送らない。</text>
+<text x="78" y="312" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Linux では struct page（いまは folio）、古典的な Unix では struct buf と呼ばれる構造体がこれにあたる。</text>
+</svg>

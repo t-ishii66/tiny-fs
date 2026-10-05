@@ -78,8 +78,11 @@ $ tiny-fs fsck disk.img
 fsck: clean (8 blocks used, 1 inodes used)
 ```
 
-**8 ブロック、i-node 1 個** は mkfs 直後と同じ数字（第 9 章）。
+**8 ブロック、i-node 1 個** は mkfs 直後と同じ数字。
 作って消したものが、すべて解放されている。
+
+`fsck` の i-node の数は、予約の bit 0 を含めない（第 5 章）。
+同じ状態を `dump` で見ると `used 2 / 129` と出る（第 9 章）ので、1 だけ違う。
 
 ---
 
@@ -178,7 +181,13 @@ def main(argv: list[str] | None = None) -> int:
 
 `ValueError` を受ける節が要る。第 1 章の `device.py` は「512 の倍数でないファイル」を
 `ValueError` で拒むので（まだファイルシステムの層ではないため `FSError` ではない）、
-これを捕捉しないと `tiny-fs fsck /etc/hosts` がトレースバックで終了する。
+これを捕捉しないと、イメージでないファイルを指定したときにトレースバックで終了する。
+
+```
+$ printf 'hello' > odd.txt
+$ tiny-fs fsck ./odd.txt
+tiny-fs: ./odd.txt: size 5 is not a multiple of 512
+```
 
 ```
 $ tiny-fs cat disk.img /nothing

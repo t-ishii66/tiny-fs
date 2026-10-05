@@ -2,7 +2,7 @@
 <title>間接ブロックを 1 本足すと何が変わるか</title>
 <rect x="0" y="0" width="900" height="428" fill="#ffffff"/>
 <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
-<text x="450.0" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">間接ブロックを 1 本足すと、上限が 48 KiB から 4 MiB になる</text>
+<text x="450.0" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">間接ブロックを 1 本足すと、上限が 48 KiB から約 4 MiB になる</text>
 <text x="130.0" y="64" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">i-node</text>
 <rect x="40" y="74" width="180" height="22" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.4"/>
 <text x="50" y="90" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct[0]</text>

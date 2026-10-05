@@ -62,9 +62,12 @@
 
 ![空とは「. と .. 以外に有効なエントリがない」こと](../images/08-is-empty.svg)
 
+この判定だけは `directory.py` に置く。dirent を見るだけで、パスもレイアウトも要らないため。
+
 ```python
+# tiny_fs/directory.py
 def is_empty(dir_inode, blocks) -> bool:
-    for _slot, entry in directory.iter_entries(dir_inode, blocks):
+    for _slot, entry in iter_entries(dir_inode, blocks):
         if entry.name not in (b".", b".."):
             return False       # 有効なエントリが 1 個でもあれば空ではない
     return True

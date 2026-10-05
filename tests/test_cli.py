@@ -144,3 +144,18 @@ def test_a_file_that_cannot_be_an_image_returns_1(tmp_path, capsys):
 def test_a_missing_image_returns_1(tmp_path, capsys):
     assert main(["dump", str(tmp_path / "nope.img")]) == 1
     assert "No such file" in capsys.readouterr().err
+
+
+def test_put_too_big_names_the_path_and_leaves_nothing(img, tmp_path, capsys):
+    # The error comes from inode.py, which knows no path: fs.py must put it back.
+    host = tmp_path / "big.bin"
+    host.write_bytes(b"x" * 60000)
+
+    assert main(["put", img, str(host), "/big.bin"]) == 1
+    assert capsys.readouterr().err == "tiny-fs: /big.bin: File too large (EFBIG)\n"
+
+    # The file create() made is gone again, so the image is as it was.
+    assert main(["ls", img, "/"]) == 0
+    assert capsys.readouterr().out == ".\n..\n"
+    assert main(["fsck", img]) == 0
+    assert capsys.readouterr().out == "fsck: clean (8 blocks used, 1 inodes used)\n"

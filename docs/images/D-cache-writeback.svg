@@ -16,21 +16,21 @@
 <text x="572" y="192" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">クリーン</text>
 <rect x="300" y="244" width="300" height="30" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
 <text x="450" y="264" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.img</text>
-<rect x="40" y="110" width="200" height="46" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<rect x="40" y="110" width="200" height="54" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
 <text x="54" y="130" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">fsync / sync</text>
-<text x="54" y="145" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">アンマウント</text>
+<text x="54" y="144" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">アンマウント</text>
 <path d="M 240 133 L 296 133" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
-<text x="280" y="125" font-size="9" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">全ダーティを書く</text>
-<rect x="40" y="170" width="200" height="46" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="54" y="156" font-size="8.5" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">全ダーティを書く</text>
+<rect x="40" y="170" width="200" height="50" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
 <text x="54" y="190" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">周期的な書き出し</text>
 <path d="M 240 193 L 296 193" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
-<text x="280" y="185" font-size="9" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">古いダーティを書く</text>
+<text x="54" y="206" font-size="8.5" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">古いダーティを書く</text>
 <rect x="640" y="140" width="200" height="46" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
-<text x="654" y="160" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">追い出し</text>
+<text x="654" y="160" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ダーティが増えた</text>
 <path d="M 640 163 L 604 163" stroke="#b4413c" stroke-width="1.5" fill="none" marker-end="url(#r)"/>
-<text x="650" y="202" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">犠牲 1 個だけ、</text>
-<text x="650" y="216" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ダーティなら書く</text>
+<text x="650" y="202" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">割合を超えると背後で、</text>
+<text x="650" y="216" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">さらに増えると書き手を待たせる</text>
 <path d="M 360 214 L 360 240" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
 <path d="M 540 214 L 540 240" stroke="#b4413c" stroke-width="1.5" fill="none" marker-end="url(#r)"/>
-<text x="450" y="292" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">上の 2 つは自発的。ダーティを減らしておくほど、追い出しのときに書き出しを待たずに解放できる。</text>
+<text x="450" y="292" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">どれもカーネル側の判断で起きる。ダーティが減っているほど、解放するときに書き出しを待たずに済む（§5）。</text>
 </svg>

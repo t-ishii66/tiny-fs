@@ -52,13 +52,15 @@ class AlreadyExistsError(FSError):
 
 ## 3. 層ごとの役割
 
+その層で**はじめて出てくる**例外を挙げる（上の層が同じ型を投げ直すこともある）。
+
 | 層 | 例外について |
 |---|---|
 | `device.py` / `disk.py` | 範囲外のセクタ / ブロック番号は `ValueError`。まだファイルシステムの層ではない |
 | `bitmap.py` | `NoSpaceError`、二重解放の `CorruptionError` |
-| `inode.py` | `FileTooBigError` |
+| `inode.py` | `FileTooBigError`、`InvalidArgumentError`、`CorruptionError` |
 | `directory.py` | `NotFoundError`、`AlreadyExistsError`、`NameTooLongError`、`InvalidArgumentError` |
-| `fs.py` | `NotADirectoryError`、`IsADirectoryError`、`NotEmptyError`、`CorruptionError` |
+| `fs.py` | `NotADirectoryError`、`IsADirectoryError`、`NotEmptyError`、`CorruptionError`、`InvalidArgumentError`（相対パス、`/` の親、子孫への `rename`） |
 | `cli.py` | **変換するだけ** — メッセージ 1 行 + 終了ステータス 1 |
 | `fuse_ops.py` | **変換するだけ** — `FuseOSError(e.errno)` |
 

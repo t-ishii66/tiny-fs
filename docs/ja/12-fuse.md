@@ -156,14 +156,14 @@ FUSE から来る操作は、`fs.py` の API とほぼ 1 対 1 に対応する�
 | `statfs` | ビットマップの空き数 | `df` が読む |
 | `chmod` / `chown` / `utimens` | 同名 | `cp` やエディタが保存の最後に呼ぶ。実装しないとそこで失敗する |
 | `destroy` | `close` | アンマウント時。`free_hint` がここで書き戻る |
-| `flush` / `fsync` | **何もしない** | キャッシュを持たないので、既に書き終わっている |
+| `flush` / `fsync` | **何もしない** | tiny-fs 側に溜めているものが無いので、ここで送るものが無い（ホストから先は付録 D） |
 | `open` / `release` | **何もしない** | パスだけで操作できるので、開いた状態を持たない |
 
 これが 1 対 1 になるのは偶然ではなく、`fs.py` が次の 3 つを満たしているから。
 
 - **パスだけで操作できる。** 開いた状態（ファイルハンドル）を持たないので、
   FUSE から来たパスをそのまま渡せる。`open` / `release` に書くことがない
-- **1 回の呼び出しの中で書き戻しまで終える**（第 7 章 §3）。
+- **1 回の呼び出しの中で書き戻しまで終える**（第 7 章 §1「書き戻しの規則」）。
   だから `flush` / `fsync` に書くことがない
 - **失敗を errno を持つ例外で表す。** `FuseOSError(e.errno)` に 1 行で変換できる（§5）
 
@@ -210,6 +210,7 @@ class TinyFSOperations(Operations):
 
     def create(self, path, mode, fi=None):
         self._fs.create(path, S_IFREG | (mode & 0o777))
+        self._set_owner(path)     # 作った人を所有者にする（§6）
         return 0
 
     def unlink(self, path):
