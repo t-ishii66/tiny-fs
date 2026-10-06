@@ -113,8 +113,9 @@ tiny-fs fsck  disk.img
 - [A. テストの書き方](docs/ja/A-testing.md)
 - [B. 定数一覧](docs/ja/B-constants.md)
 - [C. エラーコード対応表](docs/ja/C-errno.md)
-- [D. バッファキャッシュ（参考）](docs/ja/D-buffer-cache.md)
-- [E. ジャーナリング（参考）](docs/ja/E-journaling.md)
+- [D. 割り込みとデバイスドライバ（参考）](docs/ja/D-interrupt.md)
+- [E. バッファキャッシュ（参考）](docs/ja/E-buffer-cache.md)
+- [F. ジャーナリング（参考）](docs/ja/F-journaling.md)
 
 ---
 

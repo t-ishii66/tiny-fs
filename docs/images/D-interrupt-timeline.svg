@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="372" viewBox="0 0 900 372" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>依頼を出して、別の仕事に移る</title>
+<rect x="0" y="0" width="900" height="372" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">依頼を出して、別の仕事に移る</text>
+<text x="40" y="116" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">プロセス A</text>
+<path d="M 150 138 L 860 138" stroke="#eceff2" stroke-width="1" fill="none"/>
+<text x="40" y="196" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">CPU</text>
+<path d="M 150 218 L 860 218" stroke="#eceff2" stroke-width="1" fill="none"/>
+<text x="40" y="276" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">装置</text>
+<path d="M 150 298 L 860 298" stroke="#eceff2" stroke-width="1" fill="none"/>
+<rect x="150" y="86" width="150" height="46" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="225" y="114" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">実行中</text>
+<rect x="306" y="86" width="374" height="46" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="493" y="108" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">眠っている（この依頼の完了待ち）</text>
+<text x="493" y="124" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">CPU を手放している</text>
+<rect x="686" y="86" width="174" height="46" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="773" y="114" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">再開</text>
+<rect x="150" y="166" width="150" height="46" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="225" y="194" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">プロセス A</text>
+<rect x="306" y="166" width="334" height="46" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="473" y="188" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">別のプロセス B を実行</text>
+<text x="473" y="204" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">空いた時間は捨てない</text>
+<rect x="646" y="166" width="34" height="46" rx="3" fill="#fff7ed" stroke="#b8690b" stroke-width="1.5"/>
+<text x="663" y="188" font-size="9" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">割</text>
+<text x="663" y="202" font-size="9" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">込</text>
+<rect x="686" y="166" width="174" height="46" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="773" y="194" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">プロセス A</text>
+<rect x="150" y="246" width="150" height="46" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="225" y="274" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">停止</text>
+<rect x="306" y="246" width="334" height="46" rx="3" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="473" y="274" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタを読んでいる</text>
+<rect x="646" y="246" width="214" height="46" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="753" y="274" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">停止</text>
+<path d="M 303 212 L 303 244" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="288" y="234" font-size="12" fill="#b8860b" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">①</text>
+<path d="M 643 244 L 643 212" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="658" y="234" font-size="12" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">②</text>
+<path d="M 150 310 L 860 310" stroke="#c9ced4" stroke-width="1.2" fill="none" marker-end="url(#g)"/>
+<text x="860" y="328" font-size="9.5" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">時間</text>
+<text x="40" y="342" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">① ドライバが「このセクタを読め」と装置に伝える（返事は待たない）</text>
+<text x="40" y="364" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">② 装置が読み終えると割り込みが上がる。ハンドラがプロセス A を起こす</text>
+</svg>

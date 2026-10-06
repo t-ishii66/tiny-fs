@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="304" viewBox="0 0 900 304" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>メモリと装置では、待ち時間の桁が違う</title>
+<rect x="0" y="0" width="900" height="304" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">メモリと装置では、待ち時間の桁が違う</text>
+<path d="M 150 196 L 790 196" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<path d="M 150 196 L 150 203" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<text x="150" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">100 ns</text>
+<path d="M 278 196 L 278 203" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<text x="278" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1 µs</text>
+<path d="M 406 196 L 406 203" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<text x="406" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">10 µs</text>
+<path d="M 534 196 L 534 203" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<text x="534" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">100 µs</text>
+<path d="M 662 196 L 662 203" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<text x="662" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1 ms</text>
+<path d="M 790 196 L 790 203" stroke="#8b949e" stroke-width="1.4" fill="none"/>
+<text x="790" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">10 ms</text>
+<path d="M 150 196 L 150 124" stroke="#b8860b" stroke-width="1.6" fill="none"/>
+<rect x="62" y="70" width="176" height="54" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="150" y="93" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">メモリ（DRAM）</text>
+<text x="150" y="113" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">約 300 クロック</text>
+<path d="M 534 196 L 534 124" stroke="#b8860b" stroke-width="1.6" fill="none"/>
+<rect x="446" y="70" width="176" height="54" rx="3" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="534" y="93" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">SSD（NVMe）</text>
+<text x="534" y="113" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">約 30 万クロック</text>
+<path d="M 790 196 L 790 124" stroke="#b8860b" stroke-width="1.6" fill="none"/>
+<rect x="702" y="70" width="176" height="54" rx="3" fill="#fff7ed" stroke="#b8690b" stroke-width="1.5"/>
+<text x="790" y="93" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">HDD（シーク込み）</text>
+<text x="790" y="113" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">約 3000 万クロック</text>
+<text x="450" y="258" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">箱の中は、その 1 回を待つあいだに CPU が進めるクロック数。3 GHz なら 1 ns で 3 クロック。</text>
+<text x="450" y="282" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">目盛は 1 つで 10 倍。装置の完了をその場で待つと、CPU はその間ずっと何もしないことになる。</text>
+</svg>
