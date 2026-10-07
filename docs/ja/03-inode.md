@@ -147,11 +147,30 @@ INODE_FMT = "<HHIIQQQ12I"   # 84 バイト。128 バイトまでゼロで埋め�
         return cls(*values[:7], direct=list(values[7:]))
 ```
 
-> **Python tips** — `encode` はインスタンスメソッド、`decode` は `@classmethod` になる。
-> `encode` は変換したい `Inode` が既に手元にあるので `inode.encode()` と呼べるが、
-> `decode` を呼ぶ時点では 128 バイトのバイト列しかなく、`Inode` はまだ存在しない。
-> `cls`（= `Inode`）を受け取って最後に `cls(...)` で生成するのがこの形で、
-> `datetime.fromtimestamp()` などと同じ代替コンストラクタ。
+> **Python tips** — `encode` はインスタンスメソッド、`decode` は `@classmethod`。
+> 第 1 引数（`self` / `cls`）は呼び出し側では書かず、
+> **ドットの左に書いたものがそこに入る**。
+>
+> ```python
+> class Inode:
+>     def encode(self):            # 第 1 引数は self
+>         ...
+>
+>     @classmethod
+>     def decode(cls, raw):        # 第 1 引数は cls
+>         return cls(mode=..., size=...)
+>
+> inode.encode()      # ドットの左は inode  → self = その Inode インスタンス
+> Inode.decode(raw)   # ドットの左は Inode  → cls  = Inode クラスそのもの
+> ```
+>
+> `decode` を `Inode.decode(raw)` と呼ぶと `cls` は `Inode` になるので、
+> その中の `cls(mode=..., size=...)` は `Inode(mode=..., size=...)` と同じ意味になり、
+> 新しい `Inode` が 1 個できる。
+>
+> `decode` が `@classmethod` なのは、呼ぶ時点では 128 バイトのバイト列しかなく、
+> ドットの左に置ける `Inode` のインスタンスがまだ無いため。
+> `datetime.fromtimestamp()` などと同じ、コンストラクタの別入口である。
 > 第 4 章の `Dirent` も同じ形をとる。
 
 ![i-node の 128 バイト](../images/03-inode-layout.svg)
@@ -173,8 +192,10 @@ INODE_FMT = "<HHIIQQQ12I"   # 84 バイト。128 バイトまでゼロで埋め�
 00000030  ... 以降 128 バイトまでゼロ ...
 ```
 
-- `mode = 0x81a4 = 0o100644` — 上位が種別 `S_IFREG`（通常ファイル）、下位が `rw-r--r--`。
-  8 進で書くのは、1 桁が「所有者・グループ・その他」の 3 ビットにちょうど収まるため。
+- `mode = 0x81a4 = 0o100644` — 種別の `0o100000`（`S_IFREG` = 通常ファイル）と
+  パーミッションの `0o644`（`rw-r--r--`）を足した値。
+  **上位 4 ビットが種別、下位 9 ビットがパーミッション**にあたる。
+  8 進で書くのは、下位の 1 桁が「所有者・グループ・その他」の 3 ビットにちょうど収まるため。
 - `size = 5000` なのにブロックは 2 個（8192 バイト）確保されている。
   **最後のブロックの 904 バイト目から先はゴミ**で、そこが中身でないことを知っているのは
   `size` だけ。
