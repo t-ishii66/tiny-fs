@@ -106,7 +106,6 @@ def cmd_put(args) -> int:
 
 ホストのファイルを丸ごとメモリに読んでから書いている。
 `MAX_FILE_SIZE` が 48 KiB なので、それで足りる。
-48 KiB を超えるファイルは `write` が `EFBIG` で弾く。
 
 `cat` は標準出力にバイト列をそのまま流す。
 
@@ -136,21 +135,7 @@ def _open(image: str) -> FileSystem:
     return FileSystem(BlockDevice(SectorDevice(image)))
 ```
 
-サブコマンドの登録は `argparse` に任せる。
-
-```python
-def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="tiny-fs")
-    sub = parser.add_subparsers(dest="command", required=True)
-
-    p = sub.add_parser("put", help="ホストのファイルを入れる")
-    p.add_argument("image")
-    p.add_argument("host_path")
-    p.add_argument("fs_path")
-    p.set_defaults(func=cmd_put)
-    ...
-    return parser
-```
+サブコマンドの登録は `argparse` に任せる。引数の並びは §1 の表のとおり。
 
 ---
 
@@ -179,9 +164,9 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 ```
 
-`ValueError` を受ける節が要る。第 1 章の `device.py` は「512 の倍数でないファイル」を
+`ValueError` は第 1 章の `device.py` から来る。「512 の倍数でないファイル」を
 `ValueError` で拒むので（まだファイルシステムの層ではないため `FSError` ではない）、
-これを捕捉しないと、イメージでないファイルを指定したときにトレースバックで終了する。
+捕捉しないとトレースバックで終わる。
 
 ```
 $ printf 'hello' > odd.txt

@@ -44,7 +44,6 @@ pip install fusepy             # pip install -e ".[fuse]" でも入る
 ```
 
 `apt` はシステム全体に入れ、`pip` は有効にした venv の中だけに入れる。
-置かれる場所が違うので、片方を消してももう片方は残る。
 
 ![2 つのインストールが、どこに何を置くか](../images/12-fuse-install.svg)
 
@@ -61,8 +60,8 @@ root 権限で動き、マウントを済ませて `/dev/fuse` の fd を呼び�
 
 fusepy は `libfuse.so.2` をビルド時にリンクしない。`import fuse` の時点で
 `find_library('fuse')` が soname `libfuse.so.2` を探し、`ctypes.CDLL` で読み込む。
-だから `pip install fusepy` に C コンパイラも開発パッケージも要らず、
-ライブラリが無ければ `import fuse` が `EnvironmentError: Unable to find libfuse` で落ちる。
+だから `pip install fusepy` に C コンパイラも開発パッケージも要らない
+（ライブラリが無ければ `import fuse` が落ちる。§7）。
 
 パッケージ名は Ubuntu 24.04 のもの。22.04 では `libfuse2t64` が `libfuse2` になる。
 
@@ -82,8 +81,6 @@ from fuse import FUSE, FuseOSError, Operations
 class TinyFSOperations(Operations):
     def getattr(self, path, fh=None): ...
     def readdir(self, path, fh): ...
-    def read(self, path, size, offset, fh): ...
-    def write(self, path, data, offset, fh): ...
     # 以下、必要な操作だけ並べる
 ```
 
@@ -94,10 +91,9 @@ class TinyFSOperations(Operations):
 `~/mnt/tiny-fs/docs/a.txt` への操作は `/docs/a.txt` として届く。
 カーネルが解決してから渡すので、相対パスもカレントディレクトリも出てこない（第 6 章）。
 
-定義しなかったメソッドは、基底クラス `Operations` の既定が答える。
-既定は `getattr` がルートだけを返し（他は `ENOENT`）、`readdir` が `.` と `..` だけを返し、
-書き込み系は `EROFS`、`read` は `EIO` を返す。つまり**何も定義しなくてもマウントは成功し、
-「ルートだけがある、書き込めない FS」になる**。そこから必要な操作を 1 つずつ置き換えていく。
+定義しなかったメソッドは基底クラス `Operations` の既定が答え、書き込み系は `EROFS` を返す。
+**何も定義しなくてもマウントは成功し、「ルートだけがある、書き込めない FS」になる。**
+そこから必要な操作を 1 つずつ置き換えていく。
 
 ### ② 引数と戻り値の形を合わせる
 
@@ -263,7 +259,6 @@ return self.operations('unlink', path.decode(self.encoding))
 >
 > オーバーライドした `__call__` の中で `super().__call__(...)` を呼ぶと、
 > 基底クラスの振り分けはそのまま行われ、自分のコードはその前後に足すだけで済む。
-> 呼ばなければ振り分け自体が起きないので、どのメソッドも呼ばれなくなる。
 > `TinyFSOperations.__call__` は例外変換だけを足し、振り分けは基底に任せている。
 >
 > ```python
@@ -286,17 +281,7 @@ tiny-fs は `__call__` にログではなく例外変換を置いた。結果と
 **errno への変換と `fs.py` の呼び出しだけ**で、ファイルシステムの処理は 1 行も書かない。
 第 1 章で示した層構造「各層は自分より下の層だけを呼ぶ」が、最上段の L6 でも維持されている。
 
-マウントは 1 行。
-
-```python
-FUSE(TinyFSOperations(image), mountpoint, foreground=True,
-     nothreads=True, fsname="tiny-fs")
-```
-
-`nothreads=True` を必ず付ける。
-`fs.py` はロックを持たないので、同時に 2 つの操作が走ると壊れる。
-`fsname` は `df` や `mount` の Filesystem 欄に出る名前で、
-省くとクラス名がそのまま表示される。
+マウントは §3③ の `FUSE(...)` 1 行で、`fuse_ops.py` はこれ以上のことをしない。
 
 ---
 
@@ -383,23 +368,8 @@ FUSE 経由で書いたものが、CLI からそのまま読める。
 CLI と `fsck` で中身を確かめる。第 1 章から層を分けてきたので、
 このテストだけが FUSE を必要とする。
 
-```python
-pytest.importorskip("fuse")
-
-pytestmark = [
-    pytest.mark.fuse,
-    pytest.mark.skipif(not os.path.exists("/dev/fuse"),
-                       reason="no /dev/fuse on this machine"),
-]
-
-
-@pytest.mark.fuse
-def test_mount_write_unmount(tmp_path):
-    ...
-```
-
 `fusepy` か `/dev/fuse` が無い環境では、このテストだけが自分でスキップする。
-マーカーを付けてあるので `pytest -m fuse` で 1 本だけ実行することも、
+`pytest.mark.fuse` を付けてあるので、`pytest -m fuse` で 1 本だけ実行することも、
 `pytest -m "not fuse"` で外すこともできる。
 
 ---

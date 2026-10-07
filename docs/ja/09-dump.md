@@ -12,37 +12,13 @@
 
 ---
 
-## 1. 出力の形
+## 1. mkfs 直後を見る
 
-出力は、第 5 章で決めたレイアウトの順に並べる。
-
-```
-$ tiny-fs dump disk.img
-
-superblock (block 0)
-  ...
-
-block bitmap (block 1)
-  ...
-
-inode bitmap (block 2)
-  ...
-
-inode table (block 3-6)
-  ...
-
-directory /  (ino 1)
-  ...
-```
-
-前半 4 つはレイアウトそのもの、最後がディレクトリの中身になる。
+出力は第 5 章で決めたレイアウトの順に並べる — スーパーブロック、ビットマップ 2 枚、
+i-node テーブル、そして到達できるディレクトリの中身。
 ビットマップは 4096 バイトをすべて並べても人間には読み取れないので、
 **使用中のインデックスを範囲にまとめて**出力する。
 i-node テーブルも同じで、128 個すべてではなく**使用中のものだけ**を出力する。
-
----
-
-## 2. mkfs 直後を見る
 
 ```
 $ tiny-fs mkfs disk.img
@@ -86,7 +62,7 @@ directory /  (ino 1)
 
 ---
 
-## 3. ファイルを 1 個作って差分を見る
+## 2. ファイルを 1 個作って差分を見る
 
 `dump` の出力をファイルに保存して `diff` を取ると、
 1 つの操作がディスクのどこを変えたかがそのまま読める。
@@ -133,7 +109,7 @@ directory /  (ino 1)
 
 ---
 
-## 4. 生バイトを見る
+## 3. 生バイトを見る
 
 解釈せずに 16 進で見たいときのために、ブロック番号を指定できるようにする。
 
@@ -151,7 +127,7 @@ block 7
 
 ---
 
-## 5. 実装 — `dump.py`
+## 4. 実装 — `dump.py`
 
 `FileSystem` を使わず、`BlockDevice` から直接読む。
 壊れたイメージも覗けるようにしておきたいので、
@@ -179,41 +155,14 @@ def dump(blocks: BlockDevice, out) -> None:
     print("\n\n".join("\n".join(lines) for lines in sections), file=out)
 ```
 
-使用中のインデックスをまとめる部分だけ、少し実装の手間がかかる。
-
-```python
-def _ranges(indexes: list[int]) -> str:
-    """[0,1,2,3,7,8] を "0-3, 7-8" の形にまとめる。"""
-    parts, start, prev = [], None, None
-    for i in indexes:
-        if start is None:
-            start = prev = i
-        elif i == prev + 1:
-            prev = i
-        else:
-            parts.append(f"{start}-{prev}" if start != prev else f"{start}")
-            start = prev = i
-    if start is not None:
-        parts.append(f"{start}-{prev}" if start != prev else f"{start}")
-    return ", ".join(parts)
-```
-
-`mode` は `ls -l` と同じ表示形式にする。種別 1 文字 + パーミッション 9 文字。
-これは第 11 章の `ls -l` からも呼ぶので、`dump.py` の公開関数にしておく。
-
-```python
-def mode_str(mode: int) -> str:
-    kind = "d" if stat.S_ISDIR(mode) else "-"
-    bits = ""
-    for who in ("USR", "GRP", "OTH"):
-        for what, ch in (("R", "r"), ("W", "w"), ("X", "x")):
-            bits += ch if mode & getattr(stat, f"S_I{what}{who}") else "-"
-    return f"{kind} {bits}"
-```
+表示を整える部分は `dump.py` に閉じている。使用中のインデックスは `_ranges` が
+`[0,1,2,3,7,8]` → `"0-3, 7-8"` の形にまとめ、`mode` は `mode_str` が
+`ls -l` と同じ「種別 1 文字 + パーミッション 9 文字」にする。
+`mode_str` は第 11 章の `ls -l` からも呼ぶので、`dump.py` の公開関数にしておく。
 
 ---
 
-## 6. テスト
+## 5. テスト
 
 `dump` は文字列を作る関数なので、**出力そのもの**を突き合わせられる。
 
@@ -240,8 +189,6 @@ def test_dump_survives_a_broken_magic(tmp_path):
 `test_dump_does_not_modify_the_image` を必ず入れる。**覗くだけの道具が書き込んでしまう**のは、
 この種の道具で最も起きやすく、最も気づきにくい壊れ方になる。
 
-`test_dump_shows_the_diff_of_one_create` は、第 III 部のこれ以降と、第 10 章の `fsck` の土台にもなる。
-
 ---
 
 ## 試す
@@ -253,7 +200,7 @@ tiny-fs dump disk.img > before.txt
 python -c "open('sample.txt','w').write('x' * 5000)"
 tiny-fs put disk.img ./sample.txt /a.txt
 tiny-fs dump disk.img > after.txt
-diff before.txt after.txt                     # 「3. ファイルを 1 個作って差分を見る」の表と同じ 5 か所が出る
+diff before.txt after.txt                     # 「2. ファイルを 1 個作って差分を見る」の表と同じ 5 か所が出る
 
 # 解釈した表示と生バイトを往復する
 tiny-fs dump disk.img --raw 3 --length 128    # ルートの i-node
