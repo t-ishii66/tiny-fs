@@ -1,6 +1,6 @@
-# 12. FUSE でマウントする
+# 13. FUSE でマウントする
 
-![小さな島と街をつなぐ橋を渡る Alice と Bob](../images/12-alice-bob.png)
+![小さな島と街をつなぐ橋を渡る Alice と Bob](../images/13-alice-bob.png)
 
 第 11 章で、tiny-fs はファイルシステムとして完成した。
 ただし触れるのは `tiny-fs` コマンドからだけで、
@@ -8,9 +8,8 @@ OS から見れば `disk.img` はいまだに**ただのファイル**にすぎ�
 
 最後の 1 歩は、これを OS につなぐこと。
 `~/mnt/tiny-fs` という空のディレクトリを選び、そこに tiny-fs を**マウント**する。
-これ以降、そのディレクトリが **tiny-fs のルート (`/`)** になり、
-`~/mnt/tiny-fs/docs/a.txt` は tiny-fs の中の `/docs/a.txt` を指す。
-本物の `ls` や `cat` やエディタから触れるのは、この対応があるため。
+第 12 章で見た乗り換えの先をこの FS にすれば、
+本物の `ls` や `cat` やエディタから触れるようになる。
 
 ---
 
@@ -21,7 +20,7 @@ OS から見れば `disk.img` はいまだに**ただのファイル**にすぎ�
 カーネルの FUSE ドライバが `/dev/fuse` を介して、
 「このパスを読みたい」という要求をこちらのプロセスに渡し、応答を待つ。
 
-![cat ~/mnt/tiny-fs/a.txt が tiny-fs に届くまで](../images/12-fuse-flow.svg)
+![cat ~/mnt/tiny-fs/a.txt が tiny-fs に届くまで](../images/13-fuse-flow.svg)
 
 `cat` の側からは、通常のファイルの読み出しと区別がつかない。
 カーネルモジュールを書かなくても、**Python のプロセス 1 個がファイルシステムになれる**。
@@ -45,11 +44,11 @@ pip install fusepy             # pip install -e ".[fuse]" でも入る
 
 `apt` はシステム全体に入れ、`pip` は有効にした venv の中だけに入れる。
 
-![2 つのインストールが、どこに何を置くか](../images/12-fuse-install.svg)
+![2 つのインストールが、どこに何を置くか](../images/13-fuse-install.svg)
 
 置かれたものは、呼び出しの連鎖で見るとこうつながる。
 
-![マウントに必要な 3 つと、その居場所](../images/12-fuse-parts.svg)
+![マウントに必要な 3 つと、その居場所](../images/13-fuse-parts.svg)
 
 マウント (`mount(2)`) は本来 root の操作で、一般ユーザは実行できない。
 そこで libfuse は `mount(2)` を自分で呼ばず、**`fusermount` を起動して代行させる**。
