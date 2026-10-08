@@ -1,26 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="368" viewBox="0 0 900 368" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
-<title>置き換えられた側の後始末</title>
-<rect x="0" y="0" width="900" height="368" fill="#ffffff"/>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
-<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">置き換えられた側の後始末</text>
-<rect x="340" y="80" width="220" height="56" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
-<text x="450" y="104" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">消される側（victim）は</text>
-<text x="450" y="124" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">ディレクトリ ?</text>
-<path d="M 400 140 L 250 174" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
-<text x="150" y="166" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">はい（空のディレクトリ）</text>
-<path d="M 500 140 L 650 174" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
-<text x="760" y="166" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">いいえ（ファイル）</text>
-<rect x="40" y="180" width="380" height="130" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
-<text x="230" y="206" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">空であることは検査済み</text>
-<text x="230" y="228" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">残っている名前は自分の "." だけ</text>
-<text x="230" y="254" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">free_inode(...)</text>
-<text x="230" y="276" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">128 バイトをゼロ埋め</text>
-<text x="230" y="298" font-size="10.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">new_parent.nlink -= 1</text>
-<rect x="480" y="180" width="380" height="130" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
-<text x="670" y="208" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">victim.nlink -= 1</text>
-<text x="670" y="236" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">0 になった → free_inode してゼロ埋め</text>
-<text x="670" y="260" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">まだ残る → write_inode するだけ</text>
-<text x="670" y="292" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">unlink とまったく同じ処理</text>
-<text x="450" y="342" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ディレクトリ側だけ nlink を余分に 1 減らすのは、victim の ".." が新しい親を指していたから。</text>
-<text x="450" y="364" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">この後始末は、名前の付け替えが終わってから実行する。</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="492" viewBox="0 0 900 492" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>名前を失った i-node を片づける</title>
+<rect x="0" y="0" width="900" height="492" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">rename("/a", "/b") の後始末 — 名前を失った i-node を片づける</text>
+<text x="40" y="68" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">名前の付け替えが終わった時点</text>
+<rect x="40" y="80" width="370" height="112" rx="4" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="225" y="102" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">名前（dirent）</text>
+<rect x="56" y="112" width="338" height="30" rx="2" fill="#fff7ed" stroke="#b8690b" stroke-width="1.2"/>
+<text x="70" y="132" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"b" → ino 5</text>
+<text x="382" y="132" font-size="8.5" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">差し替えた</text>
+<rect x="56" y="150" width="338" height="30" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.2"/>
+<text x="70" y="170" font-size="10.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"a" → ino 0</text>
+<text x="382" y="170" font-size="8.5" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">古い名前は消した</text>
+<rect x="490" y="80" width="370" height="112" rx="4" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="675" y="102" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node</text>
+<rect x="506" y="112" width="338" height="30" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.2"/>
+<text x="520" y="132" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 5（元 /a の中身）</text>
+<text x="832" y="132" font-size="8.5" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">名前 1 個</text>
+<rect x="506" y="150" width="338" height="30" rx="2" fill="#fff7ed" stroke="#b8690b" stroke-width="1.2"/>
+<text x="520" y="170" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 9（元 /b の中身）</text>
+<text x="832" y="170" font-size="8.5" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">名前 0 個 ← 片づける相手</text>
+<path d="M 416 127 L 500 127" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="458" y="118" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">指す</text>
+<text x="450" y="216" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">この ino 9 が片づける相手になる。中身は元の /b のままで、名前だけが無くなっている。</text>
+<path d="M 40 240 L 860 240" stroke="#e1e4e8" stroke-width="1.2" fill="none"/>
+<rect x="340" y="262" width="220" height="52" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="450" y="284" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 9 は</text>
+<text x="450" y="302" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">ディレクトリ ?</text>
+<path d="M 400 318 L 250 350" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="150" y="342" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">はい（空だと検査済み）</text>
+<path d="M 500 318 L 650 350" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="760" y="342" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">いいえ（ファイル）</text>
+<rect x="40" y="356" width="380" height="112" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="230" y="380" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">残る名前は自分の "." だけ</text>
+<text x="230" y="406" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">free_inode(...)</text>
+<text x="230" y="428" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">128 バイトをゼロ埋め</text>
+<text x="230" y="452" font-size="10.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">new_parent.nlink -= 1</text>
+<rect x="480" y="356" width="380" height="112" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="670" y="382" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">nlink -= 1</text>
+<text x="670" y="410" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">0 になった → free_inode してゼロ埋め</text>
+<text x="670" y="434" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">まだ残る → write_inode するだけ</text>
+<text x="670" y="458" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">unlink とまったく同じ処理</text>
+<text x="450" y="486" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ディレクトリ側だけ親の nlink を減らすのは、ino 9 の "." が親を指さなくなったため。</text>
 </svg>

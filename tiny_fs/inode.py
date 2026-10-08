@@ -112,7 +112,8 @@ def write(inode: Inode, blocks: BlockDevice, alloc: Allocator,
         n = min(len(data) - pos, BLOCK_SIZE - inner)
 
         if inode.direct[index] == 0:
-            # Allocated only when actually needed. A fresh block counts as zeros.
+            # No block here yet. It was just allocated, so skip the read
+            # and treat it as zeros.
             inode.direct[index] = alloc.allocate()
             buf = bytearray(BLOCK_SIZE)
         else:

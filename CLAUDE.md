@@ -192,7 +192,7 @@ tiny-fs mv   disk.img /docs/readme.md /readme.md
 tiny-fs rm   disk.img /readme.md
 tiny-fs rmdir disk.img /docs
 
-# FUSE（第 12 章。sudo apt install fuse libfuse2t64 && pip install fusepy）
+# FUSE（第 13 章。sudo apt install fuse libfuse2t64 && pip install fusepy）
 mkdir -p ~/mnt/tiny-fs
 python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f   # -f = フォアグラウンド
 fusermount -u ~/mnt/tiny-fs

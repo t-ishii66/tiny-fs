@@ -99,7 +99,7 @@ def test_detects_leaked_block(image):
 
 ## 5. FUSE のテストにマーカーを付ける
 
-FUSE が要るのは第 12 章のテスト 1 本だけ。マーカーを付けておくと、選んで実行できる。
+FUSE が要るのは第 13 章のテスト 1 本だけ。マーカーを付けておくと、選んで実行できる。
 
 ```toml
 # pyproject.toml

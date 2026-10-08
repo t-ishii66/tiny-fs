@@ -121,7 +121,7 @@ def is_empty(dir_inode, blocks) -> bool:
 
 返ってくる一覧には `.` と `..` が**最初から入っている**。
 第 4 章で実体のある dirent として作ったので、ここで追加する必要がない
-（`ls -a` がそのまま成立し、第 12 章の FUSE でもそのまま使える）。
+（`ls -a` がそのまま成立し、第 13 章の FUSE でもそのまま使える）。
 
 `stat` が返すのは `Inode` そのもの。`ls -l` が必要とするもの
 （種別とパーミッション、`nlink`、所有者、`size`、時刻）はすべてここに入っている。
@@ -194,8 +194,8 @@ i-node もデータブロックも移動しない。
 
 仕様として決めたことが 3 つある。
 
-**宛先が既にあれば置き換える。** `mv a b` で `b` が存在する場合、
-`b` は消えて `a` がその名前を引き継ぐ。`rename(2)` の規定がそうなっている。
+**宛先が既にあれば置き換える。** `rename("/a", "/b")` で `/b` が存在する場合、
+`/b` は消えて `/a` がその名前を引き継ぐ。`rename(2)` の規定がそうなっている。
 置き換えられるのは同じ種別どうしだけで、組み合わせによって返す errno が変わる。
 
 ![宛先に何かあるとき、置き換えられる組み合わせ](../images/08-replace-matrix.svg)
@@ -212,10 +212,10 @@ i-node もデータブロックも移動しない。
             raise IsADirectoryError(new_path)         # EISDIR
 ```
 
-`mv a b` で置き換えられた側、つまり**元の `b` が指していた i-node** は、
+置き換えられた側、つまり**元の `/b` が指していた i-node** は、
 `b` という名前を失う。あとは `unlink` と同じ後始末になる。
 
-![置き換えられた側の後始末](../images/08-drop-replaced.svg)
+![名前を失った i-node を片づける](../images/08-drop-replaced.svg)
 
 ```python
     def _drop_replaced(self, victim_ino: int, new_parent: Inode) -> None:

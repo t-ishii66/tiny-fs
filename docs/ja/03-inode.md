@@ -230,7 +230,7 @@ MAX_FILE_SIZE = NDIRECT × BLOCK_SIZE = 12 × 4096 = 49152 バイト = 48 KiB
 
 一覧を 12 本しか持たないので、**48 KiB を超えるファイルは作れない**。
 これを超える書き込みは `EFBIG` で拒否する。
-この壁をどう越えるかは第 13 章で扱う。
+この壁をどう越えるかは第 14 章で扱う。
 
 ### `size` と確保済みブロック
 
@@ -329,8 +329,8 @@ def write(inode: Inode, blocks: BlockDevice, alloc: Allocator,
         n = min(len(data) - pos, BLOCK_SIZE - inner)
 
         if inode.direct[index] == 0:
-            # 必要になった時点で初めて確保する。割り当てたばかりなので
-            # ディスクから読まず、全部ゼロのブロックとして扱う
+            # この範囲のブロックはまだ無い。割り当てたばかりなので、
+            # ディスクから読まずに全部ゼロとして扱う
             inode.direct[index] = alloc.allocate()
             buf = bytearray(BLOCK_SIZE)
         else:

@@ -17,8 +17,8 @@ i-node テーブル、データ領域を自分で並べる。ディスク上の�
 - Ubuntu
 - Python 3.11 以上
 - コアは標準ライブラリだけで動く。外から入れるのはテスト用の `pytest` と、
-  第 12 章で使う `fusepy` だけ
-- 第 12 章で FUSE マウントを試すときだけ `sudo apt install fuse libfuse2t64`
+  第 13 章で使う `fusepy` だけ
+- 第 13 章で FUSE マウントを試すときだけ `sudo apt install fuse libfuse2t64`
   （sudo が要るのはこのインストールだけで、マウント自体は一般ユーザでできる）
 
 ## 用意する
@@ -98,11 +98,12 @@ tiny-fs fsck  disk.img
 
 ### 第 IV 部 カーネルにつなぐ
 
-12. [FUSE でマウントする](docs/ja/12-fuse.md) — 本物の `ls` と `cat` から触る。**ここがゴール**
+12. [マウント](docs/ja/12-mount.md) — 木に木を貼る。パスはどこで別の FS に移るのか
+13. [FUSE でマウントする](docs/ja/13-fuse.md) — 本物の `ls` と `cat` から触る。**ここがゴール**
 
 ### まとめ
 
-13. [まとめと、次の一歩](docs/ja/13-summary.md)
+14. [まとめと、次の一歩](docs/ja/14-summary.md)
 
 ### 付録
 

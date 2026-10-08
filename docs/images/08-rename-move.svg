@@ -81,10 +81,10 @@
 <text x="506" y="374" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"a.txt"</text>
 <text x="786" y="374" font-size="10" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ ino 5</text>
 <path d="M 400 240 L 466 240" stroke="#57606a" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
-<text x="40" y="408" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">② / の "docs" を消す</text>
-<text x="330" y="408" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino = 0 を書くだけ。スロットは残る</text>
-<text x="40" y="427" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">① /archive に "docs" を足す</text>
-<text x="330" y="427" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">空きスロットを再利用。i-node 3 はそのまま</text>
+<text x="40" y="408" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">① /archive に "docs" を足す</text>
+<text x="330" y="408" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">空きスロットを再利用。i-node 3 はそのまま</text>
+<text x="40" y="427" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">② / の "docs" を消す</text>
+<text x="330" y="427" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino = 0 を書くだけ。スロットは残る</text>
 <text x="40" y="446" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">③ /docs の ".." を 4 に書き換える</text>
 <text x="330" y="446" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">移動したディレクトリだけが持つ手順</text>
 <text x="40" y="465" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">④ / の nlink を −1、/archive を +1</text>

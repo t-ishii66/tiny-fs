@@ -2,7 +2,7 @@
 
 tiny-fs の例外はすべて `FSError` 派生で、`errno` を持つ。
 この 1 つの規約で、CLI は終了ステータスに変換でき（第 11 章）、
-FUSE は `FuseOSError` に変換できる（第 12 章）。
+FUSE は `FuseOSError` に変換できる（第 13 章）。
 
 ---
 
@@ -85,7 +85,7 @@ tiny-fs: /nothing: No such file or directory (ENOENT)
 $ echo $?
 1
 
-# FUSE 経由（第 12 章）
+# FUSE 経由（第 13 章）
 $ cat ~/mnt/tiny-fs/nothing
 cat: /home/dev/mnt/tiny-fs/nothing: No such file or directory
 ```
