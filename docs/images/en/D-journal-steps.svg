@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>Journaling — write first, replay later</title>
+<rect x="0" y="0" width="900" height="400" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f8f52"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b4413c"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Journaling — write first, replay later</text>
+<text x="60" y="56" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Normal case — write to the journal before rewriting the main body</text>
+<rect x="60" y="72" width="186" height="72" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="74" y="94" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(1)</text>
+<text x="98" y="90" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Descriptor (target numbers)</text>
+<text x="98" y="104" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">+ the new contents of each block</text>
+<text x="98" y="122" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">together into the journal (figure above)</text>
+<path d="M 246 108 L 256 108" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<rect x="256" y="72" width="186" height="72" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="270" y="94" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(2)</text>
+<text x="294" y="92" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Write the commit record</text>
+<text x="294" y="107" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">← the boundary</text>
+<path d="M 442 108 L 452 108" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<rect x="452" y="72" width="186" height="72" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="466" y="94" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(3)</text>
+<text x="490" y="92" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Main body (i-nodes, bitmaps,</text>
+<text x="490" y="107" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">data)</text>
+<path d="M 638 108 L 648 108" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<rect x="648" y="72" width="186" height="72" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="662" y="94" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(4)</text>
+<text x="686" y="92" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Release the journal area</text>
+<text x="60" y="196" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">After reboot — replay</text>
+<rect x="60" y="212" width="220" height="56" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="74" y="236" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">in the journal?</text>
+<text x="74" y="253" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">in the journal?</text>
+<path d="M 284 228 L 344 204" stroke="#3f8f52" stroke-width="1.5" fill="none" marker-end="url(#g)"/>
+<text x="330" y="190" font-size="9.5" fill="#3f8f52" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">yes</text>
+<rect x="348" y="180" width="500" height="46" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="364" y="200" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Apply the journal contents to the main body (redo (3))</text>
+<text x="364" y="217" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(2) had finished, so this change may be completed</text>
+<path d="M 284 252 L 344 280" stroke="#b4413c" stroke-width="1.5" fill="none" marker-end="url(#r)"/>
+<text x="310" y="288" font-size="9.5" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">no</text>
+<rect x="348" y="258" width="500" height="46" rx="3" fill="#fde2e0" stroke="#b4413c" stroke-width="1.5"/>
+<text x="364" y="278" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Discard the journal. The main body stays as before</text>
+<text x="364" y="295" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">It may have crashed during (1); half-finished contents must not go into the main body</text>
+<rect x="60" y="326" width="790" height="56" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="78" y="348" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Either way, the main body ends up either "before the operation" or "after it". No intermediate state remains.</text>
+<text x="78" y="370" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The only branch point is whether the single commit record write succeeded.</text>
+<line x1="251" y1="146" x2="251" y2="158" stroke="#b4413c" stroke-width="1.4"/>
+<text x="251" y="172" font-size="9" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">flush - wait for the device</text>
+<line x1="447" y1="146" x2="447" y2="158" stroke="#b4413c" stroke-width="1.4"/>
+<text x="447" y="172" font-size="9" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">flush - wait for the device</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="348" viewBox="0 0 900 348" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>When something is at the destination, what can be replaced</title>
+<rect x="0" y="0" width="900" height="348" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">When something is at the destination, what can be replaced</text>
+<rect x="30" y="76" width="240" height="44" rx="2" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.2"/>
+<text x="150" y="104" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">What destination name b points at</text>
+<rect x="270" y="76" width="300" height="44" rx="2" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.2"/>
+<text x="420" y="104" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Moving a file</text>
+<rect x="570" y="76" width="300" height="44" rx="2" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.2"/>
+<text x="720" y="104" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Moving a directory</text>
+<rect x="30" y="120" width="240" height="44" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="150" y="148" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Nothing (a new name)</text>
+<rect x="270" y="120" width="300" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.2"/>
+<text x="420" y="148" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Add a new entry</text>
+<rect x="570" y="120" width="300" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.2"/>
+<text x="720" y="148" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Same</text>
+<rect x="30" y="164" width="240" height="44" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="150" y="192" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">An existing file</text>
+<rect x="270" y="164" width="300" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.2"/>
+<text x="420" y="192" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Replace</text>
+<rect x="570" y="164" width="300" height="44" rx="2" fill="#fff7ed" stroke="#b8690b" stroke-width="1.2"/>
+<text x="720" y="192" font-size="11" fill="#b8690b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">ENOTDIR</text>
+<rect x="30" y="208" width="240" height="44" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="150" y="236" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Existing empty directory</text>
+<rect x="270" y="208" width="300" height="44" rx="2" fill="#fff7ed" stroke="#b8690b" stroke-width="1.2"/>
+<text x="420" y="236" font-size="11" fill="#b8690b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">EISDIR</text>
+<rect x="570" y="208" width="300" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.2"/>
+<text x="720" y="236" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Replace</text>
+<rect x="30" y="252" width="240" height="44" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="150" y="280" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A non-empty existing directory</text>
+<rect x="270" y="252" width="300" height="44" rx="2" fill="#fff7ed" stroke="#b8690b" stroke-width="1.2"/>
+<text x="420" y="280" font-size="11" fill="#b8690b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">EISDIR</text>
+<rect x="570" y="252" width="300" height="44" rx="2" fill="#fff7ed" stroke="#b8690b" stroke-width="1.2"/>
+<text x="720" y="280" font-size="11" fill="#b8690b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">ENOTEMPTY</text>
+<text x="450" y="330" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Only the same kind can be replaced. A directory can be taken over only when empty.</text>
+</svg>

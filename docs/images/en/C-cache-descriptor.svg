@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="352" viewBox="0 0 900 352" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>The state is held in a flag of the management structure, not in the page</title>
+<rect x="0" y="0" width="900" height="352" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The state is held in a flag of the management structure, not in the page</text>
+<text x="60" y="58" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Management structure (one per page)</text>
+<rect x="60" y="68" width="380" height="184" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.4"/>
+<text x="74" y="92" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Flags</text>
+<text x="166" y="92" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">Dirty = 1</text>
+<text x="166" y="106" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Differs from the device. Write back before releasing</text>
+<text x="166" y="124" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">pinned = 0</text>
+<text x="166" y="138" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Set by how many processes use it now</text>
+<text x="166" y="156" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">contents valid = 1</text>
+<text x="166" y="170" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">the read has completed</text>
+<text x="74" y="188" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Target</text>
+<text x="166" y="188" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.img / page 3</text>
+<text x="166" y="202" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">the file, and the page number in it</text>
+<text x="74" y="220" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Links</text>
+<text x="166" y="220" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">index chain / LRU chain</text>
+<text x="166" y="234" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">2 pointers (figure in §7)</text>
+<text x="560" y="58" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Page itself</text>
+<rect x="560" y="68" width="280" height="184" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.4"/>
+<text x="700" y="150" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">4096 bytes</text>
+<text x="700" y="174" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">the cache of disk.img's block 3</text>
+<text x="700" y="196" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Looking here, you cannot tell</text>
+<text x="700" y="210" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">or dirty is not known</text>
+<path d="M 444 160 L 554 160" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="499" y="150" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">points to</text>
+<rect x="60" y="270" width="780" height="62" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.4"/>
+<text x="78" y="292" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A write changes only the page itself and this structure's dirty flag. Nothing is written to the device.</text>
+<text x="78" y="312" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">In Linux this is the structure called struct page (now folio); in classic Unix, struct buf.</text>
+</svg>

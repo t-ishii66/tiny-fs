@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>A directory cannot be moved into its own descendant</title>
+<rect x="0" y="0" width="900" height="440" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">A directory cannot be moved into its own descendant</text>
+<text x="40" y="76" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">If mv /a /a/b/c were executed as is</text>
+<rect x="50" y="96" width="150" height="44" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="125" y="115" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/</text>
+<text x="125" y="132" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 1</text>
+<rect x="74" y="154" width="150" height="44" rx="3" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="149" y="173" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/a</text>
+<text x="149" y="190" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 3</text>
+<path d="M 70 140 L 94 154" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<rect x="98" y="212" width="150" height="44" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="173" y="231" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/a/b</text>
+<text x="173" y="248" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 4</text>
+<path d="M 94 198 L 118 212" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<rect x="122" y="270" width="150" height="44" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="197" y="289" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/a/b/c</text>
+<text x="197" y="306" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 5</text>
+<path d="M 118 256 L 142 270" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 224 140 C 360 150 372 282 322 294" stroke="#b8690b" stroke-width="1.8" fill="none" stroke-dasharray="6 4"/>
+<path d="M 330 295 L 280 293" stroke="#b8690b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="250" y="350" font-size="10.5" fill="#b8690b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">/a and below is cut off from the tree,</text>
+<text x="250" y="370" font-size="10.5" fill="#b8690b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">becomes a cycle reachable from nowhere</text>
+<text x="520" y="76" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">So follow ".." up from the new parent</text>
+<rect x="560" y="96" width="260" height="48" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="690" y="116" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/a/b/c (new parent)</text>
+<text x="690" y="134" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 5</text>
+<rect x="560" y="174" width="260" height="48" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="690" y="194" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/a/b</text>
+<text x="690" y="212" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 4</text>
+<path d="M 690 148 l 0 22" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="836" y="162" font-size="9.5" fill="#b8860b" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">follow ".."</text>
+<rect x="560" y="252" width="260" height="48" rx="3" fill="#fff7ed" stroke="#b8690b" stroke-width="1.5"/>
+<text x="690" y="272" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/a</text>
+<text x="690" y="290" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 3</text>
+<path d="M 690 226 l 0 22" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="836" y="240" font-size="9.5" fill="#b8860b" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">follow ".."</text>
+<text x="690" y="322" font-size="11" fill="#b8690b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Met the one being moved (ino 3) → EINVAL</text>
+<text x="690" y="346" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Reach the root without meeting it → allow</text>
+<text x="450" y="400" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The height to the root should be shorter than the i-node count. We cut off by count so that even an image whose ".." is broken into a cycle does not loop forever.</text>
+<text x="450" y="424" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">If the cutoff is reached, report that the image is corrupt rather than refusing the move.</text>
+</svg>

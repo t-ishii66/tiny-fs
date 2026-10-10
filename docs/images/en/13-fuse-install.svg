@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="422" viewBox="0 0 900 422" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>What the two installations put where</title>
+<rect x="0" y="0" width="900" height="422" fill="#ffffff"/>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">What the two installations put where</text>
+<rect x="40" y="44" width="420" height="262" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="56" y="66" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">sudo apt install fuse libfuse2t64</text>
+<text x="56" y="84" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Goes system-wide. sudo is needed only here</text>
+<rect x="56" y="96" width="388" height="62" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="70" y="116" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/usr/bin/fusermount</text>
+<text x="70" y="134" font-size="9.5" fill="#b8860b" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">-rwsr-xr-x root root  ← setuid root</text>
+<text x="70" y="150" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Package fuse. It mounts on your behalf</text>
+<rect x="56" y="166" width="388" height="62" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="70" y="186" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/usr/lib/x86_64-linux-gnu/libfuse.so.2</text>
+<text x="70" y="204" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The shared library itself (C)</text>
+<text x="70" y="220" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Package libfuse2t64. Goes into the multiarch path</text>
+<rect x="56" y="236" width="388" height="46" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="70" y="256" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">registered in ldconfig's cache</text>
+<text x="70" y="273" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">This is what lets find_library('fuse') find it</text>
+<rect x="476" y="44" width="384" height="262" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="492" y="66" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">pip install fusepy</text>
+<text x="492" y="84" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Prerequisite — create a venv with python3 -m venv .venv first,</text>
+<text x="492" y="98" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">activated with source .venv/bin/activate (README)</text>
+<text x="492" y="116" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The active venv's pip is called, so it lands under .venv/</text>
+<rect x="492" y="126" width="352" height="78" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="506" y="146" font-size="10" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">.venv/lib/python3.12/site-packages/</text>
+<text x="506" y="162" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">fuse.py</text>
+<text x="506" y="180" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Just one module file (py_modules=['fuse'])</text>
+<text x="506" y="196" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">no C extension, no compiling</text>
+<rect x="492" y="214" width="352" height="78" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="506" y="234" font-size="10" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Nothing lands on the system side</text>
+<text x="506" y="252" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">deactivate and the import stops working,</text>
+<text x="506" y="268" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">delete .venv/ and no trace is left</text>
+<text x="506" y="286" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Conversely, apt's two remain even if you delete the venv</text>
+<rect x="40" y="322" width="820" height="58" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="56" y="344" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/dev/fuse</text>
+<text x="140" y="344" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">crw-rw-rw- root root 10, 229</text>
+<text x="56" y="364" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Neither command installs it. A device file the kernel provides, openable by anyone</text>
+<text x="450.0" y="404" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Mounting needs no root because the setuid fusermount does it for you. After the apt you can go on as an ordinary user.</text>
+</svg>

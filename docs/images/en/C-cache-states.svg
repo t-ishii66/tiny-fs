@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="250" viewBox="0 0 900 250" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>A page's states and the two operations</title>
+<rect x="0" y="0" width="900" height="250" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f8f52"/></marker><marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b4413c"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">A page's states and the two operations</text>
+<rect x="80" y="100" width="160" height="54" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="160" y="124" font-size="10" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">disk.img</text>
+<text x="160" y="140" font-size="10" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Block</text>
+<rect x="310" y="100" width="160" height="54" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="390" y="132" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="560" y="100" width="160" height="54" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="640" y="132" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirty</text>
+<path d="M 242 127 L 304 127" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="273" y="118" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Read in</text>
+<path d="M 472 114 L 554 114" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="513" y="105" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">rewrite</text>
+<path d="M 554 142 L 472 142" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
+<text x="513" y="158" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">write-out (flush)</text>
+<rect x="730" y="100" width="130" height="54" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="795" y="132" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Release (evict)</text>
+<path d="M 472 172 L 726 150" stroke="#b4413c" stroke-width="1.5" fill="none" marker-end="url(#r)" stroke-dasharray="5 4"/>
+<text x="600" y="192" font-size="9.5" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">If clean it can be released as is</text>
+<path d="M 640 100 L 740 80" stroke="#b4413c" stroke-width="1.5" fill="none" marker-end="url(#r)" stroke-dasharray="5 4"/>
+<text x="700" y="72" font-size="9.5" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A dirty page must not be released directly (the latest content is lost)</text>
+<text x="450" y="228" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Write-back only returns the state to clean. The page stays in the cache. Release removes the page itself to make room.</text>
+</svg>

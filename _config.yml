@@ -1,0 +1,40 @@
+title: "tiny-fs"
+description: >-
+  Build a file system from scratch in Python. tiny-fs starts from a device that can
+  only read and write 512-byte sectors, lays out a superblock, bitmaps, an i-node
+  table and a data region on a 4 MiB disk image, and ends by mounting the result on
+  Linux through FUSE. Fourteen chapters and four appendices, in Japanese and English,
+  with every on-disk byte explained.
+
+url: "https://t-ishii66.github.io"
+baseurl: "/tiny-fs"
+repository: t-ishii66/tiny-fs
+
+theme: jekyll-theme-cayman
+
+author: t-ishii66
+lang: en
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - "*.bak"
+  - PROBLEMS.md
+  - "*PROBLEMS*.md"
+  - Makefile
+  - build/
+  - dist/
+  - target/
+  - node_modules/
+  - .vscode/
+  - "*.o"
+  - "*.so"
+  - "*.dylib"
+  - "*.exe"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

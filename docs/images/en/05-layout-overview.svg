@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="270" viewBox="0 0 900 270" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>The block allocation of tiny-fs</title>
+<rect x="0" y="0" width="900" height="270" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="30" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">disk.img — TOTAL_BLOCKS = 1024, BLOCK_SIZE = 4096 → 4 MiB</text>
+<rect x="40" y="78" width="90" height="76" rx="4" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="85.0" y="110" font-size="13" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">super</text>
+<text x="85.0" y="128" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Block</text>
+<text x="85.0" y="66" font-size="12" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="130" y="78" width="115" height="76" rx="4" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="187.5" y="110" font-size="13" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Data blocks</text>
+<text x="187.5" y="128" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bitmap</text>
+<text x="187.5" y="66" font-size="12" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<rect x="245" y="78" width="115" height="76" rx="4" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="302.5" y="110" font-size="13" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node</text>
+<text x="302.5" y="128" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bitmap</text>
+<text x="302.5" y="66" font-size="12" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">2</text>
+<rect x="360" y="78" width="180" height="76" rx="4" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="450.0" y="110" font-size="13" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node table</text>
+<text x="450.0" y="128" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">128 × 128 B</text>
+<text x="450.0" y="66" font-size="12" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">3 – 6</text>
+<rect x="540" y="78" width="300" height="76" rx="4" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="690.0" y="110" font-size="13" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Data area</text>
+<text x="690.0" y="128" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">1017 blocks ≈ 3.97 MiB</text>
+<text x="690.0" y="66" font-size="12" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">7 – 1023</text>
+<text x="40" y="60" font-size="11" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block</text>
+<path d="M 40 162 L 40 170 L 360 170 L 360 162" stroke="#57606a" fill="none" stroke-width="1.2"/>
+<text x="200" y="186" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Fixed position (needed before reading the superblock)</text>
+<path d="M 360 156 L 360 206 L 380 206" stroke="#57606a" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<text x="386" y="210" font-size="11" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">inode_table_start = 3</text>
+<path d="M 540 156 L 540 206 L 560 206" stroke="#57606a" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+<text x="566" y="210" font-size="11" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">data_start = 7</text>
+<text x="450.0" y="236" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">For the start of the i-node table and the data area, the superblock's values are authoritative</text>
+<text x="450.0" y="258" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Figure not proportional to block counts</text>
+</svg>

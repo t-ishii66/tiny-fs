@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="292" viewBox="0 0 900 292" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>tiny-fs has no cache of its own, but below it is the OS's cache</title>
+<rect x="0" y="0" width="900" height="292" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f8f52"/></marker><marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b4413c"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">tiny-fs has no cache of its own, but below it is the OS's cache</text>
+<rect x="150" y="70" width="600" height="48" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="166" y="91" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">tiny-fs (down to L0 device.py)</text>
+<text x="166" y="108" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">No cache of its own. One read_block reads 8 sectors' worth</text>
+<rect x="150" y="142" width="600" height="48" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="166" y="163" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The OS's page cache</text>
+<text x="166" y="180" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Holds disk.img's contents in memory. tiny-fs is not involved</text>
+<rect x="150" y="214" width="600" height="48" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="166" y="235" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The actual disk</text>
+<text x="166" y="252" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">only a small part reaches here</text>
+<path d="M 450 118 L 450 140" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="462" y="134" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Read / write requests (1 sector each)</text>
+<path d="M 450 190 L 450 212" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="462" y="206" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">only on a miss</text>
+<text x="450" y="276" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">When the main text says "holds no cache", it means the top tier. The lower tier is the OS's job and is invisible from tiny-fs.</text>
+</svg>

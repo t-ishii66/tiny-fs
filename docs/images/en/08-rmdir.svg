@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="396" viewBox="0 0 900 396" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>rmdir — pass two checks, then free everything at once</title>
+<rect x="0" y="0" width="900" height="396" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">rmdir — pass two checks, then free everything at once</text>
+<rect x="40" y="84" width="170" height="60" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="125" y="108" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(1) Find parent</text>
+<text x="125" y="128" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">lookup_parent</text>
+<rect x="240" y="84" width="170" height="60" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="325" y="108" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(2) Check the kind</text>
+<text x="325" y="128" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">Is it a directory</text>
+<rect x="440" y="84" width="170" height="60" rx="3" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.5"/>
+<text x="525" y="108" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(3) Check if empty</text>
+<text x="525" y="128" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">is_empty</text>
+<rect x="640" y="84" width="220" height="60" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="750" y="108" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(4) Remove</text>
+<text x="750" y="128" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">nothing fails from here on</text>
+<path d="M 214 114 L 234 114" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M 414 114 L 434 114" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M 614 114 L 634 114" stroke="#b8860b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<text x="125" y="168" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"/" is EINVAL</text>
+<text x="125" y="186" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">root cannot be removed</text>
+<path d="M 325 148 l 0 24" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<rect x="240" y="176" width="170" height="52" rx="3" fill="#fff7ed" stroke="#b8690b" stroke-width="1.5"/>
+<text x="325" y="199" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">ENOTDIR</text>
+<text x="325" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A file is unlink</text>
+<path d="M 525 148 l 0 24" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<rect x="440" y="176" width="170" height="52" rx="3" fill="#fff7ed" stroke="#b8690b" stroke-width="1.5"/>
+<text x="525" y="199" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">ENOTEMPTY</text>
+<text x="525" y="218" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Contents remain</text>
+<rect x="40" y="250" width="820" height="92" rx="4" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="60" y="274" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Step (4)</text>
+<text x="60" y="300" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">- Set the parent's dirent to ino = 0</text>
+<text x="470" y="300" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">- free_inode: return the data blocks and the i-node number to free</text>
+<text x="60" y="324" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">- Zero-fill the i-node table's 128 bytes</text>
+<text x="470" y="324" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">- Decrement the parent's nlink by 1 (the child's ".." is gone)</text>
+<text x="450" y="378" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Only (2) and (3) can fail. Past them, there is no path that fails partway.</text>
+</svg>

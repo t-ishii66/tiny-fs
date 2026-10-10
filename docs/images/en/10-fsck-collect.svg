@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="444" viewBox="0 0 900 444" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>Follow the tree from the root, counting up 3 things</title>
+<rect x="0" y="0" width="900" height="444" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Follow the tree from the root, counting up 3 things as we pass</text>
+<text x="40" y="60" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Walk order</text>
+<rect x="40" y="76" width="176" height="48" rx="2" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.4"/>
+<text x="50" y="96" font-size="11.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 1  /</text>
+<text x="50" y="113" font-size="10.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct [7]</text>
+<rect x="76" y="150" width="176" height="48" rx="2" fill="#dcfce7" stroke="#2f7d43" stroke-width="1.4"/>
+<text x="86" y="170" font-size="11.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 2  a.txt</text>
+<text x="86" y="187" font-size="10.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct [8, 9]</text>
+<rect x="76" y="224" width="176" height="48" rx="2" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.4"/>
+<text x="86" y="244" font-size="11.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 3  docs/</text>
+<text x="86" y="261" font-size="10.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct [10]</text>
+<rect x="112" y="298" width="176" height="48" rx="2" fill="#dcfce7" stroke="#2f7d43" stroke-width="1.4"/>
+<text x="122" y="318" font-size="11.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 4  b.txt</text>
+<text x="122" y="335" font-size="10.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct [11]</text>
+<path d="M 54 124 L 54 174.0 L 72 174.0" fill="none" stroke="#57606a" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="62" y="144" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"a.txt"</text>
+<path d="M 54 124 L 54 248.0 L 72 248.0" fill="none" stroke="#57606a" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="62" y="218" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"docs"</text>
+<path d="M 90 272 L 90 322.0 L 108 322.0" fill="none" stroke="#57606a" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="98" y="292" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"b.txt"</text>
+<text x="40" y="378" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Each time we enter a directory, we also</text>
+<text x="40" y="394" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">check that the first 2 entries are "." and ".."</text>
+<text x="40" y="418" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-nodes already walked are skipped, so</text>
+<text x="40" y="434" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">the scan ends even on a broken image</text>
+<line x1="300" y1="240" x2="336" y2="240" stroke="#57606a" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="350" y="50" width="520" height="118" rx="2" fill="#ffffff" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="364" y="72" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Referenced blocks</text>
+<text x="492" y="72" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">— the block numbers that appeared in direct[]</text>
+<text x="384.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="364" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="383.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="424.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<rect x="404" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="423.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="464.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">2</text>
+<rect x="444" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="463.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="504.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">3</text>
+<rect x="484" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="503.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="544.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">4</text>
+<rect x="524" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="543.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="584.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">5</text>
+<rect x="564" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="583.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="624.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">6</text>
+<rect x="604" y="102" width="37" height="30" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="623.0" y="122" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">meta</text>
+<text x="664.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">7</text>
+<rect x="644" y="102" width="37" height="30" rx="2" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.4"/>
+<text x="663.0" y="122" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 1</text>
+<text x="704.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">8</text>
+<rect x="684" y="102" width="37" height="30" rx="2" fill="#dcfce7" stroke="#2f7d43" stroke-width="1.4"/>
+<text x="703.0" y="122" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 2</text>
+<text x="744.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">9</text>
+<rect x="724" y="102" width="37" height="30" rx="2" fill="#dcfce7" stroke="#2f7d43" stroke-width="1.4"/>
+<text x="743.0" y="122" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 2</text>
+<text x="784.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">10</text>
+<rect x="764" y="102" width="37" height="30" rx="2" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.4"/>
+<text x="783.0" y="122" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 3</text>
+<text x="824.0" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">11</text>
+<rect x="804" y="102" width="37" height="30" rx="2" fill="#dcfce7" stroke="#2f7d43" stroke-width="1.4"/>
+<text x="823.0" y="122" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 4</text>
+<text x="364" y="156" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">meta = superblock, bitmaps, i-node table. Belongs to no i-node, but in use</text>
+<rect x="350" y="182" width="520" height="74" rx="2" fill="#ffffff" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="364" y="204" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Reached i-nodes</text>
+<text x="478" y="204" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">— the numbers reached from the root</text>
+<rect x="364" y="216" width="40" height="28" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="384" y="235" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<rect x="410" y="216" width="40" height="28" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="430" y="235" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">2</text>
+<rect x="456" y="216" width="40" height="28" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="476" y="235" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">3</text>
+<rect x="502" y="216" width="40" height="28" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="522" y="235" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">4</text>
+<text x="562" y="235" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">5 and above were not reached, so they should be free</text>
+<rect x="350" y="270" width="520" height="152" rx="2" fill="#ffffff" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="364" y="292" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Names</text>
+<text x="422" y="292" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">— the dirents pointing at that i-node ("." and ".." too)</text>
+<text x="370" y="318" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">i-node</text>
+<text x="430" y="318" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirents pointing at it</text>
+<text x="816" y="318" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Count</text>
+<text x="370" y="344" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 1</text>
+<text x="430" y="344" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"." in /, ".." in /, ".." in /docs</text>
+<text x="816" y="344" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">3</text>
+<text x="370" y="367" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 2</text>
+<text x="430" y="367" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"a.txt" in /</text>
+<text x="816" y="367" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">1</text>
+<text x="370" y="390" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 3</text>
+<text x="430" y="390" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"docs" in /, "." in /docs</text>
+<text x="816" y="390" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">2</text>
+<text x="370" y="413" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino 4</text>
+<text x="430" y="413" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"b.txt" in /docs</text>
+<text x="816" y="413" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">1</text>
+</svg>

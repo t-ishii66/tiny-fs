@@ -38,3 +38,8 @@ service-account*.json
 *.pem
 *.key
 id_rsa*
+
+# --- Jekyll / GitHub Pages ---
+_site/
+.jekyll-cache/
+.jekyll-metadata

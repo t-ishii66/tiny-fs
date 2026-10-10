@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="472" viewBox="0 0 900 472" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>Layers of tiny-fs</title>
+<rect x="0" y="0" width="900" height="472" fill="#ffffff"/>
+<defs><marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">tiny-fs layers — a lower layer does not know those above</text>
+<rect x="150" y="52" width="520" height="28" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="410.0" y="71" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">OS (the real ls / cat / editor)</text>
+<rect x="150" y="92" width="520" height="34" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="164" y="114" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L6</text>
+<text x="202" y="114" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">fuse_ops.py</text>
+<text x="340" y="114" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Connection to the OS (errno conversion only)</text>
+<text x="690" y="114" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Ch. 13</text>
+<rect x="150" y="130" width="520" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="164" y="152" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L5</text>
+<text x="202" y="152" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">fs.py</text>
+<text x="340" y="152" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Layout, path resolution, FS API</text>
+<text x="690" y="152" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Chapters 5-8</text>
+<rect x="150" y="168" width="520" height="34" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="164" y="190" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L4</text>
+<text x="202" y="190" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">directory.py</text>
+<text x="340" y="190" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Names and the tree (dirent)</text>
+<text x="690" y="190" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Chapter 4</text>
+<rect x="150" y="206" width="520" height="34" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="164" y="228" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L3</text>
+<text x="202" y="228" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">inode.py</text>
+<text x="340" y="228" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">File contents and metadata</text>
+<text x="690" y="228" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Ch. 3</text>
+<rect x="150" y="244" width="520" height="34" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="164" y="266" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L2</text>
+<text x="202" y="266" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">bitmap.py</text>
+<text x="340" y="266" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Free space</text>
+<text x="690" y="266" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Chapter 2</text>
+<rect x="150" y="282" width="520" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="164" y="304" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L1</text>
+<text x="202" y="304" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.py</text>
+<text x="340" y="304" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">8 sectors = 1 block</text>
+<text x="690" y="304" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Chapter 1</text>
+<rect x="150" y="320" width="520" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="164" y="342" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">L0</text>
+<text x="202" y="342" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">device.py</text>
+<text x="340" y="342" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Reading and writing 512-byte sectors</text>
+<text x="690" y="342" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Chapter 1</text>
+<rect x="150" y="366" width="520" height="28" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="410.0" y="385" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">disk.img (a single file)</text>
+<path d="M 92 98 L 92 348" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#d)"/>
+<g transform="rotate(-90 76 223.0)">
+<text x="76" y="223.0" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Calls go only top to bottom</text>
+</g>
+<text x="690" y="78" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Built in</text>
+<rect x="60" y="410" width="780" height="46" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="78" y="430" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dump.py (ch. 9) / fsck.py (ch. 10) / cli.py (ch. 11) are not layers. They are tools that use the L5 API and the image from outside.</text>
+<text x="78" y="448" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Remove L6 and everything still works up to L5. So up to chapter 11 it runs without FUSE.</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="606" viewBox="0 0 900 606" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>read-modify-write — to rewrite 30 bytes of sector 3, read 512 bytes and write 512 bytes</title>
+<rect x="0" y="0" width="900" height="606" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">read-modify-write — we want to rewrite only 30 bytes from byte 100 of sector 3</text>
+<rect x="70" y="52" width="780" height="34" rx="3" fill="#fee2e2" stroke="#c05252" stroke-width="1.5"/>
+<text x="86" y="74" font-size="12" fill="#a03030" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"Write only 30 bytes from byte 100 of sector 3"</text>
+<text x="834" y="74" font-size="11" fill="#a03030" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">← the device has no such operation</text>
+<rect x="70" y="124" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
+<rect x="740" y="124" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
+<rect x="180" y="124" width="560" height="44" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<rect x="289.375" y="124" width="32.8125" height="44" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="84" y="151" font-size="16" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">⋯</text>
+<text x="836" y="151" font-size="16" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">⋯</text>
+<text x="125.0" y="115" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">sector 2</text>
+<text x="460.0" y="115" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">Sector 3</text>
+<text x="795.0" y="115" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">sector 4</text>
+<text x="62" y="151" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Disk</text>
+<path d="M 180.0 170 l 0 6" stroke="#57606a" stroke-width="1"/>
+<text x="180.0" y="188" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<path d="M 289.375 170 l 0 6" stroke="#57606a" stroke-width="1"/>
+<text x="289.375" y="188" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">100</text>
+<path d="M 322.1875 170 l 0 6" stroke="#57606a" stroke-width="1"/>
+<text x="322.1875" y="188" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">130</text>
+<path d="M 740.0 170 l 0 6" stroke="#57606a" stroke-width="1"/>
+<text x="740.0" y="188" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">512</text>
+<text x="590.0" y="152" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">What we want to rewrite is the orange 30 bytes</text>
+<path d="M 494.0 148 L 327.1875 148" stroke="#57606a" stroke-width="0.9" fill="none" stroke-dasharray="3 3"/>
+<rect x="180" y="244" width="560" height="44" rx="3" fill="#eef2ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<rect x="289.375" y="244" width="32.8125" height="44" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="170" y="265" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Memory</text>
+<text x="170" y="281" font-size="10" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">buf</text>
+<text x="590.0" y="272" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Only sector 3's 512 bytes are in memory</text>
+<rect x="180" y="364" width="560" height="44" rx="3" fill="#eef2ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<rect x="289.375" y="364" width="32.8125" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="170" y="385" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Memory</text>
+<text x="170" y="401" font-size="10" fill="#57606a" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">buf</text>
+<text x="590.0" y="392" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The green 30 bytes were swapped in</text>
+<path d="M 498.0 388 L 327.1875 388" stroke="#57606a" stroke-width="0.9" fill="none" stroke-dasharray="3 3"/>
+<rect x="70" y="484" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
+<rect x="740" y="484" width="110" height="44" rx="2" fill="#fafbfc" stroke="#c9ced4" stroke-width="1.5"/>
+<rect x="180" y="484" width="560" height="44" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<rect x="289.375" y="484" width="32.8125" height="44" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="84" y="511" font-size="16" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">⋯</text>
+<text x="836" y="511" font-size="16" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">⋯</text>
+<text x="62" y="511" font-size="11.5" fill="#24292f" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Disk</text>
+<text x="590.0" y="512" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The write back is the whole 512 bytes</text>
+<path d="M 240 192 L 240 236" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="258" y="212" font-size="13" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(1)</text>
+<text x="280" y="212" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Read all 512 bytes of sector 3 into memory</text>
+<path d="M 240 312 L 240 356" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="258" y="332" font-size="13" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(2)</text>
+<text x="280" y="332" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">In memory, replace only bytes 100 – 130</text>
+<path d="M 240 432 L 240 476" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="258" y="452" font-size="13" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(3)</text>
+<text x="280" y="452" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Write the whole 512 bytes back to sector 3</text>
+<text x="450.0" y="548" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Sector 2 and sector 4 are not touched by even 1 byte from start to finish. Only sector 3's 512 bytes move.</text>
+<text x="450.0" y="572" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Even to write just 30 bytes, the round trip to the device is a 512-byte read + a 512-byte write.</text>
+<text x="450.0" y="594" font-size="10.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">This round trip is called read-modify-write. A partial write in a file system always takes this shape.</text>
+</svg>

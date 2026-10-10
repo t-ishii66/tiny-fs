@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>The 3 things mounting needs, and where they live</title>
+<rect x="0" y="0" width="900" height="420" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The 3 things mounting needs, and where they live</text>
+<text x="60" y="54" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">User space — one process running as python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs</text>
+<rect x="60" y="70" width="560" height="58" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="76" y="94" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">tiny_fs/fuse_ops.py</text>
+<text x="76" y="114" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Written in this chapter. It only converts errno and calls fs.py</text>
+<text x="604" y="94" font-size="9.5" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">Our own code</text>
+<rect x="60" y="144" width="560" height="58" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="76" y="168" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">fusepy (fuse.py)</text>
+<text x="76" y="188" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Subclass Operations to implement, and start with FUSE(...)</text>
+<text x="604" y="168" font-size="9.5" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">pip install fusepy</text>
+<rect x="60" y="218" width="560" height="58" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="76" y="242" font-size="11" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">libfuse.so.2</text>
+<text x="76" y="262" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A C library. Speaks the /dev/fuse protocol</text>
+<text x="604" y="242" font-size="9.5" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">apt install libfuse2t64</text>
+<path d="M 180 128 L 180 142" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="192" y="140" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">method call</text>
+<path d="M 180 202 L 180 216" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="192" y="214" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ctypes dlopens and calls the C functions</text>
+<rect x="660" y="144" width="180" height="132" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="750" y="166" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/usr/bin/fusermount</text>
+<text x="750" y="184" font-size="9.5" fill="#b8860b" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">setuid root</text>
+<text x="750" y="206" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Only when mounting</text>
+<text x="750" y="222" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">libfuse launches it</text>
+<text x="750" y="250" font-size="9.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">apt install fuse</text>
+<path d="M 624 247 L 656 215" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
+<text x="636" y="196" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">start</text>
+<path d="M 750 280 L 750 314" stroke="#b8860b" stroke-width="1.5" fill="none" marker-end="url(#y)"/>
+<text x="750" y="300" font-size="9" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Runs mount(2) and passes the fd</text>
+<text x="840" y="286" font-size="9" fill="#b8860b" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">This path is why an ordinary user can mount</text>
+<path d="M 180 280 L 180 314" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="192" y="300" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">read / write /dev/fuse to exchange requests and responses</text>
+<rect x="60" y="320" width="780" height="56" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="76" y="342" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Kernel — FUSE driver</text>
+<text x="76" y="362" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Passes ls / cat requests from the VFS to /dev/fuse and waits for the reply. Registers ~/mnt/tiny-fs in the mount table</text>
+<text x="450.0" y="402" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Of the 3, only libfuse is on the C side. fusepy is the part that connects Python and libfuse with ctypes, and holds no file system processing.</text>
+</svg>

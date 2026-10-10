@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="352" viewBox="0 0 900 352" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>i-node is fixed length → it can be an array</title>
+<rect x="0" y="0" width="900" height="352" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f8f52"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Fixed length 128 bytes → can be an array → the number alone fixes the position</text>
+<text x="145.0" y="34" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">bit 0</text>
+<rect x="116" y="46" width="58" height="22" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="145.0" y="62" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="145.0" y="88" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 0</text>
+<text x="145.0" y="147.0" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">No substance</text>
+<text x="145.0" y="163.0" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(reserved)</text>
+<path d="M 116 100 l 0 106" stroke="#c9ced4" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 174 100 l 0 106" stroke="#c9ced4" stroke-width="1" stroke-dasharray="3 3"/>
+<rect x="190" y="46" width="114" height="22" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="247.0" y="62" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="247.0" y="88" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<rect x="190" y="100" width="114" height="106" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="200" y="126" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">mode</text>
+<text x="294" y="126" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0o040755</text>
+<text x="200" y="148" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size</text>
+<text x="294" y="148" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">4096</text>
+<text x="196" y="170" font-size="9.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct</text>
+<text x="294" y="170" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">[7, 0, 0…]</text>
+<text x="247.0" y="194" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">128 bytes</text>
+<rect x="312" y="46" width="114" height="22" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="369.0" y="62" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="369.0" y="88" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 2</text>
+<rect x="312" y="100" width="114" height="106" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="322" y="126" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">mode</text>
+<text x="416" y="126" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0o100644</text>
+<text x="322" y="148" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size</text>
+<text x="416" y="148" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">5000</text>
+<text x="318" y="170" font-size="9.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct</text>
+<text x="416" y="170" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">[8, 9, 0…]</text>
+<text x="369.0" y="194" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">128 bytes</text>
+<rect x="434" y="46" width="114" height="22" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="491.0" y="62" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="491.0" y="88" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3</text>
+<rect x="434" y="100" width="114" height="106" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="491.0" y="157.0" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">unused</text>
+<rect x="556" y="46" width="114" height="22" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="613.0" y="62" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="613.0" y="88" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 4</text>
+<rect x="556" y="100" width="114" height="106" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="566" y="126" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">mode</text>
+<text x="660" y="126" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0o100644</text>
+<text x="566" y="148" font-size="10" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">size</text>
+<text x="660" y="148" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">12</text>
+<text x="562" y="170" font-size="9.5" fill="#57606a" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">direct</text>
+<text x="660" y="170" font-size="10" fill="#24292f" text-anchor="end" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">[11, 0…]</text>
+<text x="613.0" y="194" font-size="9" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">128 bytes</text>
+<rect x="678" y="46" width="114" height="22" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="735.0" y="62" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="735.0" y="88" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 5</text>
+<rect x="678" y="100" width="114" height="106" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="735.0" y="157.0" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">unused</text>
+<text x="110" y="62" font-size="10" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node bitmap</text>
+<text x="100" y="153.0" font-size="11" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node table</text>
+<text x="792" y="157.0" font-size="18" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">⋯</text>
+<text x="792" y="62" font-size="16" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">⋯</text>
+<text x="495.0" y="232" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Exactly 32 of them fit in 1 block (4096 B) (4096 ÷ 128)</text>
+<text x="450.0" y="276" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The position in the array can be computed from the i-node number. Say "i-node 17" and the place is fixed.</text>
+<text x="450.0" y="298" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Free-space management can use chapter 2's bitmap as it is (1 bit = 1 i-node).</text>
+<text x="450.0" y="320" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino = 0 is a sentinel meaning "invalid". It has no i-node substance, and the bitmap sets it to 1 from the start so it is never allocated.</text>
+<text x="450.0" y="342" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">And an i-node does not hold its own name. Names are chapter 4's job.</text>
+</svg>

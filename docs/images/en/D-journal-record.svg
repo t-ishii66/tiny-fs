@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="372" viewBox="0 0 900 372" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>One bundle written to the journal</title>
+<rect x="0" y="0" width="900" height="372" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">One bundle written to the journal — not only the contents but also "which block" is written</text>
+<text x="40" y="58" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">What lines up in the journal area (block 7-38)</text>
+<rect x="40" y="68" width="200" height="62" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.4"/>
+<text x="140.0" y="90" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">descriptor</text>
+<text x="140.0" y="108" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Blocks to be written</text>
+<text x="140.0" y="122" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block numbers: 3, 7, 1</text>
+<rect x="248" y="68" width="150" height="62" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.4"/>
+<text x="323.0" y="90" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">block 3 new content</text>
+<text x="323.0" y="108" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">4096 bytes</text>
+<rect x="406" y="68" width="150" height="62" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.4"/>
+<text x="481.0" y="90" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">block 7's new content</text>
+<text x="481.0" y="108" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">4096 bytes</text>
+<rect x="564" y="68" width="150" height="62" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.4"/>
+<text x="639.0" y="90" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">new contents of block 1</text>
+<text x="639.0" y="108" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">4096 bytes</text>
+<rect x="722" y="68" width="138" height="62" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.4"/>
+<text x="791.0" y="90" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">commit</text>
+<text x="791.0" y="108" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">All of it is in place</text>
+<text x="791.0" y="122" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">one record saying so</text>
+<text x="40" y="186" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Main body (the real place in the image)</text>
+<rect x="248" y="196" width="150" height="50" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="323.0" y="216" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">block 3</text>
+<text x="323.0" y="234" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node table</text>
+<path d="M 323.0 134 L 323.0 192" stroke="#7c5cc4" stroke-width="1.3" fill="none" marker-end="url(#a)" stroke-dasharray="4 3"/>
+<rect x="406" y="196" width="150" height="50" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="481.0" y="216" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">block 7</text>
+<text x="481.0" y="234" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">root's dirent</text>
+<path d="M 481.0 134 L 481.0 192" stroke="#7c5cc4" stroke-width="1.3" fill="none" marker-end="url(#a)" stroke-dasharray="4 3"/>
+<rect x="564" y="196" width="150" height="50" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.4"/>
+<text x="639.0" y="216" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">block 1</text>
+<text x="639.0" y="234" font-size="8.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Block bitmap</text>
+<path d="M 639.0 134 L 639.0 192" stroke="#7c5cc4" stroke-width="1.3" fill="none" marker-end="url(#a)" stroke-dasharray="4 3"/>
+<text x="248" y="266" font-size="9.5" fill="#7c5cc4" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The descriptor's numbers decide which contents go back where (used at replay time)</text>
+<rect x="40" y="290" width="820" height="62" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.4"/>
+<text x="58" y="312" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The contents alone do not say where in the main body to put them back. So a number is attached.</text>
+<text x="58" y="332" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A bundle with no commit may be cut off partway, so it is discarded without replay (the §3 branch).</text>
+</svg>

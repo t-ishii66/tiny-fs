@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="265" viewBox="0 0 900 265" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>The bitmap's bit order (LSB first)</title>
+<rect x="0" y="0" width="900" height="265" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The bit order is LSB first — bit i of byte b is block 8b + i</text>
+<rect x="130" y="92" width="44" height="48" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="152.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="152.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<rect x="174" y="92" width="44" height="48" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="196.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="196.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<rect x="218" y="92" width="44" height="48" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="240.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="240.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">2</text>
+<rect x="262" y="92" width="44" height="48" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="284.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="284.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">3</text>
+<rect x="306" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="328.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="328.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">4</text>
+<rect x="350" y="92" width="44" height="48" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="372.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="372.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">5</text>
+<rect x="394" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="416.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="416.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">6</text>
+<rect x="438" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="460.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="460.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">7</text>
+<text x="306" y="158" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">byte 0 = 0x2f</text>
+<rect x="500" y="92" width="44" height="48" rx="2" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="522.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="522.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">8</text>
+<rect x="544" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="566.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="566.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">9</text>
+<rect x="588" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="610.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="610.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">10</text>
+<rect x="632" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="654.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="654.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">11</text>
+<rect x="676" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="698.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="698.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">12</text>
+<rect x="720" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="742.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="742.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">13</text>
+<rect x="764" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="786.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="786.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">14</text>
+<rect x="808" y="92" width="44" height="48" rx="2" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="830.0" y="121.0" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="830.0" y="84" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">15</text>
+<text x="676" y="158" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">byte 1 = 0x01</text>
+<text x="130" y="178" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bit 0 (LSB)</text>
+<text x="482" y="178" font-size="10" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bit 7 (MSB)</text>
+<text x="500" y="178" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bit 0 (LSB)</text>
+<text x="852" y="178" font-size="10" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bit 7 (MSB)</text>
+<text x="114" y="84" font-size="11" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Block number</text>
+<text x="114" y="121.0" font-size="11" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Bit</text>
+<text x="450.0" y="208" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">In this example blocks 0,1,2,3,5,8 are in use, and 4,6,7,9-15 are free</text>
+<text x="450.0" y="232" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Numbered from the left here. In hex the leftmost bit is the most significant, so a dump looks left-right reversed</text>
+<text x="450.0" y="254" font-size="11" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">byte_index, bit_index = divmod(block_no, 8)</text>
+</svg>

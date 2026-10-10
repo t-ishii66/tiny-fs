@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="538" viewBox="0 0 900 538" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>Mounting — grafting the root of another tree onto a directory</title>
+<rect x="0" y="0" width="900" height="538" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Mounting — grafting the root of another tree onto a directory</text>
+<text x="60" y="70" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Before mount: 2 trees</text>
+<text x="60" y="96" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Root FS (ext4)</text>
+<rect x="60" y="108" width="230" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="72" y="130" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">/</text>
+<rect x="86" y="152" width="204" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="98" y="174" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">mnt</text>
+<rect x="112" y="196" width="178" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="124" y="211" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">tiny-fs</text>
+<text x="124" y="225" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">an empty directory</text>
+<rect x="138" y="240" width="152" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="150" y="262" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">old.txt</text>
+<path d="M 72 142 L 72 169 L 86 169" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 98 186 L 98 213 L 112 213" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 124 230 L 124 257 L 138 257" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<text x="500" y="96" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The 2nd device (an mkfs-ed tiny-fs)</text>
+<rect x="500" y="108" width="260" height="34" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="512" y="123" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">/</text>
+<text x="512" y="137" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino 1</text>
+<rect x="526" y="152" width="234" height="34" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="538" y="167" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">docs</text>
+<text x="538" y="181" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino 3</text>
+<rect x="552" y="196" width="208" height="34" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="564" y="211" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">a.txt</text>
+<text x="564" y="225" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino 5</text>
+<path d="M 512 142 L 512 169 L 526 169" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 538 186 L 538 213 L 552 213" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<text x="500" y="252" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">has its own root (ino 1)</text>
+<path d="M 40 290 L 860 290" stroke="#e1e4e8" stroke-width="1.2" fill="none"/>
+<text x="60" y="320" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">After mounting: it looks like 1 tree</text>
+<rect x="60" y="336" width="300" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="72" y="358" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">/</text>
+<rect x="86" y="376" width="274" height="34" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="98" y="398" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">mnt</text>
+<rect x="112" y="416" width="248" height="34" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="124" y="431" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">tiny-fs</text>
+<text x="124" y="445" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Here is tiny-fs's root (ino 1)</text>
+<rect x="138" y="456" width="222" height="34" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="150" y="471" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">docs</text>
+<text x="150" y="485" font-size="8.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ino 3</text>
+<path d="M 72 370 L 72 393 L 86 393" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 98 410 L 98 433 L 112 433" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 124 450 L 124 473 L 138 473" stroke="#8b949e" stroke-width="1.2" fill="none"/>
+<path d="M 100 413 L 420 413" stroke="#b8860b" stroke-width="1.6" fill="none" stroke-dasharray="6 4"/>
+<text x="430" y="409" font-size="10.5" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">This one line is the boundary. Above is ext4, below is tiny-fs</text>
+<text x="430" y="442" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The original contents (old.txt) are only hidden, not deleted.</text>
+<text x="430" y="462" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Unmount and they come back.</text>
+<text x="450" y="522" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">What is grafted onto which directory is held by the kernel in a table (/proc/mounts).</text>
+</svg>

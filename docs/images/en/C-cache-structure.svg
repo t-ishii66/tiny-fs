@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="376" viewBox="0 0 900 376" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>The cache structure — buffers, states, and ordering</title>
+<rect x="0" y="0" width="900" height="376" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f8f52"/></marker><marker id="y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b4413c"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The cache structure — buffers, states, and ordering</text>
+<text x="60" y="58" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Classic implementation — one table looked up by block number</text>
+<rect x="60" y="68" width="760" height="24" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
+<text x="76" y="85" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Block number</text>
+<text x="216" y="85" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Buffer (4096 bytes)</text>
+<text x="470" y="85" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">State</text>
+<text x="600" y="85" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">LRU order</text>
+<rect x="60" y="92" width="760" height="32" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="76" y="113" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 3</text>
+<text x="216" y="113" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The i-nodes of the root and a.txt</text>
+<text x="470" y="113" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirty</text>
+<text x="600" y="113" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">recently used</text>
+<rect x="60" y="124" width="760" height="32" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="76" y="145" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 7</text>
+<text x="216" y="145" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">root's dirent</text>
+<text x="470" y="145" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirty</text>
+<rect x="60" y="156" width="760" height="32" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="76" y="177" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 0</text>
+<text x="216" y="177" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Superblock</text>
+<text x="470" y="177" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="60" y="188" width="760" height="32" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="76" y="209" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 1</text>
+<text x="216" y="209" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Data block bitmap</text>
+<text x="470" y="209" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Clean, pinned</text>
+<rect x="60" y="220" width="760" height="32" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="76" y="241" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 2</text>
+<text x="216" y="241" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node bitmap</text>
+<text x="470" y="241" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<text x="600" y="241" font-size="10" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">oldest</text>
+<path d="M 44 242 L 44 100" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<g transform="rotate(-90 30 176.0)">
+<text x="30" y="176.0" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">newest</text>
+</g>
+<text x="60" y="286" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Clean or dirty, and pinned or not, decide whether it can be released</text>
+<rect x="60" y="300" width="246" height="56" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="74" y="321" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">clean</text>
+<text x="74" y="337" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">same contents as disk</text>
+<text x="74" y="351" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">can be released as is</text>
+<rect x="314" y="300" width="246" height="56" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="328" y="321" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">dirty</text>
+<text x="328" y="337" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Memory side newer</text>
+<text x="328" y="351" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">write out, then release</text>
+<rect x="568" y="300" width="246" height="56" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="582" y="321" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">pinned</text>
+<text x="582" y="337" font-size="9.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">a separate axis from clean/dirty</text>
+<text x="582" y="351" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Cannot be evicted until unpinned</text>
+</svg>

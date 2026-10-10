@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>`.` and `..` connect the tree</title>
+<rect x="0" y="0" width="900" height="400" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6fc4"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">. and .. — going up and down the tree is also just a dirent</text>
+<text x="185.0" y="56" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/</text>
+<text x="185.0" y="72" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1,  nlink = 3</text>
+<rect x="60" y="80" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<path d="M 130 83 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="96" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<text x="142" y="96" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."</text>
+<rect x="60" y="104" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<path d="M 130 107 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="120" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<text x="142" y="120" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".."</text>
+<rect x="60" y="128" width="250" height="24" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<path d="M 130 131 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="144" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 4</text>
+<text x="142" y="144" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"b.txt"</text>
+<rect x="60" y="152" width="250" height="24" rx="2" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<path d="M 130 155 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="72" y="168" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3</text>
+<text x="142" y="168" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"docs"</text>
+<text x="645.0" y="206" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/docs</text>
+<text x="645.0" y="222" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3,  nlink = 2</text>
+<rect x="520" y="230" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<path d="M 590 233 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="532" y="246" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 3</text>
+<text x="602" y="246" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."</text>
+<rect x="520" y="254" width="250" height="24" rx="2" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<path d="M 590 257 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="532" y="270" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 1</text>
+<text x="602" y="270" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".."</text>
+<rect x="520" y="278" width="250" height="24" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<path d="M 590 281 l 0 18" stroke="#c9ced4" stroke-width="1"/>
+<text x="532" y="294" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">ino = 5</text>
+<text x="602" y="294" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"a.txt"</text>
+<path d="M 314 164 L 512 242" stroke="#5b6fc4" stroke-width="1.5" fill="none" marker-end="url(#g)"/>
+<text x="360" y="180" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">docs → ino 3</text>
+<path d="M 520 266 C 420 266 420 116 314 116" stroke="#5b6fc4" stroke-width="1.5" fill="none" marker-end="url(#g)" stroke-dasharray="4 3"/>
+<text x="360" y="262" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">.. → ino 1 (going back to the parent is one dirent too)</text>
+<rect x="60" y="330" width="780" height="54" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="78" y="352" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">A directory's nlink = 2 + the number of child directories</text>
+<text x="78" y="372" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">3 dirents point at ino 1: /'s ".", /'s ".." (the root's parent is itself), /docs's ".." → nlink = 3</text>
+</svg>

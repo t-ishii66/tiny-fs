@@ -285,8 +285,11 @@ fusermount -u ~/mnt/tiny-fs
 
 ### 9.4 図とコード
 
-- **図は SVG。** `docs/images/NN-name.svg` に置き、`docs/ja/` からは `../images/...` で参照する
-  （`docs/en/` からも同じ相対パスで届くので、図は 1 枚だけ持つ）。
+- **図は SVG。** 日本語版は `docs/images/NN-name.svg`、英語版は同じファイル名で
+  `docs/images/en/NN-name.svg` に置く。参照は `docs/ja/` から `../images/...`、
+  `docs/en/` から `../images/en/...`。**図の中の文字も訳す**ので、1 枚を 2 言語で共有しない
+  （文字の無い挿絵 `*-alice-bob.png` だけは共有し、両方から `../images/...` で参照する）。
+  日本語版の図を直したら、英語版も作り直す。
   ASCII 図や mermaid は使わない。SVG は背景に明示的な白い矩形を敷く
   （GitHub のダークテーマで文字が消えないため）。文字が枠や他の文字と重ならないか確認する。
 - **16 進ダンプは図ではない。** コードブロックのテキストのまま貼る

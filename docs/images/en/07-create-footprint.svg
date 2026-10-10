@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="408" viewBox="0 0 900 408" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>The 4 places create() writes on the disk</title>
+<rect x="0" y="0" width="900" height="408" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">The 4 places create("/a.txt") writes to on the disk</text>
+<rect x="40" y="96" width="90" height="80" rx="3" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.5"/>
+<text x="85" y="114" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">0</text>
+<text x="85" y="138" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">super</text>
+<text x="85" y="156" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Block</text>
+<rect x="130" y="96" width="110" height="80" rx="3" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="185" y="114" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">1</text>
+<text x="185" y="138" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Data blocks</text>
+<text x="185" y="156" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bitmap</text>
+<rect x="240" y="96" width="110" height="80" rx="3" fill="#ffedd5" stroke="#b8690b" stroke-width="1.5"/>
+<text x="295" y="114" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">2</text>
+<text x="295" y="138" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node</text>
+<text x="295" y="156" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">bitmap</text>
+<rect x="350" y="96" width="180" height="80" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="440" y="114" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">3 – 6</text>
+<text x="440" y="138" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">i-node table</text>
+<text x="440" y="156" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">128 of them</text>
+<rect x="530" y="96" width="300" height="80" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="680" y="114" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">7 – 1023</text>
+<text x="680" y="144" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Data blocks</text>
+<path d="M 295 64 l 0 22" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="295" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(1)</text>
+<path d="M 407.6 64 l 0 22" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="407.6" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(2)</text>
+<path d="M 578 64 l 0 22" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="578" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(3)</text>
+<path d="M 479.6 64 l 0 22" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+<text x="479.6" y="58" font-size="13" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(4)</text>
+<text x="40" y="212" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(1) i-node bitmap</text>
+<text x="230" y="212" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Take one free i-node number (ino = 5). Set the bit to 1 and write it back on the spot</text>
+<text x="40" y="242" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(2) the i-node table</text>
+<text x="230" y="242" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Write the new i-node into ino 5's 128 bytes (size = 0, all direct 0, nlink = 1)</text>
+<text x="40" y="272" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(3) Parent's data block</text>
+<text x="230" y="272" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Write one dirent into a free slot ("a.txt" → 5)</text>
+<text x="40" y="302" font-size="12" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(4) i-node table</text>
+<text x="230" y="302" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Update the parent directory i-node's mtime / ctime and write it back</text>
+<text x="450" y="374" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Not a single data block is added: the parent has a free slot, and the new file's contents are 0 bytes.</text>
+<text x="450" y="396" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The bitmaps and i-nodes are written back on the spot at every change. Nothing is kept in memory.</text>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>Eviction when it is full — whether to write before releasing</title>
+<rect x="0" y="0" width="900" height="480" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Eviction when it is full — whether to write before releasing</text>
+<text x="40" y="66" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(1) When the release target is clean</text>
+<text x="40" y="84" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Capacity 3, full</text>
+<rect x="40" y="94" width="180" height="34" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="52" y="116" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 3</text>
+<text x="208" y="116" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirty</text>
+<rect x="40" y="132" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="52" y="154" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 7</text>
+<text x="208" y="154" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="40" y="170" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="52" y="192" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 0</text>
+<text x="208" y="192" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<text x="40" y="222" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Older further down</text>
+<path d="M 228 146 L 268 146" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="272" y="110" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 9 requested</text>
+<rect x="272" y="118" width="230" height="58" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="286" y="140" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">release block 0</text>
+<text x="286" y="158" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The device has the same content, so nothing is lost</text>
+<path d="M 506 146 L 546 146" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="550" y="84" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">After loading</text>
+<rect x="550" y="94" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="562" y="116" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 9</text>
+<text x="718" y="116" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="550" y="132" width="180" height="34" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="562" y="154" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 3</text>
+<text x="718" y="154" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirty</text>
+<rect x="550" y="170" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="562" y="192" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 7</text>
+<text x="718" y="192" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<text x="550" y="222" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 9 enters the head</text>
+<text x="750" y="222" font-size="9.5" fill="#3f8f52" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">0 writes to the device</text>
+<path d="M 40 258 L 860 258" stroke="#e1e4e8" stroke-width="1.2" fill="none"/>
+<text x="40" y="288" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">(2) When the release target is dirty</text>
+<text x="40" y="306" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">Capacity 3, full</text>
+<rect x="40" y="316" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="52" y="338" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 7</text>
+<text x="124" y="338" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">pinned</text>
+<text x="208" y="338" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="40" y="354" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="52" y="376" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 0</text>
+<text x="124" y="376" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">pinned</text>
+<text x="208" y="376" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="40" y="392" width="180" height="34" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="52" y="414" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 3</text>
+<text x="208" y="414" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">dirty</text>
+<text x="40" y="444" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Older further down</text>
+<path d="M 228 368 L 268 368" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="272" y="332" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 9 requested</text>
+<rect x="272" y="340" width="230" height="76" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="286" y="360" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The 2 clean ones are pinned → not choosable</text>
+<text x="286" y="380" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Write block 3 out first, then release</text>
+<text x="286" y="398" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">skip it and the latest content is lost</text>
+<path d="M 506 368 L 546 368" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<text x="550" y="306" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">After loading</text>
+<rect x="550" y="316" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="562" y="338" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 9</text>
+<text x="718" y="338" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="550" y="354" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="562" y="376" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 7</text>
+<text x="718" y="376" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<rect x="550" y="392" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
+<text x="562" y="414" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 0</text>
+<text x="718" y="414" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">clean</text>
+<text x="550" y="444" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 9 enters the head</text>
+<text x="750" y="444" font-size="9.5" fill="#b8860b" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">1 write to the device happens</text>
+</svg>

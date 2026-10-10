@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<title>How cat ~/mnt/tiny-fs/a.txt reaches tiny-fs</title>
+<rect x="0" y="0" width="900" height="430" fill="#ffffff"/>
+<defs><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b6ea5"/></marker></defs>
+<text x="450.0" y="26" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">How cat ~/mnt/tiny-fs/a.txt reaches tiny-fs</text>
+<rect x="24" y="52" width="852" height="112" rx="8" fill="#eef2ff" stroke="#5b6fc4" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="36" y="70" font-size="11" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">User space</text>
+<rect x="24" y="182" width="852" height="86" rx="8" fill="#fef3c7" stroke="#b8860b" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="36" y="196" font-size="11" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Kernel space</text>
+<rect x="60" y="84" width="190" height="62" rx="4" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
+<text x="155" y="108" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">cat</text>
+<text x="155" y="128" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">Just a program</text>
+<rect x="470" y="76" width="370" height="78" rx="4" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
+<text x="655" y="96" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">tiny-fs daemon (Python)</text>
+<text x="655" y="116" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">fuse_ops.py → fs.py → disk.py → device.py</text>
+<text x="655" y="136" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">what we built in chapters 1 to 11</text>
+<rect x="60" y="200" width="190" height="52" rx="4" fill="#fef3c7" stroke="#b8860b" stroke-width="1.5"/>
+<text x="155" y="231" font-size="12.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">VFS</text>
+<rect x="330" y="200" width="220" height="52" rx="4" fill="#fef3c7" stroke="#b8860b" stroke-width="1.5"/>
+<text x="440" y="224" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">FUSE driver</text>
+<text x="440" y="242" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">/dev/fuse</text>
+<rect x="600" y="300" width="240" height="54" rx="4" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
+<text x="720" y="324" font-size="12.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">disk.img</text>
+<text x="720" y="342" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">a row of 512-byte sectors</text>
+<path d="M 155 150 L 155 196" stroke="#3b6ea5" stroke-width="1.8" fill="none" marker-end="url(#b)"/>
+<text x="168" y="176" font-size="10.5" fill="#3b6ea5" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(1) read(2)</text>
+<path d="M 254 226 L 326 226" stroke="#3b6ea5" stroke-width="1.8" fill="none" marker-end="url(#b)"/>
+<text x="290" y="216" font-size="10.5" fill="#3b6ea5" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(2)</text>
+<path d="M 500 198 L 560 158" stroke="#3b6ea5" stroke-width="1.8" fill="none" marker-end="url(#b)"/>
+<text x="566" y="194" font-size="10.5" fill="#3b6ea5" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(3) request across /dev/fuse</text>
+<path d="M 660 158 L 690 296" stroke="#3b6ea5" stroke-width="1.8" fill="none" marker-end="url(#b)"/>
+<text x="700" y="230" font-size="10.5" fill="#3b6ea5" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">(4) Read sectors</text>
+<text x="450.0" y="386" font-size="12" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The daemon top right and (4) are what this book builds. (1)–(3) come with the OS.</text>
+<text x="450.0" y="408" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">The return follows the same road backwards. From cat's point of view it is indistinguishable from reading an ordinary file.</text>
+</svg>
