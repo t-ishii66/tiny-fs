@@ -40,4 +40,8 @@
 <rect x="60" y="326" width="790" height="56" rx="3" fill="#f6f8fa" stroke="#c9ced4" stroke-width="1.5"/>
 <text x="78" y="348" font-size="11" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">どちらに転んでも、本体は「操作前」か「操作後」のどちらかになる。途中の状態が残らない。</text>
 <text x="78" y="370" font-size="10.5" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">コミットレコード 1 個の書き込みが成功したかどうか、だけが分岐点になる。</text>
+<line x1="251" y1="146" x2="251" y2="158" stroke="#b4413c" stroke-width="1.4"/>
+<text x="251" y="172" font-size="9" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">装置に届くまで待つ（フラッシュ）</text>
+<line x1="447" y1="146" x2="447" y2="158" stroke="#b4413c" stroke-width="1.4"/>
+<text x="447" y="172" font-size="9" fill="#b4413c" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">装置に届くまで待つ（フラッシュ）</text>
 </svg>

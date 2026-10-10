@@ -18,7 +18,7 @@
 <text x="596.0" y="108" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ ino 3</text>
 <rect x="670" y="74" width="132" height="42" rx="2" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
 <text x="736.0" y="93" font-size="11" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"memo.txt"</text>
-<text x="736.0" y="108" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ ino 5</text>
+<text x="736.0" y="108" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">→ ino 6</text>
 <path d="M 596.0 120 l 0 14" stroke="#57606a" stroke-width="1.4" fill="none" marker-end="url(#a)"/>
 <text x="596.0" y="148" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">"docs" が一致 → ino = 3</text>
 <text x="30" y="226" font-size="12.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">② 現在地 /docs</text>

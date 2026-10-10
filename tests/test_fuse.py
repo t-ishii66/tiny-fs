@@ -1,4 +1,4 @@
-"""Chapter 12: FUSE. Skipped where the machine cannot mount one."""
+"""Chapter 13: FUSE. Skipped where the machine cannot mount one."""
 
 from __future__ import annotations
 

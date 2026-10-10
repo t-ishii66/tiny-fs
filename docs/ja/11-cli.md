@@ -109,11 +109,18 @@ fsck: clean (8 blocks used, 1 inodes used)
 def cmd_put(args) -> int:
     data = pathlib.Path(args.host_path).read_bytes()   # ホスト側
     with _open(args.image) as fs:
+        created = False
         try:
             fs.create(args.fs_path)
+            created = True
         except AlreadyExistsError:
             fs.truncate(args.fs_path, 0)               # 既にあれば上書き
-        fs.write(args.fs_path, 0, data)
+        try:
+            fs.write(args.fs_path, 0, data)
+        except FSError:
+            if created:
+                fs.unlink(args.fs_path)    # 0 バイトのファイルを残さない（第 7 章）
+            raise
     return 0
 ```
 

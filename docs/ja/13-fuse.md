@@ -121,6 +121,7 @@ def mount(image: str, mountpoint: str, foreground: bool = True) -> None:
 
 §6 で実行するのは `python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f` で、
 受け取った 2 つの引数をそのまま `mount()` に渡している。
+`-f` は読み捨てていて、このコマンドは付けても付けなくてもフォアグラウンドで動く。
 
 この `FUSE(...)` が登録とマウントを兼ねる。
 **第 1 引数が、カーネルからの操作を受け取るインスタンス**になる。
@@ -217,6 +218,7 @@ class TinyFSOperations(Operations):
 
     def mkdir(self, path, mode):
         self._fs.mkdir(path, S_IFDIR | (mode & 0o777))
+        self._set_owner(path)     # ディレクトリも作った人の所有にする
 
     def destroy(self, path):
         self._fs.close()          # アンマウント。ここで free_hint が書き戻る
@@ -310,6 +312,18 @@ tiny-fs は `__call__` にログではなく例外変換を置いた。結果と
 ---
 
 ## 6. マウントして触る
+
+**マウントするのはこのコマンドになる。**
+
+```bash
+python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f
+```
+
+`tiny-fs` コマンドにマウントのサブコマンドは無い（第 11 章）。
+`fuse_ops.py` の末尾に `if __name__ == "__main__": sys.exit(main())` があるので、
+`python -m` で実行すると `main()` が呼ばれ、受け取った 2 つの引数が
+§3③ の `mount()` に渡る。アンマウントされるまで戻らないので、
+終わるときは Ctrl-C、別の端末からなら `fusermount -u ~/mnt/tiny-fs`。
 
 ```
 $ tiny-fs mkfs disk.img

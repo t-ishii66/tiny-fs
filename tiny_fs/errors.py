@@ -1,7 +1,7 @@
 """All tiny-fs errors. Every one of them carries an errno.
 
 That single rule is what lets cli.py turn an error into one line plus an exit
-status (chapter 11), and fuse_ops.py turn it into a FuseOSError (chapter 12).
+status (chapter 11), and fuse_ops.py turn it into a FuseOSError (chapter 13).
 """
 
 from errno import (

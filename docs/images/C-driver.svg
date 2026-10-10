@@ -5,7 +5,7 @@
 <text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">装置ごとに書くのはドライバだけ</text>
 <rect x="260" y="66" width="420" height="76" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
 <text x="470" y="90" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">カーネル</text>
-<text x="470" y="110" font-size="10" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ファイルシステム / バッファキャッシュ / ブロック層</text>
+<text x="470" y="110" font-size="10" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ファイルシステム / ページキャッシュ / ブロック層</text>
 <text x="470" y="130" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">セクタ番号と 512 バイトだけで話す</text>
 <rect x="260" y="190" width="420" height="62" rx="3" fill="#ede9fe" stroke="#7c5cc4" stroke-width="1.5"/>
 <text x="470" y="216" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">デバイスドライバ</text>

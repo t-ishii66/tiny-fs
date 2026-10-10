@@ -1,3 +1,7 @@
+# 第 III 部　観察と検証
+
+---
+
 # 09. イメージを覗く — dump
 
 ![宝箱の中身を覗く Alice と Bob](../images/09-alice-bob.png)
