@@ -148,13 +148,63 @@ def _open(image: str) -> FileSystem:
     return FileSystem(BlockDevice(SectorDevice(image)))
 ```
 
-サブコマンドの登録は `argparse` に任せる。引数の並びは §1 の表のとおり。
+コマンドラインの解析は、標準ライブラリの **`argparse`** に任せる。
+`ArgumentParser` を 1 個作り、`add_subparsers()` でサブコマンドを受け付ける口を足すと、
+`sub.add_parser("ls")` が **`ls` 専用の parser** を返す。
+それに `ls` の引数を宣言し、処理する関数を `set_defaults(func=...)` で登録する。
+
+```python
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="tiny-fs")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p = sub.add_parser("ls", help="list a directory")       # ← p は ls 用の parser
+    p.add_argument("-l", "--long", action="store_true")
+    p.add_argument("image")
+    p.add_argument("fs_path")
+    p.set_defaults(func=cmd_ls)                             # ls を処理する関数
+
+    ...                                                     # 残りのサブコマンドも同じ形
+    return parser
+```
+
+宣言した名前が、そのまま値の取り出し口になる。
+§2 で打った `tiny-fs ls -l disk.img /docs` は、3 段でつながっている。
+
+**①`argparse` が解析して `args` を作る。**
+`add_argument("image")` と宣言したので、`args.image` に `"disk.img"` が入る。
+`add_argument("-l", "--long", action="store_true")` のほうは値を取らない旗で、
+コマンドラインに `-l`（または `--long`）が**あれば `args.long` が `True`、
+無ければ `False`** になる。属性の名前は、長いほうの綴り `--long` から決まる。
+
+```python
+Namespace(command='ls', long=True, image='disk.img', fs_path='/docs',
+          func=<function cmd_ls at 0x...>)
+```
+
+**②`main` が `args.func(args)` を呼ぶ**（§5）。登録してあるのは `cmd_ls` なので、
+`cmd_ls(args)` が走る。
+
+**③`cmd_ls` は `args` のフィールドを読んで、`fs.py` を呼ぶ。**
+
+```python
+def cmd_ls(args) -> int:
+    with _open(args.image) as fs:              # "disk.img" を開く
+        entries = fs.readdir(args.fs_path)     # "/docs" の中身
+        if not args.long:                      # -l が無ければ名前だけ
+            for name, _ino in entries:
+                print(name.decode("utf-8", "replace"))
+            return 0
+        ...                                    # -l なら mode_str と時刻を添える
+```
+
+サブコマンドが増えても、増えるのは `_parser()` の 4 行と `cmd_*` が 1 本だけになる。
 
 ---
 
 ## 5. エラーの扱い
 
-`fs.py` から上がってくるのは、すべて `FSError` 派生で `errno` を持っている（付録 C）。
+`fs.py` から上がってくるのは、すべて `FSError` 派生で `errno` を持っている（付録 B）。
 CLI はそれを**1 行のメッセージと終了ステータス**に変える。
 
 ```python
@@ -176,6 +226,16 @@ def main(argv: list[str] | None = None) -> int:
         print(f"tiny-fs: {e}", file=sys.stderr)
         return 1
 ```
+
+> **Python tips** — `args.func(args)` が二度手間に見えるのは、
+> `args.func` が**メソッドではなく、ただの関数**だから。
+> 第 3 章で見た「ドットの左が第 1 引数に入る」は、クラスに定義された関数の話で、
+> `args`（`argparse.Namespace` のインスタンス）の**属性**に入れた関数では起きない。
+>
+> ```python
+> args.func          # <function cmd_ls at 0x...> — cmd_ls そのもの
+> args.func(args)    # cmd_ls(args) と同じ。引数は自分で渡す
+> ```
 
 `ValueError` は第 1 章の `device.py` から来る。「512 の倍数でないファイル」を
 `ValueError` で拒むので（まだファイルシステムの層ではないため `FSError` ではない）、

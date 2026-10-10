@@ -38,9 +38,11 @@
 <text x="40" y="306" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">容量 3・満杯</text>
 <rect x="40" y="316" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
 <text x="52" y="338" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 7</text>
+<text x="124" y="338" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">参照中</text>
 <text x="208" y="338" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">クリーン</text>
 <rect x="40" y="354" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>
 <text x="52" y="376" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 0</text>
+<text x="124" y="376" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">参照中</text>
 <text x="208" y="376" font-size="9" fill="#57606a" text-anchor="end" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">クリーン</text>
 <rect x="40" y="392" width="180" height="34" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
 <text x="52" y="414" font-size="10.5" fill="#24292f" text-anchor="start" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">block 3</text>
@@ -48,9 +50,10 @@
 <text x="40" y="444" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">下へ行くほど古い</text>
 <path d="M 228 368 L 268 368" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
 <text x="272" y="332" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 9 を要求</text>
-<rect x="272" y="340" width="230" height="58" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
-<text x="286" y="362" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 3 を先に書き出してから解放する</text>
-<text x="286" y="380" font-size="9" fill="#b4413c" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">飛ばすと最新の内容が消える</text>
+<rect x="272" y="340" width="230" height="76" rx="3" fill="#fde8c8" stroke="#b8860b" stroke-width="1.5"/>
+<text x="286" y="360" font-size="9.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">クリーンな 2 つは参照中 → 選べない</text>
+<text x="286" y="380" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">block 3 を先に書き出してから解放する</text>
+<text x="286" y="398" font-size="9" fill="#57606a" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">飛ばすと最新の内容が消える</text>
 <path d="M 506 368 L 546 368" stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
 <text x="550" y="306" font-size="10.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">読み込み後</text>
 <rect x="550" y="316" width="180" height="34" rx="3" fill="#e0e7ff" stroke="#5b6fc4" stroke-width="1.5"/>

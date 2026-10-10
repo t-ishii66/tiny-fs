@@ -1,23 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="316" viewBox="0 0 900 316" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="392" viewBox="0 0 900 392" role="img" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif">
 <title>ルートでの .. はカーネルが答える</title>
-<rect x="0" y="0" width="900" height="316" fill="#ffffff"/>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b8860b"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/></marker></defs>
-<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">ルートでの .. はカーネルが答える</text>
-<text x="40" y="72" font-size="11.5" fill="#24292f" text-anchor="start" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">/mnt/tiny-fs で cd .. したとき</text>
-<rect x="40" y="92" width="330" height="110" rx="3" fill="#dcfce7" stroke="#3f8f52" stroke-width="1.5"/>
-<text x="205" y="116" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">tiny-fs のルート（ino 1）</text>
-<rect x="56" y="128" width="298" height="28" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
-<text x="205" y="147" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."  → ino 1</text>
-<rect x="56" y="162" width="298" height="28" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.2"/>
-<text x="205" y="181" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".." → ino 1</text>
-<text x="205" y="222" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">mkfs が自分自身を指すように書いた</text>
-<path d="M 386 146 L 446 146" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
-<text x="416" y="136" font-size="10" fill="#b8860b" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">cd ..</text>
-<rect x="460" y="92" width="400" height="110" rx="3" fill="#f3f4f6" stroke="#8b949e" stroke-width="1.5"/>
-<text x="660" y="120" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">カーネルがマウントの表を見る</text>
-<text x="660" y="148" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">貼り付け先は /mnt/tiny-fs だったので</text>
-<text x="660" y="176" font-size="12" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/mnt</text>
-<text x="660" y="222" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ext4 側に出る</text>
-<text x="450" y="268" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ルートの ".." はこの FS の中では自分自身を指す。木をまたぐ答えを返すのはカーネルになる。</text>
-<text x="450" y="292" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">逆向きも同じ。/mnt/tiny-fs へ降りるときは、ext4 の dirent ではなく tiny-fs のルートに乗り換える。</text>
+<rect x="0" y="0" width="900" height="392" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/></marker></defs>
+<text x="450" y="28" font-size="14" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">cd .. — マウントのルートに居るときだけ、カーネルが組を差し替える</text>
+<rect x="40" y="64" width="220" height="128" rx="2" fill="#dcfce7" stroke="#2f7d43" stroke-width="1.4"/>
+<text x="150" y="86" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">いまの組</text>
+<text x="150" y="106" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">(tiny-fs のマウント,</text>
+<text x="150" y="122" font-size="10.5" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal"> tiny-fs のルート)</text>
+<rect x="56" y="134" width="188" height="44" rx="2" fill="#ffffff" stroke="#2f7d43" stroke-width="1"/>
+<text x="150" y="152" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">"."  → ino 1</text>
+<text x="150" y="168" font-size="10" fill="#57606a" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">".." → ino 1</text>
+<text x="150" y="208" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">この 2 つは読まれない</text>
+<text x="315" y="96" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ディレクトリが</text>
+<text x="315" y="110" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">そのマウントの</text>
+<text x="315" y="124" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">ルートと同じ？</text>
+<text x="315" y="142" font-size="10.5" fill="#2f7d43" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">はい</text>
+<line x1="262" y1="156" x2="368" y2="156" stroke="#57606a" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="370" y="64" width="290" height="128" rx="2" fill="#dbeafe" stroke="#3b6ea5" stroke-width="1.4"/>
+<text x="515" y="86" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">マウントの記録（カーネルのメモリ）</text>
+<rect x="386" y="100" width="258" height="44" rx="2" fill="#ffffff" stroke="#3b6ea5" stroke-width="1"/>
+<text x="515" y="118" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">貼り付け先 =</text>
+<text x="515" y="134" font-size="10" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="normal">(ext4 のマウント, /mnt/tiny-fs)</text>
+<text x="515" y="166" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">組をこれに差し替える</text>
+<text x="515" y="208" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">mount したときに記録された</text>
+<text x="705" y="140" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">差し替えた</text>
+<text x="705" y="154" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">組から .. を</text>
+<text x="705" y="168" font-size="9.5" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">1 歩</text>
+<line x1="662" y1="180" x2="748" y2="180" stroke="#57606a" stroke-width="1.3" marker-end="url(#a)"/>
+<rect x="750" y="64" width="120" height="128" rx="2" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+<text x="810" y="86" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">ext4 の中の</text>
+<text x="810" y="104" font-size="11.5" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="bold">普通の 1 歩</text>
+<text x="810" y="140" font-size="13" fill="#24292f" text-anchor="middle" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-weight="bold">/mnt</text>
+<text x="810" y="208" font-size="10" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">tiny-fs は呼ばれない</text>
+<line x1="40" y1="236" x2="870" y2="236" stroke="#d0d7de" stroke-width="1"/>
+<text x="450" y="262" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">条件が成り立たない普通のディレクトリでは、この差し替えは起きず、同じマウントの中で 1 つ上のディレクトリへ進む。</text>
+<text x="450" y="288" font-size="11" fill="#24292f" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">判定に使うのは i-node 番号ではない。tiny-fs のルートが ino 1 なのはこの FS の決めごとで、ext4 のルートは ino 2。</text>
+<text x="450" y="318" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">逆向きも同じ。/mnt/tiny-fs へ降りるときは、ext4 の dirent ではなく tiny-fs のルートに乗り換える。</text>
+<text x="450" y="350" font-size="11" fill="#57606a" text-anchor="middle" font-family="Helvetica Neue, Arial, Hiragino Sans, Noto Sans JP, sans-serif" font-weight="normal">木と木をつないでいるのは FS ではなく、カーネルのこの記録になる。</text>
 </svg>

@@ -43,6 +43,8 @@ pip install fusepy             # pip install -e ".[fuse]" でも入る
 ```
 
 `apt` はシステム全体に入れ、`pip` は有効にした venv の中だけに入れる。
+`fusepy` は純 Python で、`libfuse.so.2` は `import fuse` のときに動的に読み込む。
+C コンパイラも開発パッケージも要らない。
 
 ![2 つのインストールが、どこに何を置くか](../images/13-fuse-install.svg)
 
@@ -56,11 +58,6 @@ pip install fusepy             # pip install -e ".[fuse]" でも入る
 root 権限で動き、マウントを済ませて `/dev/fuse` の fd を呼び出し元に返す。
 **だから sudo が要らない。** `fusermount` が無ければ `Permission denied` で失敗する。
 マウント後の読み書きに使う `/dev/fuse` は `crw-rw-rw-` で誰でも開けるので、ここにも特権は要らない。
-
-fusepy は `libfuse.so.2` をビルド時にリンクしない。`import fuse` の時点で
-`find_library('fuse')` が soname `libfuse.so.2` を探し、`ctypes.CDLL` で読み込む。
-だから `pip install fusepy` に C コンパイラも開発パッケージも要らない
-（ライブラリが無ければ `import fuse` が落ちる。§7）。
 
 パッケージ名は Ubuntu 24.04 のもの。22.04 では `libfuse2t64` が `libfuse2` になる。
 
@@ -125,8 +122,11 @@ def mount(image: str, mountpoint: str, foreground: bool = True) -> None:
 §6 で実行するのは `python -m tiny_fs.fuse_ops disk.img ~/mnt/tiny-fs -f` で、
 受け取った 2 つの引数をそのまま `mount()` に渡している。
 
-この `FUSE(...)` が登録とマウントを兼ねる。`FUSE()` は libfuse のループに入り、
-カーネルから届いた操作名を見て、渡したインスタンスの同名メソッドを呼ぶ。
+この `FUSE(...)` が登録とマウントを兼ねる。
+**第 1 引数が、カーネルからの操作を受け取るインスタンス**になる。
+`FUSE()` は自分のインスタンスを 1 個作り、受け取ったそれ（第１引数）を `operations` 属性に保持する
+（fusepy のコードでは `self.operations`。§5 でその呼び出しを見る）。
+あとは libfuse のループに入り、届いた操作名を見て、そのインスタンスの同名メソッドを呼ぶ。
 戻ってくるのはアンマウントされたとき。
 
 `nothreads=True` は省略できない。既定ではカーネルからの要求が並行して届くが、
@@ -151,10 +151,14 @@ FUSE から来る操作は、`fs.py` の API とほぼ 1 対 1 に対応する�
 | `statfs` | ビットマップの空き数 | `df` が読む |
 | `chmod` / `chown` / `utimens` | 同名 | `cp` やエディタが保存の最後に呼ぶ。実装しないとそこで失敗する |
 | `destroy` | `close` | アンマウント時。`free_hint` がここで書き戻る |
-| `flush` / `fsync` | **何もしない** | tiny-fs 側に溜めているものが無いので、ここで送るものが無い（ホストから先は付録 E） |
-| `open` / `release` | **何もしない** | パスだけで操作できるので、開いた状態を持たない |
+| `flush` / `fsync` | **同名で、`return 0` だけの関数を定義** | tiny-fs 側に溜めているものが無いので、ここで送るものが無い（ホストから先は付録 C） |
+| `open` / `release` | **同名で、`return 0` だけの関数を定義** | パスだけで操作できるので、開いた状態を持たない |
 
-これが 1 対 1 になるのは偶然ではなく、`fs.py` が次の 3 つを満たしているから。
+対応が 1 対 1 になるのは、どちらも POSIX のファイル操作を扱っているから。
+FUSE が呼んでくる操作名と、第 II 部で決めた `fs.py` の API の名前と単位が、そろっている。
+
+そのうえで、**`open` / `release` と `flush` / `fsync` が `return 0` だけで済み、
+失敗の扱いも 1 行で書ける**のは、`fs.py` が次の 3 つを満たしているから。
 
 - **パスだけで操作できる。** 開いた状態（ファイルハンドル）を持たないので、
   FUSE から来たパスをそのまま渡せる。`open` / `release` に書くことがない
@@ -231,10 +235,32 @@ class Operations(object):
         return getattr(self, op)(*args)
 ```
 
+> **Python tips** — `getattr(obj, "mkdir")` は `obj.mkdir` と同じものを返す。
+> 違うのは、**名前を文字列で指定できる**ことだけ。`hasattr` はその名前があるかを調べる。
+>
+> ```python
+> op = "mkdir"
+> getattr(self, op)                # self.mkdir と同じ（bound method が返る）
+> getattr(self, op)("/docs", 0o755)  # self.mkdir("/docs", 0o755) と同じ
+> ```
+>
+> `self` は束縛済み（第 3 章の tips）なので、渡すのは残りの引数だけになる。
+> `op` に入るのは `"mkdir"` や `"unlink"` といった操作名なので、
+> この 1 行がそのまま「操作名 → 同名のメソッド呼び出し」になる。
+>
+> ここで名前がぶつかって見える。`getattr(self, op)` の `getattr` は**組み込み関数**で、
+> `TinyFSOperations` に書いた `getattr` は**FUSE の操作名**（`stat` 相当）になる。
+> 別物で、互いに隠し合うこともない。メソッドは `self.` を付けないと届かないので、
+> 素の `getattr(...)` は組み込みのままである。
+> `op` が `"getattr"` のときは、組み込みの `getattr` が FUSE の `getattr` を引き当てる。
+
 操作名を受け取り、同名のメソッドを探して呼ぶだけのディスパッチャになっている。
 カーネルからの呼び出しを受ける `FUSE` クラスの実装は、すべてこの形になっている。
+ここの `self` は `FUSE` のインスタンスで、**`self.operations` は `FUSE()` に渡した
+`TinyFSOperations` のインスタンス**（§3③）。それを関数のように呼んでいる。
 
 ```python
+# fusepy の FUSE クラスより
 return self.operations('mkdir', path.decode(self.encoding), mode)
 return self.operations('unlink', path.decode(self.encoding))
 ```
@@ -253,8 +279,7 @@ return self.operations('unlink', path.decode(self.encoding))
 > callable(g)                   # True。__call__ が無いと呼んだ時点で TypeError
 > ```
 >
-> fusepy が `self.operations('mkdir', path, mode)` と書けるのはこの仕組みで、
-> `self.operations` は `Operations` のインスタンスである。
+> fusepy が `self.operations('mkdir', path, mode)` と書けるのは、この仕組みによる。
 >
 > オーバーライドした `__call__` の中で `super().__call__(...)` を呼ぶと、
 > 基底クラスの振り分けはそのまま行われ、自分のコードはその前後に足すだけで済む。
