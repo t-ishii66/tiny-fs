@@ -38,3 +38,6 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  # paragraph_end は classic ビルドの既定。no_auto_typographic を足して、
+  # コード例の "..." や "--flag" が en ダッシュや三点リーダに化けるのを止める。
+  gfm_quirks: [paragraph_end, no_auto_typographic]

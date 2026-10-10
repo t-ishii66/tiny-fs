@@ -1,11 +1,12 @@
 ---
 title: "tiny-fs — ファイルシステムを Python で自作する"
 description: "512 バイトのセクタしか読み書きできない装置から、i-node・ビットマップ・ディレクトリ・スーパーブロックを自分で並べ、FUSE で Linux にマウントできるファイルシステムを Python で作る教材。"
-keywords: "ファイルシステム, 自作, ファイルシステム自作, FUSE, fusepy, Python, i-node, inode, スーパーブロック, ビットマップ, データブロック, セクタ, ディスクイメージ, mkfs, fsck, 16進ダンプ, ディレクトリ, dirent, パス解決, namei, マウント, ページキャッシュ, バッファキャッシュ, ジャーナリング, デバイスドライバ, 割り込み, OS, カーネル, OS自作, 教材, チュートリアル, 入門, オープンソース, ドキュメント"
 lang: ja
 ---
 
 # tiny-fs
+
+[English](README.md) · [日本語](README-jp.md)
 
 ![小さなブロックからファイルの街を組み上げる Alice と Bob](docs/images/readme-alice-bob.png)
 

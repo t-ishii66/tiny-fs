@@ -1,11 +1,12 @@
 ---
 title: "tiny-fs — build a file system from scratch in Python"
 description: "Build a file system from scratch in Python: i-nodes, bitmaps, directories and a superblock on a 4 MiB disk image, then mount it on Linux with FUSE."
-keywords: "file system, filesystem from scratch, build your own filesystem, FUSE, fusepy, Python, i-node, inode, superblock, block bitmap, data block, sector, disk image, mkfs, fsck, hex dump, directory, dirent, path resolution, namei, mount, page cache, buffer cache, journaling, write-ahead log, device driver, interrupt, operating system, OS internals, kernel, tutorial, educational, teaching material, open source, documentation, GitHub, tiny-fs"
 permalink: /
 ---
 
 # tiny-fs
+
+[English](README.md) · [日本語](README-jp.md)
 
 ![Alice and Bob building a town of files out of small blocks](docs/images/readme-alice-bob.png)
 
