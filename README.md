@@ -8,6 +8,9 @@ permalink: /
 
 [English](README.md) · [日本語](README-jp.md)
 
+> For a cleaner reading layout, see the GitHub Pages edition:
+> **<https://t-ishii66.github.io/tiny-fs/>**
+
 ![Alice and Bob building a town of files out of small blocks](docs/images/readme-alice-bob.png)
 
 A teaching text that starts from a "device" that can do nothing but read and write 512-byte sectors, builds

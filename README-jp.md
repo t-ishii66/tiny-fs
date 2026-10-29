@@ -8,6 +8,9 @@ lang: ja
 
 [English](README.md) · [日本語](README-jp.md)
 
+> 図や表を整えた形で読むなら、GitHub Pages 版へ:
+> **<https://t-ishii66.github.io/tiny-fs/README-jp.html>**
+
 ![小さなブロックからファイルの街を組み上げる Alice と Bob](docs/images/readme-alice-bob.png)
 
 512 バイトのセクタを読み書きできるだけの「装置」から出発して、その上にファイルシステムを
